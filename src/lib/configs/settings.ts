@@ -9,8 +9,8 @@ export const urlList = {
 		domainURL: 'https://stagingdapp.iwinfund.com/',
 		// baseUrl: 'https://stagingcore.iwinfund.com/dapp',
 		// apiBase: 'https://stagingcore.iwinfund.com/dapp',
-        baseUrl: 'http://192.168.100.111:8767',
-		apiBase: 'http://192.168.100.111:8767/dapp',
+        baseUrl: 'http://192.168.100.111:8787',
+		apiBase: 'http://192.168.100.111:8787/dapp',
 		wsBase: 'ws://192.168.100.111:7272',
 		apiLoginRequest: '/api/auth/request',
 		apiLoginVerify: '/api/auth/verify',
@@ -18,6 +18,7 @@ export const urlList = {
 		apiEditName: '/dapp/user/editname',
 		apiStrategy: '/dapp/user/editname'
 	},
+
 	live: {
 		domainURL: 'https://dapp.iwinfund.com/',
 		baseUrl: 'https://core.iwinfund.com/dapp',
