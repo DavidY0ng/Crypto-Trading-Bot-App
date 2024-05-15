@@ -6,8 +6,10 @@
 	import { showToast } from '../toasts/toast';
 	import Spinner from '../spinner/Spinner.svelte';
     import { isLoading } from '$lib/stores/store';
+    import Modal from '../modal/Modal.svelte';
     
     let showSpinner = false
+    let showModal = false
 
 	const connectWallet = async () => {
 		try {
@@ -55,3 +57,19 @@
 {#if $isLoading}
 <Spinner />
 {/if}
+
+<Modal bind:showModal>
+	<div slot="header">
+        <div class="">
+            Referral Code
+        </div>
+    </div>
+    <div class="mb-3">
+        <input type="text" class="bg-gray-200 w-full p-1">
+    </div>
+    <div class="flex justify-end">
+        <button class="btn bg-primary-500 text-white font-semibold">
+            Confirm
+        </button>
+    </div>
+</Modal>
