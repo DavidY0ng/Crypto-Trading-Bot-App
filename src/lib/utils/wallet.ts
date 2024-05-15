@@ -17,11 +17,14 @@ import {
 	type Chain
 } from 'viem';
 import { bsc, bscTestnet } from 'viem/chains';
+import Spinner from '$lib/components/spinner/Spinner.svelte';
+import { isLoading } from '$lib/stores/store';
+import { wait } from './helper';
 
 export let walletClient: any;
 export let connectedAddress: Address = get(storeUserInfo).address;
 
-
+let showSpinner: boolean = false
 let signedMessage: string = '';
 let message: string = '';
 const targetNetwork: Chain =
@@ -43,6 +46,7 @@ export const publicClient = createPublicClient({
 
 export const onConnectWallet = async () => {
 	try {
+		isLoading.set(true)
 		const accounts = await walletClient.requestAddresses({force:true});
 		if (accounts) {
 			const connectedChainId = await walletClient.getChainId();
@@ -58,12 +62,15 @@ export const onConnectWallet = async () => {
 				await walletClient.addChain({ chain: targetNetwork });
 				await walletClient.switchChain({ id: targetNetwork.id });
 			}
-			onRequestSignMessage()
+			await onRequestSignMessage()
+			isLoading.set(false);
 			return true;
 		} else {
+			isLoading.set(false);
 			return false;
 		}
 	} catch (error) {
+		isLoading.set(false);
 		return false;
 	}
 };
@@ -122,7 +129,7 @@ const onVerifySignMessage = async () => {
 			});
 
 			showToast(t.get('common.toast.login_success'), 'green');
-			goto('/trade/BTC');
+			goto('/');
 			return { success: true };
 		}
 	} catch (error) {
@@ -136,7 +143,26 @@ export const clearUserData = () => {
 };
 
 export const onLogOut = async () => {
-	await apiWithToken('POST', '/auth/logout');
-	clearUserData();
-	goto('/');
+    try {
+        isLoading.set(true);
+
+        // Create a promise that resolves after 2 seconds
+        const delay = new Promise((resolve) => setTimeout(resolve, 2000));
+
+        // Perform the API call and the delay simultaneously
+        await Promise.all([
+            apiWithToken('POST', '/auth/logout'),
+            delay
+        ]);
+
+        clearUserData();
+        showToast(t.get('common.toast.logout_success'), 'green');
+
+        goto('/');
+
+    } catch (error) {
+        console.error('Logout failed:', error);
+    } finally {
+        isLoading.set(false);
+    }
 };

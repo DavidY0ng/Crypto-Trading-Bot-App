@@ -1,6 +1,9 @@
 <script>
     import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide';
     import Icon from "@iconify/svelte";
+    import Spinner from '$lib/components/spinner/Spinner.svelte';
+  
+
     const menuPath = [ 
         {
             links: "#",
@@ -47,6 +50,7 @@
         // }
     ]
 </script>
+
 
 <!-- dashboard -->
 <div class="mb-3 text-white p-3 rounded-lg shadow-md bg-gradient-to-r from-secondary-500 to-tertiary-500">
