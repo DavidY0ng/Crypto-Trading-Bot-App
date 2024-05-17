@@ -23,7 +23,7 @@
 </script>
 
 <div class="flex justify-center left-0 right-0 bottom-0 fixed max-w-[425px] mx-auto card rounded-none">
-    <div class="  flex justify-between w-full px-5 py-2">
+    <div class="flex justify-between w-full px-5 py-2 ">
         {#each menuList as menu}
             <a href={menu.path} class="flex flex-col items-center text-sm {$page.url.pathname == menu.path ? 'text-primary-500' : 'text-gray-400'}">
                 <div>

@@ -2,6 +2,7 @@
     import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide';
     import Icon from "@iconify/svelte";
     import Spinner from '$lib/components/spinner/Spinner.svelte';
+    import TopNav from '$lib/components/topNav/TopNav.svelte';
   
 
     const menuPath = [ 
@@ -11,7 +12,7 @@
             name: "API sync"
         },
         {
-            links: "#",
+            links: "/referral",
             icon: "ic:round-group-add",
             name: "Referral"
         },
@@ -51,85 +52,90 @@
     ]
 </script>
 
+<TopNav/>
 
-<!-- dashboard -->
-<div class="mb-3 text-white p-3 rounded-lg shadow-md bg-gradient-to-r from-secondary-500 to-tertiary-500">
+
+<div class="px-3 pt-3">
+    <!-- dashboard -->
+    <div class="p-3 mb-3 text-white rounded-lg shadow-md bg-gradient-to-r from-secondary-500 to-tertiary-500">
+        <div class="flex justify-between mb-3">
+            <div>
+                <div class="font-semibold ">Total Profit</div>
+                <div>0.0</div>
+            </div>
+            
+            <div class="text-end">
+                <div>API Sync</div>
+                <div>Binance</div>
+            </div>
+            
+        </div>
+        
+    
+        <div class="flex justify-between">
+            <div>
+                <div class="font-semibold ">Today's Profit</div>
+                <div>0.0</div>
+            </div>
+            
+            <div class="text-end">
+                <div>Active Bots</div>
+                <div>0</div>
+            </div>
+            
+        </div>
+    
+        <div class="flex justify-end pt-3">
+            <button class="font-semibold bg-white text btn text-tertiary-500">
+                Deposit
+            </button>
+        </div>
+        
+    </div>
+    
+    <!-- menu section -->
     <div class="flex justify-between mb-3">
-        <div>
-            <div class=" font-semibold">Total Profit</div>
-            <div>0.0</div>
-        </div>
-        
-        <div class="text-end">
-            <div>API Sync</div>
-            <div>Binance</div>
-        </div>
-        
+        {#each menuPath as menu }
+        <a class="flex flex-col items-center card bg-white shadow-md p-2 w-[80px]" href={menu.links}>
+            <div class="mb-1">
+                <Icon icon={menu.icon} width="1.2em" height="1.2em" />
+            </div>
+            <div class="text-sm">
+                {menu.name}
+            </div>
+        </a>
+            
+        {/each}
     </div>
     
-
-    <div class="flex justify-between">
-        <div>
-            <div class=" font-semibold">Today's Profit</div>
-            <div>0.0</div>
-        </div>
-        
-        <div class="text-end">
-            <div>Active Bots</div>
-            <div>0</div>
-        </div>
-        
+    <!-- strategy -->
+    <div class="mb-3 text-gray-500">
+        Strategy
     </div>
-
-    <div class="flex justify-end pt-3">
-        <button class="text btn bg-white text-tertiary-500 font-semibold">
-            Deposit
-        </button>
-    </div>
-    
-</div>
-
-<!-- menu section -->
-<div class="flex justify-between mb-3">
-    {#each menuPath as menu }
-    <div class="flex flex-col items-center card bg-white shadow-md p-2 w-[80px]">
-        <div class="mb-1">
-            <Icon icon={menu.icon} width="1.2em" height="1.2em" />
-        </div>
-        <div class="text-sm">
-            {menu.name}
-        </div>
-    </div>
-        
-    {/each}
-</div>
-
-<!-- strategy -->
-<div class="text-gray-500 mb-3">
-    Strategy
-</div>
-<div class="flex flex-col gap-3">
-    {#each strategies as strategy}
-    <div class="bg-white shadow-md rounded-lg p-3 flex items-center gap-4 py-5">
-        <div class=" rounded-lg h-12 w-14 flex items-center justify-center bg-tertiary-500 text-white">
-            <Icon icon={strategy.icon} width="1.4em" height="1.4em" />
-        </div>
-        <div class="w-full">
-            <div class="flex justify-between mb-1">
-                <div class="font-bold">
-                    {strategy.name}
+    <div class="flex flex-col gap-3">
+        {#each strategies as strategy}
+        <div class="flex items-center gap-4 p-3 py-5 bg-white rounded-lg shadow-md">
+            <div class="flex items-center justify-center h-12 text-white rounded-lg w-14 bg-tertiary-500">
+                <Icon icon={strategy.icon} width="1.4em" height="1.4em" />
+            </div>
+            <div class="w-full">
+                <div class="flex justify-between mb-1">
+                    <div class="font-bold">
+                        {strategy.name}
+                    </div>
+                    <div class="text-gray-400">
+                        <Icon icon="material-symbols:keyboard-arrow-right" width="1.2em" height="1.2em" />
+                    </div>
                 </div>
-                <div class="text-gray-400">
-                    <Icon icon="material-symbols:keyboard-arrow-right" width="1.2em" height="1.2em" />
+                <div class="text-sm text-gray-400">
+                    {strategy.description}
                 </div>
             </div>
-            <div class="text-sm text-gray-400">
-                {strategy.description}
-            </div>
+            
+           
         </div>
-        
-       
+        {/each}
     </div>
-    {/each}
 </div>
+
 

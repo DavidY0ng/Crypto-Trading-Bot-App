@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body { @apply h-full bg-[#F3F4F6]; }
+html, body { @apply h-full ; }
 
 .card {
     @apply bg-white
+}
+
+input {
+    @apply outline-primary-500 bg-gray-200 p-1 px-2 w-full
 }

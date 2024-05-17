@@ -10,15 +10,15 @@
     
     let showSpinner = false
     let showModal = false
+	let referralValue = ''
+	let errorInput = ''
 
 	const connectWallet = async () => {
 		try {
 			// showModal = true;
-            // showSpinner = true
 			let resp = await onConnectWallet();
 			if (resp) {
 				// showModal = false;
-                // showSpinner = false
 			} else {
 				// showModal = false;
 			}
@@ -39,16 +39,29 @@
 			// showModal = false;
 		}
 	};
+
+	function onSubmitCode() {
+    if (referralValue == '') {
+        errorInput = "Field cannot be empty";
+        
+        // Set a timeout to clear the errorInput after 3 seconds
+        setTimeout(() => {
+            errorInput = '';
+            // Assuming you need to update the UI, you might need to call a function or trigger a re-render here
+            // This is a placeholder for your actual UI update logic
+        }, 3000);
+    }
+}
 	
 </script>
 
 <div class="flex justify-end left-0 right-0 top-0 max-w-[425px] mx-auto card rounded-none py-2 px-3">
     {#if !$storeAccessToken.access_token}
-    <button on:click={connectWallet} class="bg-primary-500 text-white rounded-full px-2 py-1">
+    <button on:click={connectWallet} class="px-2 py-1 text-white rounded-full bg-primary-500">
         Connect wallet
     </button>
     {:else}
-    <button on:click={onLogOut} class="bg-primary-500 text-white rounded-full px-2 py-1">
+    <button on:click={onLogOut} class="px-2 py-1 text-white rounded-full bg-primary-500">
         Logout
     </button>
     {/if}
@@ -58,6 +71,7 @@
 <Spinner />
 {/if}
 
+<!-- referral code modal -->
 <Modal bind:showModal>
 	<div slot="header">
         <div class="">
@@ -65,10 +79,13 @@
         </div>
     </div>
     <div class="mb-3">
-        <input type="text" class="bg-gray-200 w-full p-1">
+        <input type="text" class="rounded-md" value={referralValue}>
+		{#if errorInput}
+		<p class="fixed text-xs text-error-500">{errorInput}</p>
+		{/if}
     </div>
     <div class="flex justify-end">
-        <button class="btn bg-primary-500 text-white font-semibold">
+        <button on:click={onSubmitCode} class="py-2 font-semibold text-white rounded-md btn bg-primary-500">
             Confirm
         </button>
     </div>

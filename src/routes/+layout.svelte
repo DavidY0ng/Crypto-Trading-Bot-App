@@ -12,14 +12,23 @@
 
 <Toast />
 <Drawer />
-<TopNav />
-<div class="max-w-[425px] mx-auto p-3 pb-[62px]">
+<!-- <TopNav /> -->
+<div class="h-full">
+    <div class="max-w-[425px] mx-auto h-full bg-[#F3F4F6] ">
+        <div class="pb-[58px]">
+            <slot  />
+        </div>
     
-    <div class="w-full">
-
-        <slot />
-        
     </div>
-</div>
-<BottomNav />
+    <div class="">
+        <BottomNav />
+    </div>
   
+</div>
+
+
+<style>
+    .max-display {
+        height: calc(100% - 58px);
+    }
+</style>

@@ -18,12 +18,12 @@
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div on:click|stopPropagation class="border-8">
         <div class="flex justify-end text-gray-500">
-            <button on:click={() => dialog.close()}>
+            <button on:click={() => dialog.close()} class="outline-none">
                 <Icon icon="maki:cross" width="1.2em" height="1.2em" />
             </button>
         </div>
         
-        <div class="mb-2 h3 flex justify-between">
+        <div class="flex justify-between mb-2 h3">
             <slot name="header" />
             
         </div>
@@ -42,6 +42,7 @@
 	}
 	dialog::backdrop {
 		background: rgba(0, 0, 0, 0.3);
+		z-index: 5;
 	}
 	dialog > div {
 		padding: 1em;
