@@ -47,7 +47,7 @@
         <div class="font-bold text-white h3">
             Invite Friends
         </div>
-        <div class="text-sm text-gray-200/70">
+        <div class="text-sm text-gray-200">
             Refer friends and win together
         </div>
     </div>

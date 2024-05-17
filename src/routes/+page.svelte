@@ -97,7 +97,7 @@
     <div class="flex justify-between mb-3">
         {#each menuPath as menu }
         <a class="flex flex-col items-center card bg-white shadow-md p-2 w-[80px]" href={menu.links}>
-            <div class="mb-1">
+            <div class="mb-1 text-gray-500">
                 <Icon icon={menu.icon} width="1.2em" height="1.2em" />
             </div>
             <div class="text-sm">
@@ -107,15 +107,30 @@
             
         {/each}
     </div>
+
+    <!-- Join membership section -->
+    <a class="relative flex justify-between gap-4 px-2 py-2 mb-3 text-sm shadow-md bg-gradient-to-r from-tertiary-500/20 to-orange-500/20" href="/membership">
+        <div class="absolute top-[-8px] left-0 text-tertiary-500">
+            <Icon icon="streamline:star-2-solid" width="1.2em" height="1.2em" />
+        </div>
+        
+        <div class="">
+            Enjoy more rewards with membership
+        </div>
+        <div class="font-semibold text-orange-500">
+            Subscribe+
+        </div>
+    </a>
+    
     
     <!-- strategy -->
-    <div class="mb-3 text-gray-500">
+    <!-- <div class="mb-3 text-gray-500">
         Strategy
-    </div>
+    </div> -->
     <div class="flex flex-col gap-3">
         {#each strategies as strategy}
         <div class="flex items-center gap-4 p-3 py-5 bg-white rounded-lg shadow-md">
-            <div class="flex items-center justify-center h-12 text-white rounded-lg w-14 bg-tertiary-500">
+            <div class="flex items-center justify-center h-12 text-white rounded-lg w-14 bg-primary-500">
                 <Icon icon={strategy.icon} width="1.4em" height="1.4em" />
             </div>
             <div class="w-full">
