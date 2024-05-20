@@ -3,10 +3,10 @@
 	import { storeUserInfo } from '$lib/stores/storeUser';
 	import { storeAccessToken } from '$lib/stores/storeLocal';
 	import { zeroAddress } from 'viem';
-	import { showToast } from '../toasts/toast';
-	import Spinner from '../spinner/Spinner.svelte';
+	import { showToast } from './toasts/toast';
+	import Spinner from './Spinner.svelte';
     import { isLoading } from '$lib/stores/store';
-    import Modal from '../modal/Modal.svelte';
+    import Modal from './Modal.svelte';
     
     let showSpinner = false
     let showModal = false
@@ -55,7 +55,7 @@
 	
 </script>
 
-<div class="flex justify-end left-0 right-0 top-0 max-w-[425px] mx-auto card rounded-none py-2 px-3">
+<div class="flex justify-end left-0 right-0 top-0 max-w-[425px] mx-auto card rounded-none py-2 px-3 w-full">
     {#if !$storeAccessToken.access_token}
     <button on:click={connectWallet} class="px-2 py-1 text-white rounded-full bg-primary-500">
         Connect wallet

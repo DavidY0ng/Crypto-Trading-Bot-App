@@ -17,7 +17,7 @@ import {
 	type Chain
 } from 'viem';
 import { bsc, bscTestnet } from 'viem/chains';
-import Spinner from '$lib/components/spinner/Spinner.svelte';
+import Spinner from '$lib/components/Spinner.svelte';
 import { isLoading } from '$lib/stores/store';
 import { wait } from './helper';
 
@@ -78,10 +78,11 @@ export const onConnectWallet = async () => {
 export const onRequestSignMessage = async () => {
 	try {
 		if (connectedAddress === zeroAddress) {
+			
 			showToast(t.get('common.toast.connect_wallet'), 'red');
 			return false;
 		} else {
-			const req  = await api('GET', `/auth/request`, {
+			const req  = await api('POST', `/auth/request`, {
 				address: connectedAddress
 			});
 

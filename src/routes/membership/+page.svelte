@@ -1,7 +1,8 @@
 <script>
-	import BackHeader from '$lib/components/backButton/BackHeader.svelte';
+	import BackHeader from '$lib/components/BackHeader.svelte';
 	import Icon from '@iconify/svelte';
-    import Modal from "$lib/components/modal/Modal.svelte"
+    import Modal from "$lib/components/Modal.svelte"
+	import { goto } from '$app/navigation';
 
     let showModal = false
 	const benefits = ['Higher ROI', 'Free Bots 24/7', 'Gurantee Profit', 'Premium Support'];
@@ -13,7 +14,7 @@
 	<div class="flex-1"></div>
 </BackHeader>
 
-<div class="px-3 py-3 bg-white">
+<div class="h-full px-3 py-3 bg-white">
 	<div class="mb-7">
 		<div class="mb-3 font-semibold h2">Start Membership</div>
 		<div class="text-sm text-gray-400">
@@ -62,11 +63,13 @@
 	</div>
 
 	<div class="mt-5">
-		<button class="w-full text-white shadow-lg btn bg-primary-500 rounded-xl"> Proceed to Payment </button>
+		<button on:click={()=>goto('/membership/success')} class="w-full text-white shadow-lg btn bg-primary-500 rounded-xl"> Proceed to Payment </button>
 	</div>
 </div>
 
+{#if showModal}
 <Modal bind:showModal>
+    
     <div slot="header">
         Insufficient Balance
     </div>
@@ -74,7 +77,7 @@
         Please top up your balance before proceeding.
     </div>
     <div class="flex gap-2">
-        <button class="w-full bg-gray-400 rounded-lg shadow-md btn">
+        <button on:click={() => (showModal = false)} class="w-full bg-gray-400 rounded-lg shadow-md btn">
             Cancel
         </button>
         <button class="w-full text-white rounded-lg shadow-md btn bg-primary-500">
@@ -83,3 +86,4 @@
     </div>
    
 </Modal>
+{/if}

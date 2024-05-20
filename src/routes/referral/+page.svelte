@@ -1,5 +1,5 @@
 <script>
-    import BackHeader from '$lib/components/backButton/BackHeader.svelte'
+    import BackHeader from '$lib/components/BackHeader.svelte'
     import Icon from "@iconify/svelte";
     import { copyToClipboard } from "$lib/utils/helper"
 
@@ -41,7 +41,7 @@
     </div>
 </BackHeader> 
 
-<div class="bg-[url('/img/referral/bg.jpg')] bg-cover bg-fixed">
+<div class="bg-[url('/img/referral/bg.jpg')] bg-cover h-full ">
     <!-- <img src="/img/referral/bg.jpg" alt='bg' class="absolute z-0"> -->
     <div class="px-3 py-3">
         <div class="font-bold text-white h3">
@@ -95,7 +95,7 @@
         </div>
        
     </div>
-    <div class="pb-3 bg-white">
+    <div class="py-3 pb-10 bg-white">
         <div class="pt-3">
             <div class="w-2/3 py-1 mb-3 font-bold text-white rounded-r shadow-lg h3 bg-gradient-to-r from-primary-500 to-tertiary-500">
                 <div class="pl-3">

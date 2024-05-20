@@ -1,7 +1,7 @@
 <script>
     import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide';
     import Icon from "@iconify/svelte";
-    import Spinner from '$lib/components/spinner/Spinner.svelte';
+    import Spinner from '$lib/components/Spinner.svelte';
   
 
     const menuPath = [ 

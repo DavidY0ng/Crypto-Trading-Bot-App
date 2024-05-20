@@ -7,6 +7,7 @@
 	let dialog:any; // HTMLDialogElement
 
 	$: if (dialog && showModal) dialog.showModal();
+	$: console.log(showModal)
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
@@ -16,7 +17,7 @@
 	on:click|self={() => dialog.close()}
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div on:click|stopPropagation class="border-8">
+	<div on:click|stopPropagation class="">
         <div class="flex justify-end text-gray-500">
             <button on:click={() => dialog.close()} class="outline-none">
                 <Icon icon="maki:cross" width="1.2em" height="1.2em" />
@@ -36,7 +37,7 @@
 <style>
 	dialog {
 		max-width: 32em;
-		border-radius: 0.2em;
+		border-radius: 0.5em;
 		border: none;
 		padding: 0;
 	}
