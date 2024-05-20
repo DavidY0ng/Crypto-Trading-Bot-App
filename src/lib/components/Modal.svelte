@@ -1,25 +1,36 @@
 <script lang='ts'>
 	import Icon from "@iconify/svelte";
+	import { createEventDispatcher } from 'svelte';
 
 	export let showModal:boolean; // boolean
     export let modalClass = ""
 
 	let dialog:any; // HTMLDialogElement
+	const dispatch = createEventDispatcher();
 
-	$: if (dialog && showModal) dialog.showModal();
-	$: console.log(showModal)
+	$: if (dialog && showModal) {
+		dialog.showModal();
+	}
+	
+	$: console.log(showModal, "current modal state")
+	function closeModal() {
+		if (dialog) dialog.close();
+		showModal = false;
+		dispatch('close')
+	}
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
+{#if showModal}
 <dialog class="{modalClass} w-[300px]"
 	bind:this={dialog}
 	on:close={() => (showModal = false)}
-	on:click|self={() => dialog.close()}
+	
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div on:click|stopPropagation class="">
+	<div class="">
         <div class="flex justify-end text-gray-500">
-            <button on:click={() => dialog.close()} class="outline-none">
+            <button on:click={closeModal} class="outline-none">
                 <Icon icon="maki:cross" width="1.2em" height="1.2em" />
             </button>
         </div>
@@ -33,6 +44,7 @@
 		<!-- svelte-ignore a11y-autofocus -->
 	</div>
 </dialog>
+{/if}
 
 <style>
 	dialog {

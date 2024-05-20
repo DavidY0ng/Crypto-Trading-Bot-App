@@ -1,0 +1,27 @@
+{
+	"/": [
+		"src/routes/+layout.ts",
+		"src/routes/+layout.ts"
+	],
+	"/bots": [
+		"src/routes/+layout.ts"
+	],
+	"/membership": [
+		"src/routes/+layout.ts"
+	],
+	"/membership/plans": [
+		"src/routes/+layout.ts"
+	],
+	"/membership/success": [
+		"src/routes/+layout.ts"
+	],
+	"/profile": [
+		"src/routes/+layout.ts"
+	],
+	"/referral": [
+		"src/routes/+layout.ts"
+	],
+	"/sandbox/theme": [
+		"src/routes/+layout.ts"
+	]
+}

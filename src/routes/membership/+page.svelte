@@ -63,11 +63,11 @@
 	</div>
 
 	<div class="mt-5">
-		<button on:click={()=>goto('/membership/success')} class="w-full text-white shadow-lg btn bg-primary-500 rounded-xl"> Proceed to Payment </button>
+		<button on:click={()=>(showModal = true)} class="w-full text-white shadow-lg btn bg-primary-500 rounded-xl"> Proceed to Payment </button>
 	</div>
 </div>
 
-{#if showModal}
+
 <Modal bind:showModal>
     
     <div slot="header">
@@ -86,4 +86,3 @@
     </div>
    
 </Modal>
-{/if}

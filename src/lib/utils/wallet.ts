@@ -18,7 +18,7 @@ import {
 } from 'viem';
 import { bsc, bscTestnet } from 'viem/chains';
 import Spinner from '$lib/components/Spinner.svelte';
-import { isLoading } from '$lib/stores/store';
+import { noReferralCode, isLoading, showReferralModal } from '$lib/stores/store';
 import { wait } from './helper';
 
 export let walletClient: any;
@@ -98,8 +98,11 @@ export const onRequestSignMessage = async () => {
 
 				return result;
 			} else {
+				noReferralCode.set(true)
+				console.log(get(noReferralCode), "no referral code is...")
 				showToast(t.get(`common.toast.${data[0]}`), 'red');
-				return false;
+				
+				return ;
 			}
 		}
 	} catch (error) {

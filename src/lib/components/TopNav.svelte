@@ -5,13 +5,17 @@
 	import { zeroAddress } from 'viem';
 	import { showToast } from './toasts/toast';
 	import Spinner from './Spinner.svelte';
-    import { isLoading } from '$lib/stores/store';
+    import { isLoading, noReferralCode, showReferralModal } from '$lib/stores/store';
     import Modal from './Modal.svelte';
     
     let showSpinner = false
-    let showModal = false
+	let showModal = false
 	let referralValue = ''
 	let errorInput = ''
+
+	$: if ($noReferralCode) {
+        showModal = true;
+    }
 
 	const connectWallet = async () => {
 		try {
@@ -52,9 +56,17 @@
         }, 3000);
     }
 }
+
+function promptModal() {
+	showModal = true;
+	}
+	
+function handleModalClose() {
+	noReferralCode.set(false);
+}
 	
 </script>
-
+<button on:click={promptModal}>Open Modal</button>
 <div class="flex justify-end left-0 right-0 top-0 max-w-[425px] mx-auto card rounded-none py-2 px-3 w-full">
     {#if !$storeAccessToken.access_token}
     <button on:click={connectWallet} class="px-2 py-1 text-white rounded-full bg-primary-500">
@@ -72,21 +84,26 @@
 {/if}
 
 <!-- referral code modal -->
-<Modal bind:showModal>
-	<div slot="header">
-        <div class="">
-            Referral Code
-        </div>
-    </div>
-    <div class="mb-3">
-        <input type="text" class="rounded-md" value={referralValue}>
-		{#if errorInput}
-		<p class="fixed text-xs text-error-500">{errorInput}</p>
-		{/if}
-    </div>
-    <div class="flex justify-end">
-        <button on:click={onSubmitCode} class="py-2 font-semibold text-white rounded-md btn bg-primary-500">
-            Confirm
-        </button>
-    </div>
-</Modal>
+
+{#if $noReferralCode}
+
+	<Modal bind:showModal on:close={handleModalClose}>
+		<div slot="header">
+			<div class="">
+				Referral Code
+			</div>
+		</div>
+		<div class="mb-3">
+			<input type="text" class="rounded-md" value={referralValue}>
+			{#if errorInput}
+			<p class="fixed text-xs text-error-500">{errorInput}</p>
+			{/if}
+		</div>
+		<div class="flex justify-end">
+			<button on:click={onSubmitCode} class="py-2 font-semibold text-white rounded-md btn bg-primary-500">
+				Confirm
+			</button>
+		</div>
+	</Modal>
+
+{/if}

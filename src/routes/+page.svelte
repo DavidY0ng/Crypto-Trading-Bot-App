@@ -58,7 +58,7 @@
 <div class="flex flex-col px-3 pt-3">
     <!-- dashboard -->
     <div class="flex flex-col p-3 mb-3 text-white rounded-lg shadow-md bg-gradient-to-r from-secondary-500 to-tertiary-500">
-        <div class="flex flex-col justify-between mb-3">
+        <div class="flex justify-between mb-3">
             <div class="flex flex-col">
                 <div class="font-semibold ">Total Profit</div>
                 <div>0.0</div>
@@ -68,7 +68,6 @@
                 <div>API Sync</div>
                 <div>Binance</div>
             </div>
-            
         </div>
         
     
@@ -82,11 +81,10 @@
                 <div>Active Bots</div>
                 <div>0</div>
             </div>
-            
         </div>
     
         <div class="flex justify-end pt-3">
-            <button class="flex font-semibold bg-white text btn text-tertiary-500">
+            <button class="flex font-semibold bg-white shadow-md text btn text-tertiary-500">
                 Deposit
             </button>
         </div>
