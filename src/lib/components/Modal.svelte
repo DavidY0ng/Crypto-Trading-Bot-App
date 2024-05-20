@@ -25,7 +25,7 @@
 <dialog class="{modalClass} w-[300px]"
 	bind:this={dialog}
 	on:close={() => (showModal = false)}
-	
+	on:click|self={() =>closeModal()}
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class="">
