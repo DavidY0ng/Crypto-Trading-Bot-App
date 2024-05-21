@@ -7,6 +7,7 @@
     
 
     let amountValue:number | null = null
+    let confirmCheck:boolean = false
 
 </script>
 
@@ -27,7 +28,9 @@
             </div>
             <div class="flex flex-grow">
                 <select class="flex flex-grow p-2 bg-white border rounded-md select outline-primary-500" >
-                    <option class="" value="USDT">USDT</option>
+                    <option class="" value="USDT">
+                        USDT
+                    </option>
                 </select>
             </div>
         </div>
@@ -59,10 +62,21 @@
             </div>
         </div>
     
-        
+        <label class="flex items-center ml-2 space-x-3">
+            <input
+            
+                class="checkbox w-[15px] h-[15px]"
+                type="checkbox"
+                disabled = {amountValue === null || amountValue < 20}
+                bind:checked={confirmCheck}
+            />
+            <p class="text-sm text-gray-500">
+                {$t('withdraw.confirm')}
+            </p>
+        </label>
     
         <div class="flex flex-grow">
-            <button class="flex justify-center flex-grow text-white rounded-md shadow-md btn bg-primary-500">
+            <button  class="flex justify-center flex-grow text-white rounded-md shadow-md btn bg-primary-500" disabled={!confirmCheck}>
                 Withdraw
             </button>
         </div>

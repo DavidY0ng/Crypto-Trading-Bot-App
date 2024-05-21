@@ -15,5 +15,10 @@ export default [
 		locale: lang,
 		key: 'error',
 		loader: async () => (await import('./error.json')).default
+	},
+	{
+		locale: lang,
+		key: 'withdraw',
+		loader: async () => (await import('./withdraw.json')).default
 	}
 ];

@@ -4,25 +4,26 @@
     import { goto } from "$app/navigation";
 </script>
 
-<div class="flex flex-col items-center justify-center lg:h-[39vh] space-y-6">
-    <div class="flex items-center justify-center w-full">
-        <Success />
-    </div>
-    <div class="flex flex-col items-center">
-        <p class="text-xl font-medium">{$t('withdraw.Submitted')}</p>
-        <p class="text-center text-gray-400">
-            {$t('withdraw.Your withdrawal request has been submitted !')}
-        </p>
-        <div class="flex justify-center w-full mt-10 gap-x-5">
-            <button
-                class="border border-gray-400 rounded-lg dark:border-white btn"
-                on:click={() => goto(`/wallet`)}
-                >{$t('withdraw.My Wallet')}</button
-            >
-            <button
-                class="border border-gray-400 rounded-lg dark:border-white btn"
-                on:click={() => goto(`/`)}>{$t('withdraw.Homepage')}</button
-            >
+
+<div class="flex flex-col flex-grow p-3">
+    <div class="flex flex-col items-center justify-center flex-grow gap-5 p-3 card">
+        <div class="flex">
+            <Success />
+        </div>
+      
+        <div class="flex text-center h1">
+            Withdraw request submitted
+        </div>
+
+        <div class="flex flex-row justify-between w-full gap-3">
+            <div class="flex flex-1 flex-grow">
+                <a class="flex flex-1 bg-gray-400 rounded-md shadow-md btn" href='/'>Return to Home</a>
+            </div>
+            
+            <div class="flex flex-1 flex-grow">
+                <a class="flex flex-1 text-white rounded-md shadow-md btn bg-primary-500" href='/wallet'>Wallet</a>
+            </div>
+            
         </div>
     </div>
 </div>

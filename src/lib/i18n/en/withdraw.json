@@ -1,0 +1,18 @@
+{
+    "select_coin": "Select Coin",
+    "coin": "Coin",
+    "Balance": "Balance",
+    "Send To": "Send To",
+    "Address": "Address",
+    "Network": "Network",
+    "Withdraw Amount": "Withdraw Amount",
+    "Amount": "Amount",
+    "Processing Fee": "Processing Fee",
+    "confirm": "I confirm that the above details are accurate, and I authorize to withdraw the funds to my wallet.",
+    "withdraw": "Withdraw",
+    "Submitted": "Submitted",
+    "Your withdrawal request has been submitted !": "Your withdrawal request has been submitted !",
+    "My Wallet": "My Wallet",
+    "Homepage": "Homepage",
+    "enter_an_amount": "Enter an amount..."
+}

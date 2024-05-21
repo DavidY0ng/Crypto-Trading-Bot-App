@@ -14,7 +14,7 @@
             path: "/bots"
         },
         {
-            name: "profile",
+            name: "Profile",
             icon: "mdi:user",
             path: "/profile"
         },
