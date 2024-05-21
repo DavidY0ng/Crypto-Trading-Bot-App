@@ -1,23 +1,39 @@
-<script>
+<script  lang='ts'>
 	import Icon from '@iconify/svelte';
 	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
-    import { t } from '$lib/i18n';
+	import { t } from '$lib/i18n';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+	export let amountValue:number | null = null
+	export let selectedCoin:string
+	function toBroadcast() {
+		dispatch('toBroadcast');
+	}
+
+	function goBack() {
+		dispatch('goBack')
+	}
 </script>
 
 <div class="flex flex-col gap-5 p-5 card">
 	<div class="flex flex-col gap-1">
-		<div class="flex font-bold">Selected Coin</div>
-		<div class="flex flex-grow">--</div>
+		<div class="flex text-gray-400">Selected Coin</div>
+		<div class="flex items-center gap-1 font-bold">
+			<Icon icon="cryptocurrency-color:usdt" width="1.2em" height="1.2em" />
+			<div class="flex flex-grow">{selectedCoin}</div>
+		</div>
+		
 	</div>
 
 	<div class="flex flex-col gap-1">
-		<div class="flex font-bold">Deposit Amount</div>
-		<div>--</div>
+		<div class="flex text-gray-400">Deposit Amount</div>
+		<div class="font-bold">{amountValue}</div>
 	</div>
 
 	<div class="flex flex-col gap-1">
-		<div class="flex font-bold">Network</div>
-		<div class="">--</div>
+		<div class="flex text-gray-400">Network</div>
+		<div class="font-bold">--</div>
 	</div>
 
 	<Accordion class="bg-gray-100 dark:bg-[--input-color] rounded-lg ">
@@ -97,8 +113,11 @@
 			</svelte:fragment>
 		</AccordionItem>
 	</Accordion>
-	<div class="flex flex-grow">
-		<button class="flex justify-center flex-grow text-white rounded-md btn bg-primary-500">
+	<div class="flex flex-grow gap-2">
+		<button on:click={goBack} class="flex justify-center flex-1 text-white bg-gray-500 rounded-md shadow-md btn">
+			Back
+		</button>
+		<button on:click={toBroadcast} class="flex justify-center flex-1 text-white rounded-md shadow-md btn bg-primary-500">
 			Confirm
 		</button>
 	</div>

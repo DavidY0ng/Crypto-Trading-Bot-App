@@ -1,21 +1,27 @@
-<script>
+<script lang='ts'>
     import Icon from "@iconify/svelte";
     import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
     import { t } from '$lib/i18n';
+    import { createEventDispatcher } from 'svelte';
+    import { writable } from "svelte/store";
+
+    const dispatch = createEventDispatcher()
+    export let amountValue:number | null = null
+    export let selectedCoin:string = "USDT"
 
     function toConfirmation () {
-        
+        dispatch('toConfirmation')
     }
 </script>
 
-<div class="flex flex-col gap-5 p-5 card">
+<div class="flex flex-col gap-5 p-5 shadow-md card">
     <div class="flex flex-col gap-1">
         <div class="flex font-bold">
             Select Coin
         </div>
         <div class="flex flex-grow">
-            <select class="flex flex-grow p-2 border rounded-md outline-primary-500">
-                <option>USDT</option>
+            <select class="flex flex-grow p-2 bg-white border rounded-md select outline-primary-500" bind:value={selectedCoin}>
+                <option class="" value="USDT">USDT</option>
             </select>
         </div>
     </div>
@@ -25,7 +31,7 @@
             Amount
         </div>
         <div>
-            <input type="text" class="p-2 px-3 bg-white border rounded-md">
+            <input type="number" pattern="[0-9]*" class="p-2 px-3 bg-white border rounded-md" bind:value={amountValue}>
         </div>
     </div>
 
@@ -118,7 +124,7 @@
         </AccordionItem>
     </Accordion>
     <div class="flex flex-grow">
-        <button class="flex justify-center flex-grow text-white rounded-md btn bg-primary-500">
+        <button on:click={toConfirmation} class="flex justify-center flex-grow text-white rounded-md shadow-md btn bg-primary-500" disabled={amountValue === null || amountValue < 20}>
             Continue
         </button>
     </div>

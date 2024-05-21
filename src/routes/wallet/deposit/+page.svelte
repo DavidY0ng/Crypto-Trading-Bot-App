@@ -9,13 +9,16 @@
 	import Broadcast from "$lib/components/deposit/Broadcast.svelte";
 	import Complete from "$lib/components/deposit/Complete.svelte";
 
-    let steps = ['info','confirmation','broadcast','complete']
+    let steps = ['Info','Confirmation','Broadcast','Complete']
     let currentActive = 1
     let progressBar:any
+    let amountValue:number 
+    let selectedCoin:string
 
     const handleProgress = (stepIncrement:Number) => {
 		progressBar.handleProgress(stepIncrement)
 	}
+
 </script>
 
 <BackHeader path='/wallet' layout='flex items-center bg-white pb-2'>
@@ -32,10 +35,15 @@
     <div class="flex justify-center mx-5 mt-10">
         <Stepper {steps} bind:currentActive bind:this={progressBar}/>
     </div>
-    <Info />
-    <Confirmation />
-    <Broadcast />
-    <Complete />
+    {#if currentActive == 1}
+        <Info on:toConfirmation={() => handleProgress(+1)} bind:amountValue bind:selectedCoin/>
+    {:else if currentActive == 2}
+        <Confirmation on:goBack={() => handleProgress(-1)} on:toBroadcast={() => handleProgress(+1)}  {amountValue} {selectedCoin}/>
+    {:else if currentActive == 3}
+        <Broadcast />
+    {:else}
+        <Complete />
+    {/if}
     
     
 </div>

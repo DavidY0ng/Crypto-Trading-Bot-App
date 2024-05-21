@@ -5,7 +5,7 @@
 html, body { @apply h-full overflow-hidden; }
 
 .card {
-    @apply bg-white
+    @apply bg-white  shadow-md
 }
 
 input {

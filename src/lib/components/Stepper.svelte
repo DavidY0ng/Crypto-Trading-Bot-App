@@ -55,7 +55,7 @@
 		position: relative;
 		margin-bottom: 30px;
 		max-width: 100%;
-		width: 350px;
+		width: 360px;
 	}
 
 	.progress-container::before {

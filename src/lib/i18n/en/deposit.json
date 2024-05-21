@@ -1,0 +1,80 @@
+{
+    "Deposit": "Deposit",
+    "crypto": "Crypto",
+    "fiat": "Fiat",
+    "Please kindly check your deposit information before proceeding": "Please kindly check your deposit information before proceeding.",
+    "Select Coin": "Select Coin",
+    "Balance": "Balance",
+    "Amount": "Amount",
+    "Network": "Network",
+    "Address": "Address",
+    "Copy Address": "Copy Address",
+    "Address Copied": "Address Copied",
+    "Minimum Deposit": "Minimum Deposit",
+    "Confirmation": "Confirmation",
+    "Contract Address": "Contract Address",
+    "Selected Coin": "Selected Coin",
+    "Amount to Deposit": "Amount to Deposit",
+    "Please avoid refreshing the page or clicking any buttons": "Please avoid refreshing the page or clicking any buttons",
+    "Deposit Sucessful": "Deposit Sucessful",
+    "Your money has been successfully deposited to your account !": "Your money has been successfully deposited to your account !",
+    "My Wallet": "My Wallet",
+    "Join Investment": "Join Investment",
+    "Go Back": "Go Back",
+    "enter_your_amount": "Enter your amount...",
+    "steps": {
+        "request": "Request",
+        "confirmation": "Confirmation",
+        "broadcast": "Broadcast",
+        "complete": "Complete"
+    },
+    "blocks": "Blocks",
+    "Submit": "Submit",
+    "Confirm": "Confirm",
+    "pending_wallet": "Pending wallet signature...",
+    "transaction_broadcast": "Your transaction is being broadcast...",
+    "Finalizing Transaction": "Finalizing Transaction...",
+    "Please select a coin": "Please select a coin",
+    "Please enter a valid amount": "Please enter a valid amount",
+    "Amount needs to be more than": "Amount needs to be more than",
+    "fiat_deposit": {
+        "payment_method": "Payment Method",
+        "select": "Select a payment method.",
+        "option": "Option",
+        "alipay": "Alipay",
+        "deposit_alipay": {
+            "title": "Deposit with Alipay",
+            "desc": "After clicking on 'Deposit', you will be redirected to Alipay website to complete your deposit securely."
+        },
+        "deposit_amount": "Deposit Amount",
+        "min_deposit": "Minimum Deposit",
+        "usd_rate": "USD Rate",
+        "amount_to_receive": "Amount To Receive",
+        "confirm": "I confirm the above amount is correct and acknowledged there will be no refunds after deposit."
+    },
+    "unionpay": {
+        "payment_method": "Payment Method",
+        "select": "Select a payment method.",
+        "option": "Option",
+        "title": "UnionPay",
+        "deposit_unionpay": {
+            "title": "Deposit with UnionPay",
+            "desc": "After clicking on 'Deposit', you will be redirected to UnionPay website to complete your deposit securely."
+        },
+        "deposit_amount": "Deposit Amount",
+        "min_deposit": "Minimum Deposit",
+        "usd_rate": "USD Rate",
+        "amount_to_receive": "Amount To Receive",
+        "confirm": "I confirm the above amount is correct and acknowledged there will be no refunds after deposit."
+    },
+    "no_address": {
+        "title": "No Wallet Address Detected",
+        "desc": "Please bind a wallet address to use this feature",
+        "button": "Bind Now"
+    },
+    "no_ext": {
+        "title": "Wallet Extension Not Found",
+        "desc": "Please Install Wallet Extension or Wallet App to use this feature."
+    },
+    "remark": "Note: If users choose to deposit by transferring funds directly to the provided address, it is important to use the wallet address with the registered address. Under no circumstances should transfers be initiated from exchanges or third-party recharge services."
+}

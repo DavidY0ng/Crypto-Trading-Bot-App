@@ -1,6 +1,13 @@
 <script>
     import BackHeader from "$lib/components/BackHeader.svelte"
     import Icon from "@iconify/svelte";
+    import { getFeeWalletBalance, getRewardWalletBalance, feeWalletBalance, rewardWalletBalance } from "$lib/stores/store";
+	import { onMount } from "svelte";
+
+    onMount(() => {
+        getFeeWalletBalance()
+        getRewardWalletBalance()
+    })
 </script>
 
 <BackHeader path='/' layout='flex items-center bg-white pb-2'>
@@ -18,7 +25,7 @@
             <div>
                 Fee Wallet
                 <div class="text-lg text-white">
-                    0.00 USDT
+                    {$feeWalletBalance} USDT
                </div>
             </div>
             <div>
@@ -40,7 +47,7 @@
             <div>
                 Reward Wallet
                 <div class="text-lg text-white">
-                    0.00 USDT
+                    {$rewardWalletBalance} USDT
                </div>
             </div>
             <div>
@@ -53,9 +60,9 @@
                 <button class="text-white rounded-lg variant-ghost-secondary btn">
                     Transfer
                 </button>
-                <button class="text-white bg-teal-400 rounded-lg btn w-[95px]">
+                <a class="text-white bg-teal-400 rounded-lg btn w-[95px]" href='/wallet/withdraw'>
                     Withdraw
-                </button>
+                </a>
                 
             </div>
         </div>

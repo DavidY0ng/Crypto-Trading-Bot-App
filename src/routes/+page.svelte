@@ -84,9 +84,9 @@
         </div>
     
         <div class="flex justify-end pt-3">
-            <button class="flex font-semibold bg-white shadow-md text btn text-tertiary-500">
+            <a class="flex font-semibold bg-white shadow-md text btn text-tertiary-500" href='/wallet/deposit'>
                 Deposit
-            </button>
+            </a>
         </div>
         
     </div>
