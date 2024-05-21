@@ -9,7 +9,7 @@
 		toastStore.trigger({
 			message: msg,
 			background: `${
-				color === 'red' ? 'bg-red-500' : color == 'green' ? 'bg-green-500' : `bg-${color}-500`
+				color === 'red' ? 'bg-red-500' : color == 'green' ? 'bg-green-500' : color == 'orange' ? 'bg-warning-500' : `bg-${color}-500`
 			} text-white`,
 			timeout: 5000
 		});

@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { usdtxAbi } from '$lib/components/contract/usdtAbi';
 import { goto } from '$app/navigation';
 import { showToast } from '$lib/components/toasts/toast';
 import { currentURL, urlList } from '$lib/configs/settings';
@@ -6,8 +7,9 @@ import { t } from '$lib/i18n';
 import { api, apiWithToken } from './http';
 import { emptyAccessToken, storeAccessToken } from '$lib/stores/storeLocal';
 import { emptyUserInfo, storeUserInfo, type IUserInfo } from '$lib/stores/storeUser';
-import { get } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 import {
+	parseEther,
 	createPublicClient,
 	createWalletClient,
 	custom,
@@ -18,11 +20,12 @@ import {
 } from 'viem';
 import { bsc, bscTestnet } from 'viem/chains';
 import Spinner from '$lib/components/Spinner.svelte';
-import { noReferralCode, isLoading, showReferralModal } from '$lib/stores/store';
+import { noReferralCode, isLoading, showReferralModal, getUserInfo, userInfo } from '$lib/stores/store';
 import { wait } from './helper';
 
 export let walletClient: any;
 export let connectedAddress: Address = get(storeUserInfo).address;
+export let broadcastState = writable('pending_wallet');
 
 let showSpinner: boolean = false
 let signedMessage: string = '';
@@ -75,7 +78,7 @@ export const onConnectWallet = async () => {
 	}
 };
 
-export const onRequestSignMessage = async () => {
+export const onRequestSignMessage = async (code?:String) => {
 	try {
 		if (connectedAddress === zeroAddress) {
 			
@@ -83,7 +86,8 @@ export const onRequestSignMessage = async () => {
 			return false;
 		} else {
 			const req  = await api('POST', `/auth/request`, {
-				address: connectedAddress
+				address: connectedAddress,
+				code: code
 			});
 
 			const { success, data } = req;
@@ -97,12 +101,14 @@ export const onRequestSignMessage = async () => {
 				const result = onVerifySignMessage();
 
 				return result;
-			} else {
+			} else if (data[0] == "code:required") {
 				noReferralCode.set(true)
-				console.log(get(noReferralCode), "no referral code is...")
-				showToast(t.get(`common.toast.${data[0]}`), 'red');
+				showToast(t.get(`error.${data[0]}`), 'red');
 				
 				return ;
+			} else {
+				showToast(t.get(`error.${data[0]}`), 'red');
+				return
 			}
 		}
 	} catch (error) {
@@ -132,7 +138,9 @@ const onVerifySignMessage = async () => {
 				expires_in: new Date().getTime() + res.data.expires_in * 1000
 			});
 
+			getUserInfo()
 			showToast(t.get('common.toast.login_success'), 'green');
+			noReferralCode.set(false)
 			goto('/');
 			return { success: true };
 		}
@@ -169,4 +177,50 @@ export const onLogOut = async () => {
     } finally {
         isLoading.set(false);
     }
+};
+
+export const sendTransaction = async (
+	amount: number | string,
+	token: 'usdt',
+	contractAddress: any,
+	toAddress: Address
+) => {
+	broadcastState.set('pending_wallet');
+	let hash: any;
+	const gasPrice = await publicClient.getGasPrice();
+	if (token == 'usdt') {
+		const gasEstimate = await publicClient.estimateContractGas({
+			address: contractAddress,
+			abi: usdtxAbi,
+			functionName: 'transfer',
+			args: [toAddress, parseEther(amount.toString())],
+			account: connectedAddress,
+			gasPrice
+		});
+		const { request } = await publicClient.simulateContract({
+			address: contractAddress,
+			abi: usdtxAbi,
+			functionName: 'transfer',
+			args: [toAddress, parseEther(amount.toString())],
+			account: connectedAddress,
+			gas: gasEstimate,
+			gasPrice: gasPrice
+		});
+		hash = await walletClient.writeContract(request);
+	}
+
+	if (hash) {
+		broadcastState.set('transaction_broadcast');
+		const transaction = await publicClient.waitForTransactionReceipt({
+			// passedby 10 blocks because we need to make sure the transaction passed thru 10 blocks to confirm its in the blockchain already
+			confirmations: 15,
+			hash: hash
+		});
+		if (transaction) {
+			broadcastState.set('Finalizing Transaction');
+			return { success: true, txid: hash };
+		}
+	} else {
+		return { success: false };
+	}
 };

@@ -12,7 +12,7 @@
 		dialog.showModal();
 	}
 	
-	$: console.log(showModal, "current modal state")
+	// $: console.log(showModal, "current modal state")
 	function closeModal() {
 		if (dialog) dialog.close();
 		showModal = false;

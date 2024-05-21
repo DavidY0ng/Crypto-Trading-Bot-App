@@ -2,6 +2,9 @@
     import BackHeader from '$lib/components/BackHeader.svelte'
     import Icon from "@iconify/svelte";
     import { copyToClipboard } from "$lib/utils/helper"
+	import { onMount } from 'svelte';
+	import { getReferralCode, getUserInfo, referralCode } from '$lib/stores/store';
+    import { storeUserInfo} from "$lib/stores/storeUser"
 
     const invitationMenu = [
         {
@@ -28,6 +31,11 @@
             description: 'Priority support'
         }
     ]
+
+    onMount(() => {
+        getUserInfo()
+        getReferralCode()
+    })
     
 </script>
 
@@ -63,9 +71,9 @@
                 </div>
                 <div class="flex items-center justify-between">
                     <div class="text-base font-semibold">
-                        {menu.field}
+                        {$storeUserInfo.membership == 0 ? "---" : $referralCode.code}
                     </div>
-                    <div class="text-primary-500">
+                    <div class="text-primary-500 {$storeUserInfo.membership == 0 ? "hidden": "flex"}">
                         <button on:click={() => copyToClipboard(menu.field)}>
                             <Icon icon="solar:copy-line-duotone" width="1.2em" height="1.2em" />
                         </button>
@@ -80,7 +88,10 @@
             <div class="mb-3 text-gray-400">
                 Scan QR code
             </div>
-            <img src='/img/referral/sample qr.png' alt='qr-code' class="w-[150px] h-[150px]">
+            <div class=" variant-glass-primary">
+                <img src='/img/referral/sample qr.png' alt='qr-code' class="w-[150px] h-[150px] {$storeUserInfo.membership == 0 ?"opacity-0" : "opacity-100"}">
+            </div>
+            
         </div>
 
         <div class="p-3 bg-error-200/50 text-error-400">

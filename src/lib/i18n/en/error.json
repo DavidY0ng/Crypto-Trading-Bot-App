@@ -1,0 +1,9 @@
+{
+   "address:invalid_format": "Address invalid format",
+   "account:inactivated": "Account inactivated",
+   "account:freezed": "Account freezed",
+   "account:suspended": "Account suspended",
+   "under_maintenance": "Under maintenance",
+   "code:invalid": "Referral code invalid",
+   "code:required": "Referral code required" 
+}

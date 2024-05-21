@@ -17,7 +17,7 @@
             name: "Referral"
         },
         {
-            links: "#",
+            links: "/wallet",
             icon: "iconoir:wallet",
             name: "Wallet"
         },

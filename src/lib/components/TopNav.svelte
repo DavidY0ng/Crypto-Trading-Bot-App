@@ -44,7 +44,7 @@
 		}
 	};
 
-	function onSubmitCode() {
+	async function onSubmitCode() {
     if (referralValue == '') {
         errorInput = "Field cannot be empty";
         
@@ -54,19 +54,17 @@
             // Assuming you need to update the UI, you might need to call a function or trigger a re-render here
             // This is a placeholder for your actual UI update logic
         }, 3000);
-    }
-}
-
-function promptModal() {
-	showModal = true;
+    } else {
+		const res = await onRequestSignMessage(referralValue)
 	}
+}
 	
 function handleModalClose() {
 	noReferralCode.set(false);
 }
 	
 </script>
-<button on:click={promptModal}>Open Modal</button>
+
 <div class="flex justify-end left-0 right-0 top-0 max-w-[425px] mx-auto card rounded-none py-2 px-3 w-full">
     {#if !$storeAccessToken.access_token}
     <button on:click={connectWallet} class="px-2 py-1 text-white rounded-full bg-primary-500">
@@ -86,7 +84,6 @@ function handleModalClose() {
 <!-- referral code modal -->
 
 {#if $noReferralCode}
-
 	<Modal bind:showModal on:close={handleModalClose}>
 		<div slot="header">
 			<div class="">
@@ -94,7 +91,7 @@ function handleModalClose() {
 			</div>
 		</div>
 		<div class="mb-3">
-			<input type="text" class="rounded-md" value={referralValue}>
+			<input type="text" class="rounded-md" bind:value={referralValue}>
 			{#if errorInput}
 			<p class="fixed text-xs text-error-500">{errorInput}</p>
 			{/if}
@@ -105,5 +102,4 @@ function handleModalClose() {
 			</button>
 		</div>
 	</Modal>
-
 {/if}
