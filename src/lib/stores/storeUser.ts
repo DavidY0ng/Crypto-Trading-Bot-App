@@ -2,6 +2,7 @@ import { persisted } from 'svelte-persisted-store';
 import { zeroAddress, type Address } from 'viem';
 
 interface IUserInfo {
+	uid: string;
 	address: Address;
 	chainid: string;
 	has_address: number;
@@ -10,6 +11,7 @@ interface IUserInfo {
 }
 
 export const emptyUserInfo: IUserInfo = {
+	uid: '',
 	address: zeroAddress,
 	chainid: '',
 	has_address: 0,

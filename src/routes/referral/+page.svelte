@@ -1,21 +1,31 @@
-<script>
+<script lang='ts'>
     import BackHeader from '$lib/components/BackHeader.svelte'
     import Icon from "@iconify/svelte";
     import { copyToClipboard } from "$lib/utils/helper"
+    import { currentURL, urlList } from '$lib/configs/settings';
 	import { onMount } from 'svelte';
 	import { getReferralCode, getUserInfo, referralCode } from '$lib/stores/store';
     import { storeUserInfo} from "$lib/stores/storeUser"
-
-    const invitationMenu = [
+    import QRCode from '@castlenine/svelte-qrcode';
+    
+    
+    
+    let url: string =
+		currentURL === new URL(urlList.live.domainURL).hostname
+			? urlList.live.domainURL
+			: urlList.dev.domainURL;
+            
+    $: refUrl = `${url}?code=${$referralCode}`;
+    $: invitationMenu = [
         {
             title: "My invitation link",
-            field: "https://trading-bot.xyz"
+            field: refUrl
         },
         {
             title: "My invitation code",
-            field: "1234"
+            field: $referralCode
         }
-    ]
+    ];
 
     const benefitsOfMembership = [
         {
@@ -32,9 +42,9 @@
         }
     ]
 
-    onMount(() => {
-        getUserInfo()
-        getReferralCode()
+    onMount(async () => {
+        await getUserInfo()
+        await getReferralCode()
     })
     
 </script>
@@ -71,7 +81,7 @@
                 </div>
                 <div class="flex items-center justify-between">
                     <div class="text-base font-semibold">
-                        {$storeUserInfo.membership == 0 ? "---" : $referralCode.code}
+                        {$storeUserInfo.membership == 0 ? "---" : menu.field}
                     </div>
                     <div class="text-primary-500 {$storeUserInfo.membership == 0 ? "hidden": "flex"}">
                         <button on:click={() => copyToClipboard(menu.field)}>
@@ -88,13 +98,18 @@
             <div class="mb-3 text-gray-400">
                 Scan QR code
             </div>
-            <div class=" variant-glass-primary">
-                <img src='/img/referral/sample qr.png' alt='qr-code' class="w-[150px] h-[150px] {$storeUserInfo.membership == 0 ?"opacity-0" : "opacity-100"}">
-            </div>
-            
+            {#if $storeUserInfo.membership == 0}
+                <div class=" variant-glass-primary h-[170px] w-[170px]">
+                    
+                </div>
+            {:else}
+                <div class="">
+                    <QRCode size={170} data={refUrl} />
+                </div>
+            {/if}
         </div>
 
-        <div class="p-3 bg-error-200/50 text-error-400">
+        <div class="p-3 bg-error-200/50 text-error-400 {$storeUserInfo.membership == 0 ? "flex": "hidden"}">
             Please activate your membership to access your invite link, referral code, and QR code.
         </div>
 
@@ -102,7 +117,7 @@
             <div>
                 <Icon icon="akar-icons:circle-alert" width="1.5em" height="1.5em" />
             </div>
-            <p>The referral code wille expire or become unusable if your membership ends.</p>
+            <p>The referral code will expire or become unusable if your membership ends.</p>
         </div>
        
     </div>

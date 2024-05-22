@@ -22,6 +22,7 @@ export async function getUserInfo () {
         storeUserInfo.update((item: any): IUserInfo => {
             return {
                 ...item,
+                uid: currentUserData.user_id,
                 membership: currentUserData.membership,
                 upline: currentUserData.upline
                 
@@ -36,7 +37,7 @@ export async function getReferralCode () {
     if(!res) {
         return
     } else {
-        referralCode.set(res.data)
+        referralCode.set(res.data.code)
     }
     
 }
