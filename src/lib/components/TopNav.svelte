@@ -5,18 +5,17 @@
 	import { zeroAddress } from 'viem';
 	import { showToast } from './toasts/toast';
 	import Spinner from './Spinner.svelte';
-    import { isLoading, noReferralCode, showReferralModal } from '$lib/stores/store';
+    import { isLoading, noReferralCode, showModal } from '$lib/stores/store';
     import Modal from './Modal.svelte';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
     
     let showSpinner = false
-	let showModal = false
 	let referralValue = ''
 	let errorInput = ''
 
 	$: if ($noReferralCode) {
-        showModal = true;
+        showModal.set(true);
     }
 
 	const connectWallet = async () => {
@@ -58,7 +57,7 @@
 			}, 3000);
 		} else {
 			const res = await onConnectWallet(referralValue)
-			showModal = false
+			showModal.set(false)
 			// const res = await onRequestSignMessage(referralValue)
 		}
 	}
@@ -70,7 +69,7 @@ function handleModalClose() {
 onMount(() => {
         const params = new URLSearchParams($page.url.search);
         if (params.has('code')) {
-            showModal = true
+			showModal.set(true)
 			referralValue = params.get('code');
         }
     });
@@ -95,8 +94,8 @@ onMount(() => {
 
 <!-- referral code modal -->
 
-{#if $noReferralCode || showModal}
-	<Modal bind:showModal on:close={handleModalClose}>
+{#if $noReferralCode || $showModal}
+	<Modal on:close={handleModalClose}>
 		<div slot="header">
 			<div class="">
 				Referral Code

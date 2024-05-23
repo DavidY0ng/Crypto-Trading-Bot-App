@@ -11,3 +11,14 @@ html, body { @apply h-full overflow-hidden; }
 input {
     @apply outline-primary-500 bg-gray-200 p-1 px-2 w-full
 }
+
+@layer utilities {
+    .caps-first,
+    .caps-first * {
+        text-transform: none;
+
+        &::first-letter {
+            text-transform: capitalize;
+        }
+    }
+}

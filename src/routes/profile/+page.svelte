@@ -1,9 +1,10 @@
 <script>
     import { storeUserInfo } from '$lib/stores/storeUser';
-    import { getUserInfo } from '$lib/stores/store'
+    import { getUserInfo, userInfo } from '$lib/stores/store'
 	import { onMount } from 'svelte';
     import { truncateString } from '$lib/utils/helper'
     import Icon from "@iconify/svelte";
+    import QRCode from '@castlenine/svelte-qrcode';
 
     const menus = [
         {
@@ -24,7 +25,7 @@
         {
             icon: 'mdi:security-lock-outline',
             name: "Security",
-            links: ''
+            links: '/profile/google-auth'
         },
         {
             icon: 'fluent:people-community-48-regular',
@@ -38,48 +39,49 @@
     })
 </script>
 
-<div class="flex flex-col">
+<div class="flex flex-col flex-grow max-h-[250px]">
 
-    <div class="flex items-center p-5 bg-blue-500">
-        <div class="flex flex-shrink-0 mr-2">
+    <div class="flex flex-col flex-grow p-5 bg-[url('/img/profile/bg3.jpg')] bg-cover">
+        <div class="flex items-center justify-center flex-grow">
             <img src='/img/profile/2.png' alt='profile-img' class="h-[70px] w-[70px]">
         </div>
-        
-        <a class="flex items-center flex-grow" href="/profile/personal-information">
-            <div class="flex flex-col">
-                <div class="flex gap-2">
-                    <div class="text-white">
+        <div class="flex justify-center font-bold text-white">
+            {$userInfo.nickname}
+        </div>
+        <a class="flex items-center justify-center flex-grow" href="/profile/personal-information">
+            <div class="flex flex-col items-center flex-grow">
+                <div class="flex items-center gap-2">
+                    <div class="text-xs text-gray-300">
                         UID:
                     </div>
-                    <div class="font-bold text-white">
+                    <div class="font-thin text-white">
                         {$storeUserInfo.uid}1234
                     </div>
                 </div>
                 
-                <div class="flex gap-2">
-                    <div class="text-white">
+                <div class="flex items-center gap-2">
+                    <div class="text-xs text-gray-300">
                         Address:
                     </div>
                     <!-- <div class="font-bold">
                         {truncateString('1234123412341432543523452435',5,5)}
                     </div> -->
-                    <div class="font-bold text-white">
+                    <div class="font-thin text-white">
                         {truncateString($storeUserInfo.address,5,5)}
                     </div>
                 </div>
             </div>
-            <div class="flex justify-end flex-grow text-white">
+            <div class="flex justify-end text-white">
                 <Icon icon="material-symbols:keyboard-arrow-right" width="1.5em" height="1.5em" />
             </div>
         </a>
         
         
-        
     </div>
-    
     
 </div>
 
+<!-- menu and links -->
 <div class="flex flex-col flex-grow bg-white">
     {#each menus as menu}
         <a class="flex items-center gap-4 p-5 border-b" href={menu.links}>
