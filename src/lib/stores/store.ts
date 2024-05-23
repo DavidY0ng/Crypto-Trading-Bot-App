@@ -2,13 +2,15 @@ import { api, apiWithToken } from "$lib/utils/http";
 import { get, writable } from "svelte/store";
 import { storeUserInfo, type IUserInfo } from "./storeUser";
 import { walletActions } from "viem";
+import { showToast } from "$lib/components/toasts/toast";
+import { goto } from "$app/navigation";
 
 export const isLoading = writable(false)
 export const noReferralCode = writable(false)
 export const showReferralModal = writable(false)
 export const userInfo = writable({})
 export const referralCode = writable('')
-export const feeWalletBalance = writable({})
+export const feeWalletBalance = writable(0)
 export const rewardWalletBalance = writable({})
 
 export async function getUserInfo () {
@@ -65,3 +67,4 @@ export async function getRewardWalletBalance () {
         rewardWalletBalance.set(res.data.amount)
     }
 }
+

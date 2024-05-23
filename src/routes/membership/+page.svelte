@@ -1,11 +1,35 @@
 <script>
 	import BackHeader from '$lib/components/BackHeader.svelte';
 	import Icon from '@iconify/svelte';
-    import Modal from "$lib/components/Modal.svelte"
+	import Modal from '$lib/components/Modal.svelte';
 	import { goto } from '$app/navigation';
+	import { apiWithToken } from '$lib/utils/http';
+	import { isLoading, getFeeWalletBalance, feeWalletBalance, getUserInfo } from '$lib/stores/store';
+	import { showToast } from '$lib/components/toasts/toast';
+	import Spinner from '$lib/components/Spinner.svelte';
+	import { onMount } from 'svelte';
 
-    let showModal = false
+	let showModal = false;
+
 	const benefits = ['Higher ROI', 'Free Bots 24/7', 'Gurantee Profit', 'Premium Support'];
+
+	async function purchaseMembership() {
+		const res = await apiWithToken('POST', '/membership/purchase', {});
+		if (res.success) {
+			isLoading.set(true);
+
+			setTimeout(() => {
+				goto('/membership/success');
+				getUserInfo();
+				isLoading.set(false);
+			}, 1000);
+		} else if (res.data[0] == 'amount:insufficient_balance') {
+			showModal = true;
+		} else {
+			showToast(res.data[0], 'red');
+		}
+	}
+
 </script>
 
 <BackHeader path="/" layout="flex items-center bg-white pb-2">
@@ -50,11 +74,11 @@
 				<p class="">Trade all you want without worries.</p>
 			</div>
 		</div>
-        <div class="flex items-center gap-3 p-3 bg-green-500/30 rounded-xl">
-            <div class="text-green-500">
-                <Icon icon="mdi:shield-tick" width="2em" height="2em" />
-            </div>
-			
+		<div class="flex items-center gap-3 p-3 bg-green-500/30 rounded-xl">
+			<div class="text-green-500">
+				<Icon icon="mdi:shield-tick" width="2em" height="2em" />
+			</div>
+
 			<div>
 				<div class="font-semibold text-green-500">Guaranteed Experts</div>
 				<p>Bot created by experts engineer.</p>
@@ -63,26 +87,33 @@
 	</div>
 
 	<div class="mt-5">
-		<button on:click={()=>(showModal = true)} class="w-full text-white shadow-lg btn bg-primary-500 rounded-xl"> Proceed to Payment </button>
+		<button
+			on:click={purchaseMembership}
+			class="w-full text-white shadow-lg btn bg-primary-500 rounded-xl"
+		>
+			Proceed to Payment
+		</button>
 	</div>
 </div>
 
+{#if $isLoading}
+	<Spinner />
+{/if}
 
-<Modal bind:showModal>
-    
-    <div slot="header">
-        Insufficient Balance
-    </div>
-    <div class="mb-5 text-gray-400">
-        Please top up your balance before proceeding.
-    </div>
-    <div class="flex gap-2">
-        <button on:click={() => (showModal = false)} class="w-full bg-gray-400 rounded-lg shadow-md btn">
-            Cancel
-        </button>
-        <button class="w-full text-white rounded-lg shadow-md btn bg-primary-500">
-            Deposit
-        </button>
-    </div>
-   
-</Modal>
+{#if showModal}
+	<Modal bind:showModal>
+		<div slot="header">Insufficient Balance</div>
+		<div class="mb-5 text-gray-400">Please top up your balance before proceeding.</div>
+		<div class="flex gap-2">
+			<button
+				on:click={() => (showModal = false)}
+				class="w-full bg-gray-400 rounded-lg shadow-md btn"
+			>
+				Cancel
+			</button>
+			<a class="w-full text-white rounded-lg shadow-md btn bg-primary-500" href="/wallet/deposit">
+				Deposit
+			</a>
+		</div>
+	</Modal>
+{/if}

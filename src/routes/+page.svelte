@@ -3,7 +3,9 @@
     import Icon from "@iconify/svelte";
     import Spinner from '$lib/components/Spinner.svelte';
     import TopNav from '$lib/components/TopNav.svelte';
-  
+    import { storeUserInfo } from '$lib/stores/storeUser';
+	import { onMount } from 'svelte';
+	import { getUserInfo } from '$lib/stores/store';
 
     const menuPath = [ 
         {
@@ -50,6 +52,10 @@
         //     description: ""
         // }
     ]
+
+    onMount(() => {
+        getUserInfo()
+    })
 </script>
 
 <TopNav/>
@@ -107,6 +113,7 @@
     </div>
 
     <!-- Join membership section -->
+    {#if $storeUserInfo.membership == 0}
     <a class="relative flex justify-between gap-4 px-2 py-2 mb-3 text-sm shadow-md bg-gradient-to-r from-tertiary-500/20 to-orange-500/20" href="/membership">
         <div class="flex absolute top-[-8px] left-0 text-tertiary-500">
             <Icon icon="streamline:star-2-solid" width="1.2em" height="1.2em" />
@@ -119,6 +126,7 @@
             Subscribe+
         </div>
     </a>
+    {/if}
     
     
     <!-- strategy -->

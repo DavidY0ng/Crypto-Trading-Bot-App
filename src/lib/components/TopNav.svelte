@@ -7,6 +7,8 @@
 	import Spinner from './Spinner.svelte';
     import { isLoading, noReferralCode, showReferralModal } from '$lib/stores/store';
     import Modal from './Modal.svelte';
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
     
     let showSpinner = false
 	let showModal = false
@@ -45,23 +47,33 @@
 	};
 
 	async function onSubmitCode() {
-    if (referralValue == '') {
-        errorInput = "Field cannot be empty";
-        
-        // Set a timeout to clear the errorInput after 3 seconds
-        setTimeout(() => {
-            errorInput = '';
-            // Assuming you need to update the UI, you might need to call a function or trigger a re-render here
-            // This is a placeholder for your actual UI update logic
-        }, 3000);
-    } else {
-		const res = await onRequestSignMessage(referralValue)
+		if (referralValue == '') {
+			errorInput = "Field cannot be empty";
+			
+			// Set a timeout to clear the errorInput after 3 seconds
+			setTimeout(() => {
+				errorInput = '';
+				// Assuming you need to update the UI, you might need to call a function or trigger a re-render here
+				// This is a placeholder for your actual UI update logic
+			}, 3000);
+		} else {
+			const res = await onConnectWallet(referralValue)
+			showModal = false
+			// const res = await onRequestSignMessage(referralValue)
+		}
 	}
-}
 	
 function handleModalClose() {
 	noReferralCode.set(false);
 }
+
+onMount(() => {
+        const params = new URLSearchParams($page.url.search);
+        if (params.has('code')) {
+            showModal = true
+			referralValue = params.get('code');
+        }
+    });
 	
 </script>
 
@@ -83,7 +95,7 @@ function handleModalClose() {
 
 <!-- referral code modal -->
 
-{#if $noReferralCode}
+{#if $noReferralCode || showModal}
 	<Modal bind:showModal on:close={handleModalClose}>
 		<div slot="header">
 			<div class="">

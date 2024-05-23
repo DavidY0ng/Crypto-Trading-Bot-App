@@ -47,7 +47,7 @@ export const publicClient = createPublicClient({
 
 
 
-export const onConnectWallet = async () => {
+export const onConnectWallet = async (code?:String) => {
 	try {
 		isLoading.set(true)
 		const accounts = await walletClient.requestAddresses({force:true});
@@ -65,7 +65,7 @@ export const onConnectWallet = async () => {
 				await walletClient.addChain({ chain: targetNetwork });
 				await walletClient.switchChain({ id: targetNetwork.id });
 			}
-			await onRequestSignMessage()
+			await onRequestSignMessage(code)
 			isLoading.set(false);
 			return true;
 		} else {
