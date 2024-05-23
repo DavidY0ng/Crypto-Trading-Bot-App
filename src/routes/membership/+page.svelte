@@ -4,12 +4,10 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import { goto } from '$app/navigation';
 	import { apiWithToken } from '$lib/utils/http';
-	import { isLoading, getFeeWalletBalance, feeWalletBalance, getUserInfo } from '$lib/stores/store';
+	import { showModal, isLoading, getFeeWalletBalance, feeWalletBalance, getUserInfo } from '$lib/stores/store';
 	import { showToast } from '$lib/components/toasts/toast';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import { onMount } from 'svelte';
-
-	let showModal = false;
 
 	const benefits = ['Higher ROI', 'Free Bots 24/7', 'Gurantee Profit', 'Premium Support'];
 
@@ -24,7 +22,7 @@
 				isLoading.set(false);
 			}, 1000);
 		} else if (res.data[0] == 'amount:insufficient_balance') {
-			showModal = true;
+			showModal.set(true)
 		} else {
 			showToast(res.data[0], 'red');
 		}
@@ -100,20 +98,20 @@
 	<Spinner />
 {/if}
 
-{#if showModal}
-	<Modal bind:showModal>
-		<div slot="header">Insufficient Balance</div>
-		<div class="mb-5 text-gray-400">Please top up your balance before proceeding.</div>
-		<div class="flex gap-2">
-			<button
-				on:click={() => (showModal = false)}
-				class="w-full bg-gray-400 rounded-lg shadow-md btn"
-			>
-				Cancel
-			</button>
-			<a class="w-full text-white rounded-lg shadow-md btn bg-primary-500" href="/wallet/deposit">
-				Deposit
-			</a>
-		</div>
-	</Modal>
-{/if}
+
+<Modal>
+	<div slot="header">Insufficient Balance</div>
+	<div class="mb-5 text-gray-400">Please top up your balance before proceeding.</div>
+	<div class="flex gap-2">
+		<button
+			on:click={() => (showModal.set(false))}
+			class="w-full bg-gray-400 rounded-lg shadow-md btn"
+		>
+			Cancel
+		</button>
+		<a class="w-full text-white rounded-lg shadow-md btn bg-primary-500" href="/wallet/deposit">
+			Deposit
+		</a>
+	</div>
+</Modal>
+

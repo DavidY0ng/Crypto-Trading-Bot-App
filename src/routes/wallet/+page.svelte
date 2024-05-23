@@ -10,7 +10,7 @@
     })
 </script>
 
-<BackHeader path='/' layout='flex items-center bg-white pb-2'>
+<BackHeader path='/profile' layout='flex items-center bg-white pb-2'>
     <div class="flex justify-center flex-1 h3">
         Wallet
     </div>

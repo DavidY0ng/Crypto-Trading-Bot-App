@@ -6,6 +6,7 @@ import { showToast } from "$lib/components/toasts/toast";
 import { goto } from "$app/navigation";
 
 export const isLoading = writable(false)
+export const showModal = writable(false)
 export const noReferralCode = writable(false)
 export const showReferralModal = writable(false)
 export const userInfo = writable({})

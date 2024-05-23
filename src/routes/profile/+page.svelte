@@ -82,7 +82,7 @@
 
 <div class="flex flex-col flex-grow bg-white">
     {#each menus as menu}
-        <div class="flex items-center gap-4 p-5 border-b">
+        <a class="flex items-center gap-4 p-5 border-b" href={menu.links}>
             <div>
                 <Icon icon={menu.icon} width="1.2em" height="1.2em" />
             </div>
@@ -92,6 +92,6 @@
             <div class="flex justify-end flex-grow text-gray-400">
                 <Icon icon="material-symbols:keyboard-arrow-right" width="1.5em" height="1.5em" />
             </div>
-        </div> 
+        </a> 
     {/each}
 </div>

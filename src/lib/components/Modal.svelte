@@ -1,8 +1,8 @@
 <script lang='ts'>
 	import Icon from "@iconify/svelte";
 	import { createEventDispatcher } from 'svelte';
+	import { showModal } from "$lib/stores/store";
 
-	export let showModal:boolean; // boolean
     export let modalClass = ""
 
 	let dialog:any; // HTMLDialogElement
@@ -15,16 +15,16 @@
 	// $: console.log(showModal, "current modal state")
 	function closeModal() {
 		if (dialog) dialog.close();
-		showModal = false;
+		showModal.set(false);
 		dispatch('close')
 	}
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
-{#if showModal}
+{#if $showModal}
 <dialog class="{modalClass} w-[300px]"
 	bind:this={dialog}
-	on:close={() => (showModal = false)}
+	on:close={() => showModal.set(false)}
 	on:click|self={() =>closeModal()}
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->

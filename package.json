@@ -40,8 +40,10 @@
 	"type": "module",
 	"dependencies": {
 		"@iconify/svelte": "^4.0.2",
+		"@otplib/preset-browser": "^12.0.1",
 		"@splidejs/svelte-splide": "^0.2.9",
 		"decimal.js": "^10.4.3",
+		"otplib": "^12.0.1",
 		"svelte-loading-spinners": "^0.3.6",
 		"svelte-persisted-store": "^0.9.2",
 		"sveltekit-i18n": "^2.4.2",
