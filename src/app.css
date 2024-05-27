@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body { @apply h-full overflow-hidden; }
+html, body { @apply h-full overflow-hidden bg-surface-100; }
 
 .card {
-    @apply bg-white  shadow-md
+    @apply bg-white shadow-md
 }
 
 input {

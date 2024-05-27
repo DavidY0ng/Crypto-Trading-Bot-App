@@ -1,18 +1,18 @@
 <script>
 </script>
 
-<div class="flex flex-col justify-between h-full px-3">
+<div class="flex flex-col justify-between flex-grow px-3">
 	<div class="mb-3 overflow-hidden rounded-md shadow-md">
 		<!-- header -->
-		<div class="p-5 py-3 bg-gradient-to-r from-primary-500 to-tertiary-500">
-			<div class="flex justify-between">
-				<div class="font-bold text-white h2">Deltra Pro</div>
-				<div class="text-white bg-success-500 rounded-full w-[70px] flex justify-center py-1">
-					Active
-				</div>
+		<div class="flex items-center justify-between p-5 py-3 bg-gradient-to-r from-primary-500 to-primary-500">
+			<div class="flex flex-col justify-between text-white">
+				<div class="font-bold h2">Deltra Pro</div>
+				<div class="">Expires in: 365 days</div>
 			</div>
-
-			<div class="text-white">Expires in: 365 days</div>
+            <div class="text-white bg-green-500 rounded-full w-[70px] flex justify-center py-1">
+                Active
+            </div>
+			
 		</div>
 
 		<!-- details -->
@@ -48,8 +48,8 @@
 		</div>
 	</div>
     
-    <a class="" href="/membership">
-        <button class="w-full text-white rounded-lg shadow-md bg-primary-500 btn">
+    <a class="flex flex-col justify-end flex-grow" href="/membership" >
+        <button class="flex flex-grow text-white rounded-lg shadow-md bg-primary-500 btn">
             Purchase more plans
         </button>
     </a>

@@ -30,22 +30,22 @@
 
 </script>
 
-<BackHeader path="/" layout="flex items-center bg-white pb-2">
+<BackHeader path="/" layout="flex items-center pb-2 bg-white">
 	<div class="flex justify-center flex-1 h3"></div>
 
 	<div class="flex-1"></div>
 </BackHeader>
 
-<div class="h-full px-3 py-3 bg-white">
+<div class="flex flex-col py-3 bg-white px-7">
 	<div class="mb-7">
-		<div class="mb-3 font-semibold h2">Start Membership</div>
+		<div class="mb-3 font-bold h2">Start Membership</div>
 		<div class="text-sm text-gray-400">
 			To enjoy premium benefit of trading bots, please make the payment.
 		</div>
 	</div>
 
 	<!-- payment card -->
-	<div class="px-5 py-10 mb-5 border rounded-xl">
+	<div class="flex flex-col px-5 py-10 mb-5 border rounded-xl">
 		<div class="flex h-full mb-10">
 			<span class="text-gray-500 text-[20px]">$</span>
 			<div class="font-bold text-[45px]">100</div>
@@ -65,10 +65,10 @@
 	</div>
 
 	<div class="flex flex-col gap-4">
-		<div class="flex items-center gap-3 p-3 bg-primary-500/30 rounded-xl">
+		<div class="flex items-center gap-3 p-3 bg-blue-500/30 rounded-xl">
 			<img src="/img/membership/Compliant.png" alt="icon1" class="w-10 h-10" />
 			<div>
-				<div class="font-semibold text-primary-500">Worry-Free Trading</div>
+				<div class="font-semibold text-blue-500">Worry-Free Trading</div>
 				<p class="">Trade all you want without worries.</p>
 			</div>
 		</div>
@@ -87,7 +87,7 @@
 	<div class="mt-5">
 		<button
 			on:click={purchaseMembership}
-			class="w-full text-white shadow-lg btn bg-primary-500 rounded-xl"
+			class="w-full text-white rounded-md shadow-lg btn bg-primary-500"
 		>
 			Proceed to Payment
 		</button>
@@ -109,7 +109,7 @@
 		>
 			Cancel
 		</button>
-		<a class="w-full text-white rounded-lg shadow-md btn bg-primary-500" href="/wallet/deposit">
+		<a class="w-full rounded-lg shadow-md btn bg-primary-500" href="/wallet/deposit">
 			Deposit
 		</a>
 	</div>

@@ -2,6 +2,7 @@
     import Success from "$lib/components/Success.svelte";
     import { t } from "$lib/i18n";
     import { goto } from "$app/navigation";
+   
 </script>
 
 

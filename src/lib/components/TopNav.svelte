@@ -76,13 +76,13 @@ onMount(() => {
 	
 </script>
 
-<div class="flex justify-end left-0 right-0 top-0 max-w-[425px] mx-auto card rounded-none py-2 px-3 w-full">
+<div class="flex justify-end left-0 right-0 top-0 max-w-[425px] mx-auto bg-transparent text-black rounded-none w-full ">
     {#if !$storeAccessToken.access_token}
-    <button on:click={connectWallet} class="px-2 py-1 text-white rounded-full bg-primary-500">
+    <button on:click={connectWallet} class="px-2 py-1 font-semibold bg-white rounded-full">
         Connect wallet
     </button>
     {:else}
-    <button on:click={onLogOut} class="px-2 py-1 text-white rounded-full bg-primary-500">
+    <button on:click={onLogOut} class="px-2 py-1 font-semibold bg-white rounded-full">
         Logout
     </button>
     {/if}
@@ -97,8 +97,11 @@ onMount(() => {
 {#if $noReferralCode || $showModal}
 	<Modal on:close={handleModalClose}>
 		<div slot="header">
-			<div class="">
-				Referral Code
+			<div>
+				<img src = "/img/home/referral.png">
+			</div>
+			<div class="text-base text-center">
+				Key in your referral code to connect!
 			</div>
 		</div>
 		<div class="mb-3">
@@ -107,9 +110,9 @@ onMount(() => {
 			<p class="fixed text-xs text-error-500">{errorInput}</p>
 			{/if}
 		</div>
-		<div class="flex justify-end">
-			<button on:click={onSubmitCode} class="py-2 font-semibold text-white rounded-md btn bg-primary-500">
-				Confirm
+		<div class="flex justify-end flex-grow">
+			<button on:click={onSubmitCode} class="flex flex-grow py-2 font-semibold text-white rounded-md btn bg-primary-500">
+				Connect
 			</button>
 		</div>
 	</Modal>

@@ -2,16 +2,41 @@
     import Icon from "@iconify/svelte";
     import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
     import { t } from '$lib/i18n';
-    import { createEventDispatcher } from 'svelte';
+    import { createEventDispatcher, onMount } from 'svelte';
     import { writable } from "svelte/store";
+	import { getDepositInfo, depositInfo, depositCurrentPageInfo } from "$lib/stores/store";
+    import { truncateString } from "$lib/utils/helper";
 
     const dispatch = createEventDispatcher()
-    export let amountValue:number | null = null
-    export let selectedCoin:string = "USDT"
-
+    let amountValue:number | null = null
+    
     function toConfirmation () {
+        depositCurrentPageInfo.set({
+            amount: amountValue,
+            sn: $depositInfo.sn,
+            currency: $depositInfo.currency, 
+            network: $depositInfo.network, 
+            min: $depositInfo.min, 
+            address: $depositInfo.address,
+            token_address: $depositInfo.token_address 
+        });
         dispatch('toConfirmation')
+        
     }
+
+    onMount(async() => {
+        await getDepositInfo()
+        depositCurrentPageInfo.set({
+            amount: amountValue,
+            sn: $depositInfo.sn,
+            currency: $depositInfo.currency, 
+            network: $depositInfo.network, 
+            min: $depositInfo.min, 
+            address: $depositInfo.address,
+            token_address: $depositInfo.token_address 
+        });
+    })
+    
 </script>
 
 <div class="flex flex-col gap-5 p-5 shadow-md card">
@@ -20,8 +45,8 @@
             Select Coin
         </div>
         <div class="flex flex-grow">
-            <select class="flex flex-grow p-2 bg-white border rounded-md select outline-primary-500" bind:value={selectedCoin}>
-                <option class="" value="USDT">USDT</option>
+            <select class="flex flex-grow p-2 bg-white border rounded-md select outline-primary-500" >
+                <option class="" value="">{$depositCurrentPageInfo.currency}</option>
             </select>
         </div>
     </div>
@@ -40,7 +65,7 @@
             Network
         </div>
         <div class="p-2 px-3 bg-white border rounded-md">
-            -
+            {$depositCurrentPageInfo.network}
         </div>
     </div>
 
@@ -92,17 +117,18 @@
                             <tbody>
                                 <tr>
                                     <th class="text-left">{$t('deposit.Minimum Deposit')}</th>
-                                    <td class="text-right">1</td>
+                                    <td class="text-right">{$depositCurrentPageInfo.min} {$depositCurrentPageInfo.currency}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left">{$t('deposit.Confirmation')}</th>
                                     <td class="text-right"
-                                        >1</td
+                                        >15</td
                                     >
                                 </tr>
                                 <tr>
                                     <th class="text-left">{$t('deposit.Contract Address')}</th>
                                     <td class="text-right">
+                                        {truncateString($depositCurrentPageInfo.address,5,5)}
                                         <!-- {#if selectedCoinSetting}
                                             <a
                                                 class="underline"
@@ -124,7 +150,7 @@
         </AccordionItem>
     </Accordion>
     <div class="flex flex-grow">
-        <button on:click={toConfirmation} class="flex justify-center flex-grow text-white rounded-md shadow-md btn bg-primary-500" disabled={amountValue === null || amountValue < 20}>
+        <button on:click={toConfirmation} class="flex justify-center flex-grow text-white rounded-md shadow-md btn bg-primary-500" disabled={amountValue === null || amountValue < $depositInfo.min}>
             Continue
         </button>
     </div>

@@ -14,6 +14,7 @@
     let progressBar:any
     let amountValue:number 
     let selectedCoin:string
+    let depositForm:{}
 
     const handleProgress = (stepIncrement:Number) => {
 		progressBar.handleProgress(stepIncrement)
@@ -36,11 +37,11 @@
         <Stepper {steps} bind:currentActive bind:this={progressBar}/>
     </div>
     {#if currentActive == 1}
-        <Info on:toConfirmation={() => handleProgress(+1)} bind:amountValue bind:selectedCoin/>
+        <Info on:toConfirmation={() => handleProgress(+1)} />
     {:else if currentActive == 2}
-        <Confirmation on:goBack={() => handleProgress(-1)} on:toBroadcast={() => handleProgress(+1)}  {amountValue} {selectedCoin}/>
+        <Confirmation on:goBack={() => handleProgress(-1)} on:toBroadcast={() => handleProgress(+1)}/>
     {:else if currentActive == 3}
-        <Broadcast />
+        <Broadcast on:goBack={() => handleProgress (-1)} on:goSuccess={( () => handleProgress (+1))} />
     {:else}
         <Complete />
     {/if}

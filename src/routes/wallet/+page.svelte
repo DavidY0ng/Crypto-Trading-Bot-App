@@ -20,8 +20,8 @@
     </div>
 </BackHeader> 
 <div class="flex flex-col gap-5 p-3">
-    <div class="flex flex-col shadow-md  rounded-xl bg-[url('/img/wallet/1.png')] bg-cover h-[200px]">
-        <div class="flex justify-between flex-grow p-3 font-bold text-white h-2/3 h2">
+    <div class="flex flex-col shadow-md  rounded-xl bg-[url('/img/wallet/3.png')] bg-cover h-[200px]">
+        <div class="flex justify-between flex-grow p-3 px-5 font-bold text-white h-2/3 h2">
             <div>
                 Fee Wallet
                 <div class="text-lg text-white">
@@ -33,17 +33,17 @@
             </div>
         </div>
         
-        <div class="flex flex-grow overflow-hidden rounded-b-xl h-1/3 bg-surface-700">
-            <div class="flex items-center justify-end flex-grow pr-3">
-                <a class="text-white rounded-lg btn bg-primary-500" href='/wallet/deposit'>
+        <div class="flex flex-grow overflow-hidden bg-surface-600 rounded-b-xl h-1/3">
+            <div class="flex items-center justify-end flex-grow pr-5">
+                <a class="font-bold bg-[#821dd4] bg-gradient-to-r from-[#821dd4] to-[#b452ea] rounded-lg btn text-white" href='/wallet/deposit'>
                     Deposit
                 </a>
             </div>
         </div>
     </div>
 
-    <div class="flex flex-col shadow-md card rounded-xl bg-[url('/img/wallet/2.png')] bg-cover h-[200px]">
-        <div class="flex justify-between flex-grow p-3 font-bold text-white h-2/3 h2">
+    <div class="flex flex-col shadow-md rounded-xl bg-[url('/img/wallet/4.png')] bg-cover h-[200px]">
+        <div class="flex justify-between flex-grow p-3 px-5 font-bold text-white h-2/3 h2">
             <div>
                 Reward Wallet
                 <div class="text-lg text-white">
@@ -55,12 +55,12 @@
             </div>
         </div>
         
-        <div class="flex flex-grow overflow-hidden rounded-b-xl h-1/3 bg-surface-700">
-            <div class="flex items-center justify-end flex-grow gap-3 pr-4">
-                <button class="text-white rounded-lg variant-ghost-secondary btn">
+        <div class="flex flex-grow overflow-hidden bg-surface-600 rounded-b-xl h-1/3">
+            <div class="flex items-center justify-end flex-grow gap-3 pr-5 font-bold text-black">
+                <a class="text-white rounded-lg bg-gradient-to-r from-[#3d8ef7] to-[#66a8fc] btn" href='/wallet/transfer'>
                     Transfer
-                </button>
-                <a class="text-white bg-teal-400 rounded-lg btn w-[95px]" href='/wallet/withdraw'>
+                </a>
+                <a class="text-white bg-gradient-to-r from-[#7e4de0] to-[#8d84f6] rounded-lg btn w-[95px]" href='/wallet/withdraw'>
                     Withdraw
                 </a>
                 

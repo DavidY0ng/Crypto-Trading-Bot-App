@@ -4,6 +4,7 @@
 	import { showModal } from "$lib/stores/store";
 
     export let modalClass = ""
+	export let cross = ''
 
 	let dialog:any; // HTMLDialogElement
 	const dispatch = createEventDispatcher();
@@ -29,7 +30,7 @@
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class="">
-        <div class="flex justify-end text-gray-500">
+        <div class="flex justify-end text-gray-500 {cross}">
             <button on:click={closeModal} class="outline-none">
                 <Icon icon="maki:cross" width="1.2em" height="1.2em" />
             </button>

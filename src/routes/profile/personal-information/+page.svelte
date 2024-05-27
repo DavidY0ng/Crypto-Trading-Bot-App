@@ -97,20 +97,23 @@
 </div>
 
 {#if $showModal}
-	<Modal>
+	<Modal cross="hidden">
 		<div slot="header">
 			<div class="">
 				{currentMenuItem ? currentMenuItem.name : ''}
 			</div>
 		</div>
 		<div class="mb-3">
-			<input type="text" class="rounded-md" bind:value={inputValue}>
+			<input type="text" class="py-2 rounded-md" bind:value={inputValue}>
 			{#if errorInput}
 			<p class="fixed text-xs text-error-500">{errorInput}</p>
 			{/if}
 		</div>
-		<div class="flex justify-end">
-			<button on:click={submitInfo} class="py-2 font-semibold text-white rounded-md btn bg-primary-500">
+		<div class="flex justify-end w-full gap-2">
+			<button on:click={()=>showModal.set(false)} class="w-1/2 py-2 font-semibold text-white bg-gray-500 rounded-md btn">
+				Cancel
+			</button>
+			<button on:click={submitInfo} class="w-1/2 py-2 font-semibold text-white rounded-md btn bg-primary-500">
 				Confirm
 			</button>
 		</div>

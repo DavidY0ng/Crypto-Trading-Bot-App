@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 import { join } from 'path'
 import { skeleton } from '@skeletonlabs/tw-plugin'
-import { myCustomTheme } from './customTheme'
+import { myCustomTheme } from './my-custom-theme'
 
 
 export default {
@@ -13,15 +13,15 @@ export default {
 	plugins: [
 		skeleton({
 			themes: {
-				preset: [
-					{
-						name: 'wintry',
-						enhancements: true
-					},
-				],
-				// custom: [
-				// 	myCustomTheme
-				// ]
+				// preset: [
+				// 	{
+				// 		name: 'wintry',
+				// 		enhancements: true
+				// 	},
+				// ],
+				custom: [
+					myCustomTheme
+				]
 			},
 		}),
 	],

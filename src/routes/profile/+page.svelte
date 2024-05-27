@@ -41,7 +41,7 @@
 
 <div class="flex flex-col flex-grow max-h-[250px]">
 
-    <div class="flex flex-col flex-grow p-5 bg-[url('/img/profile/bg3.jpg')] bg-cover">
+    <div class="flex flex-col flex-grow p-5 bg-surface-500">
         <div class="flex items-center justify-center flex-grow">
             <img src='/img/profile/2.png' alt='profile-img' class="h-[70px] w-[70px]">
         </div>

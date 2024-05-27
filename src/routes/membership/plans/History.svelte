@@ -4,15 +4,15 @@
 <div class="px-3">
 	<div class="overflow-hidden rounded-md shadow-md">
 		<!-- header -->
-		<div class="p-5 py-3 bg-gradient-to-r from-primary-500 to-tertiary-500">
-			<div class="flex justify-between">
-				<div class="font-bold text-white h2">Deltra Pro</div>
-				<div class="text-white bg-surface-400 rounded-full w-[70px] flex justify-center py-1">
-					Expired
-				</div>
+		<div class="flex items-center justify-between p-5 py-3 bg-gradient-to-r from-primary-500 to-primary-500">
+			<div class="flex flex-col justify-between text-white">
+				<div class="font-bold h2">Deltra Pro</div>
+				<div class="">Expires in: 365 days</div>
 			</div>
-
-			<div class="text-white">Expires in: 365 days</div>
+            <div class="text-white bg-surface-300 rounded-full w-[70px] flex justify-center py-1">
+                Expired
+            </div>
+			
 		</div>
 
 		<!-- details -->

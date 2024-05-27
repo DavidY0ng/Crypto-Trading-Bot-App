@@ -59,7 +59,7 @@
     </div>
 </BackHeader> 
 
-<div class="bg-[url('/img/referral/bg.jpg')] bg-cover h-full ">
+<div class="h-full bg-surface-500 ">
     <!-- <img src="/img/referral/bg.jpg" alt='bg' class="absolute z-0"> -->
     <div class="px-3 py-3">
         <div class="font-bold text-white h3">
@@ -109,11 +109,11 @@
             {/if}
         </div>
 
-        <div class="p-3 bg-error-200/50 text-error-400 {$storeUserInfo.membership == 0 ? "flex": "hidden"}">
+        <div class="p-3 rounded-md bg-error-200/50 text-error-400 {$storeUserInfo.membership == 0 ? "flex": "hidden"}">
             Please activate your membership to access your invite link, referral code, and QR code.
         </div>
 
-        <div class="flex items-center gap-2 p-3 bg-warning-200/50 text-warning-500">
+        <div class="flex items-center gap-2 p-3 rounded-md bg-warning-200/50 text-warning-500">
             <div>
                 <Icon icon="akar-icons:circle-alert" width="1.5em" height="1.5em" />
             </div>

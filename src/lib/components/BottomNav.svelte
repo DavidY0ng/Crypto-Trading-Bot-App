@@ -14,6 +14,11 @@
             path: "/bots"
         },
         {
+            name: "Wallet",
+            icon: "iconoir:wallet",
+            path: "/wallet"
+        },
+        {
             name: "Profile",
             icon: "mdi:user",
             path: "/profile"
@@ -23,11 +28,11 @@
 </script>
 
 <div class="flex justify-center max-w-[425px] mx-auto card rounded-none w-full">
-    <div class="flex justify-between w-full px-5 py-2 ">
+    <div class="flex justify-between w-full px-5 py-3 pb-2">
         {#each menuList as menu}
             <a href={menu.path} class="flex flex-col items-center text-sm {$page.url.pathname == menu.path ? 'text-primary-500' : 'text-gray-400'}">
                 <div>
-                    <Icon icon={menu.icon} width="1.2em" height="1.2em" />
+                    <Icon icon={menu.icon} width="1.7em" height="1.7em" />
                 </div>
                 <div>
                     {menu.name}

@@ -2,11 +2,12 @@
 	import Icon from '@iconify/svelte';
 	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 	import { t } from '$lib/i18n';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
+	import { getDepositInfo, depositInfo, depositCurrentPageInfo } from '$lib/stores/store';
+	import { truncateString } from '$lib/utils/helper';
 
 	const dispatch = createEventDispatcher();
-	export let amountValue:number | null = null
-	export let selectedCoin:string
+
 	function toBroadcast() {
 		dispatch('toBroadcast');
 	}
@@ -14,6 +15,11 @@
 	function goBack() {
 		dispatch('goBack')
 	}
+
+	onMount(() => {
+        getDepositInfo()
+    })
+
 </script>
 
 <div class="flex flex-col gap-5 p-5 card">
@@ -21,19 +27,19 @@
 		<div class="flex text-gray-400">Selected Coin</div>
 		<div class="flex items-center gap-1 font-bold">
 			<Icon icon="cryptocurrency-color:usdt" width="1.2em" height="1.2em" />
-			<div class="flex flex-grow">{selectedCoin}</div>
+			<div class="flex flex-grow">{$depositCurrentPageInfo.currency}</div>
 		</div>
 		
 	</div>
 
 	<div class="flex flex-col gap-1">
 		<div class="flex text-gray-400">Deposit Amount</div>
-		<div class="font-bold">{amountValue}</div>
+		<div class="font-bold">{$depositCurrentPageInfo.amount}</div>
 	</div>
 
 	<div class="flex flex-col gap-1">
 		<div class="flex text-gray-400">Network</div>
-		<div class="font-bold">--</div>
+		<div class="font-bold">{$depositCurrentPageInfo.network}</div>
 	</div>
 
 	<Accordion class="bg-gray-100 dark:bg-[--input-color] rounded-lg ">
@@ -84,15 +90,16 @@
 							<tbody>
 								<tr>
 									<th class="text-left">{$t('deposit.Minimum Deposit')}</th>
-									<td class="text-right">1</td>
+									<td class="text-right">{$depositCurrentPageInfo.min}</td>
 								</tr>
 								<tr>
 									<th class="text-left">{$t('deposit.Confirmation')}</th>
-									<td class="text-right">1</td>
+									<td class="text-right">15</td>
 								</tr>
 								<tr>
 									<th class="text-left">{$t('deposit.Contract Address')}</th>
 									<td class="text-right">
+										{truncateString($depositCurrentPageInfo.address,5,5)}
 										<!-- {#if selectedCoinSetting}
                                             <a
                                                 class="underline"
