@@ -38,23 +38,23 @@
 </BackHeader>  -->
 <div class="relative flex flex-col flex-grow bg-white">
     <div class="relative flex flex-col items-center overflow-hidden">
-        <div class="bg-primary-900 rounded-b-full h-[250px] w-[700px] overflow-hidden flex items-center pt-10 text-white flex-col gap-5">
+        <div class="bg-primary-900 rounded-b-full h-[300px] w-[900px] overflow-hidden flex items-center pt-20 text-white flex-col gap-5">
             <div class="h3">
                 Total Wallet Balance
             </div>
             <div class="flex items-end gap-2">
                  <div class="h1">
-                ${$feeWalletBalance + $rewardWalletBalance}
+                {$feeWalletBalance + $rewardWalletBalance}
             </div>
-            <!-- <div class="h5">
+            <div class="h5">
                 USDT
-            </div> -->
+            </div>
             </div>
            
         </div>
         
     </div>
-    <div class="absolute flex flex-col items-start top-[30%] gap-5 w-full p-5">
+    <div class="absolute flex flex-col items-start top-[33%] gap-5 w-full p-5">
         {#each wallets as wallet, i}
             <a class="flex justify-between flex-grow w-full gap-2 p-5 card" href={wallet.link}>
                 <!-- <span class="text-primary-500"><Icon icon={wallet.icon} width="1.2em" height="1.2em" /></span> -->

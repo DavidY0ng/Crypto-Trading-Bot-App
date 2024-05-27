@@ -1,13 +1,15 @@
 <script lang="ts">
 	import BackHeader from '$lib/components/BackHeader.svelte';
-	import { getUserInfo, userInfo, isLoading, showModal, showGoogleModal } from '$lib/stores/store';
+	import { getUserInfo, userInfo, isLoading, showModal, showGoogleModal, showAuthenticatorModal } from '$lib/stores/store';
 	import Icon from '@iconify/svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import GoogleModal from '$lib/components/GoogleModal.svelte';
+	import AuthenticatorModal from "$lib/components/AuthenticatorModal.svelte";
 	import { apiWithToken } from '$lib/utils/http';
 	import { goto } from '$app/navigation';
 	import { showToast } from '$lib/components/toasts/toast';
 	import { onMount } from 'svelte';
+	import { storeUserInfo } from '$lib/stores/storeUser';
 
 	let inputValue = '';
 	let google2FACode = ['', '', '', '', '', ''];
@@ -90,9 +92,14 @@
 	}
 
 	function openModal(menuItem) {
-		currentMenuItem = menuItem; // Set the current menu item data
-		inputValue = menuItem.value; // Pre-fill the input with the current value
-		showModal.set(true);
+		if($storeUserInfo.authenticator == 1) {
+			currentMenuItem = menuItem; // Set the current menu item data
+			inputValue = menuItem.value; // Pre-fill the input with the current value
+			showModal.set(true);
+		} else {
+			showAuthenticatorModal.set(true)
+		}
+
 	}
 
 	// handle input change for 6 digit code
@@ -132,6 +139,34 @@
 		</div>
 	{/each}
 </div>
+
+{#if $showAuthenticatorModal}
+	<AuthenticatorModal cross="hidden">
+		<div slot="header">
+			<div class="">
+				Unauthenticated
+			</div>
+		</div>
+		<div class="mb-5 text-sm text-gray-500">
+			Please link your Google Authenticator app
+		</div>
+		<div class="flex justify-end w-full gap-2">
+			<button
+				on:click={() => showAuthenticatorModal.set(false)}
+				class="w-1/2 py-2 font-semibold text-white bg-gray-500 rounded-md btn"
+			>
+				Cancel
+			</button>
+			<a
+			on:click={() => showAuthenticatorModal.set(false)}	
+				href='/profile/google-auth'
+				class="w-1/2 py-2 font-semibold text-white rounded-md btn bg-primary-500"
+			>
+				Proceed
+			</a>
+		</div>
+	</AuthenticatorModal>
+{/if}
 
 {#if $showModal}
 	<Modal cross="hidden">

@@ -4,10 +4,12 @@ import { storeUserInfo, type IUserInfo } from "./storeUser";
 import { walletActions } from "viem";
 import { showToast } from "$lib/components/toasts/toast";
 import { goto } from "$app/navigation";
+import { authenticator } from "otplib";
 
 export const isLoading = writable(false)
 export const showModal = writable(false)
 export const showGoogleModal = writable(false)
+export const showAuthenticatorModal = writable(false)
 export const noReferralCode = writable(false)
 export const showReferralModal = writable(false)
 export const userInfo = writable({})
@@ -26,6 +28,7 @@ export let depositCurrentPageInfo = writable({
     token_address: ''
 });
 export const google2FACode = writable('')
+export const google2FAKey = writable('')
 
 export async function getUserInfo () {
     const res = await apiWithToken ('GET', '/user/account/info')
@@ -40,7 +43,8 @@ export async function getUserInfo () {
                 ...item,
                 uid: currentUserData.user_id,
                 membership: currentUserData.membership,
-                upline: currentUserData.upline
+                upline: currentUserData.upline,
+                authenticator: currentUserData.authenticator
                 
             };
         });
@@ -109,6 +113,19 @@ export async function getGoogle2FACode () {
         return
     } else {
         google2FACode.set(res.data.code)
+        google2FAKey.set(res.data.key)
+    }
+}
+
+export async function enableGoogle2FA (code:string) {
+    const res = await apiWithToken ('POST', '/auth/twofa/enable', {
+        code: code
+    })
+    if (res.success) {
+        showToast('Google Authenticator Enabled', 'green')
+        getUserInfo()
+    } else {
+        showToast (res.data[0], 'red')
     }
 }
 

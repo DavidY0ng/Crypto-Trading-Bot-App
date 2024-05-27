@@ -8,6 +8,7 @@ interface IUserInfo {
 	has_address: number;
 	membership: number;
 	upline: number;
+	authenticator: number
 }
 
 export const emptyUserInfo: IUserInfo = {
@@ -16,7 +17,8 @@ export const emptyUserInfo: IUserInfo = {
 	chainid: '',
 	has_address: 0,
 	membership: 0,
-	upline: 0
+	upline: 0,
+	authenticator: 0
 };
 
 export const storeUserInfo = persisted<IUserInfo>('storeUserInfo', emptyUserInfo);
