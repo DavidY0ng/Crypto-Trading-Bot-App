@@ -4,7 +4,11 @@
 	import Icon from '@iconify/svelte';
 	import { onMount } from "svelte";
 	import { ListBox, ListBoxItem } from '@skeletonlabs/skeleton';
+	import {getRewardWalletBalance, rewardWalletBalance } from "$lib/stores/store";
 	
+	onMount(async() => {
+        await getRewardWalletBalance()
+    })
 </script>
 
 <BackHeader path="/wallet" layout="flex items-center bg-white pb-2">
@@ -14,7 +18,7 @@
 <div class="flex flex-col flex-grow gap-4 p-3 bg-surface-100">
 	<div class="flex flex-col p-3 card">
 		<div class="flex items-center gap-2">
-			<div class="flex flex-1 text-secondary-500">
+			<div class="flex flex-1 text-primary-500">
 				<Icon icon="solar:money-bag-bold" width="1.2em" height="1.2em" />
 			</div>
 			<div class="flex w-[50px] text-gray-400">
@@ -57,13 +61,15 @@
 			Amount
 		</div>
 		<div>
-			<input class="py-2 border-none rounded-md input" type='number'>
+			<input class="py-2 bg-white border rounded-md" type='number' placeholder="Enter an amount">
 		</div>
-		<div class="flex items-center gap-2">
-			<div class="text-sm text-gray-400">
-				Available: 
+		<div class="flex justify-between text-xs">
+			<div class="text-gray-400">
+				Available 
 			</div>
-			<div class="font-semibold">0 USDT</div>
+			<div class="font-semibold">
+				{$rewardWalletBalance} USDT
+			</div>
 		</div>
 		
 	</div>

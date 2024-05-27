@@ -19,7 +19,7 @@
 			name: 'Referral'
 		},
 		{
-			links: '/wallet/deposit',
+			links: '/wallet/fee-wallet/deposit',
 			icon: 'ph:hand-deposit-duotone',
 			name: 'Deposit'
 		},
@@ -90,7 +90,7 @@
 			<!-- <div class="flex justify-end pt-3">
 				<a
 					class="flex px-3 py-1 font-semibold text-black shadow-md bg-gradient-to-br from-primary-500 to-white border-surface-500 btn"
-					href="/wallet/deposit"
+					href="/wallet/fee-wallet/deposit"
 				>
 					Deposit
 				</a>

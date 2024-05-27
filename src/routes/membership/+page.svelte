@@ -109,7 +109,8 @@
 		>
 			Cancel
 		</button>
-		<a class="w-full text-white rounded-lg shadow-md btn bg-primary-500" href="/wallet/deposit">
+		<a on:click={() => (showModal.set(false))}
+			class="w-full text-white rounded-lg shadow-md btn bg-primary-500" href="/wallet/fee-wallet/deposit">
 			Deposit
 		</a>
 	</div>
