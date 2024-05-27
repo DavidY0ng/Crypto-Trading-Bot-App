@@ -3,7 +3,7 @@
     import BackHeader from "$lib/components/BackHeader.svelte";
     import QRCode from '@castlenine/svelte-qrcode';
     import { onMount } from 'svelte'
-    import { getGoogle2FACode, google2FACode, submitGoogle2FACode } from '$lib/stores/store'
+    import { getGoogle2FACode, google2FACode } from '$lib/stores/store'
 
     let qrCode:string
     

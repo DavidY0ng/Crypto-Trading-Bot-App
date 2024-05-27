@@ -109,7 +109,7 @@
 		>
 			Cancel
 		</button>
-		<a class="w-full rounded-lg shadow-md btn bg-primary-500" href="/wallet/deposit">
+		<a class="w-full text-white rounded-lg shadow-md btn bg-primary-500" href="/wallet/deposit">
 			Deposit
 		</a>
 	</div>

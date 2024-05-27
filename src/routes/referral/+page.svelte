@@ -109,15 +109,21 @@
             {/if}
         </div>
 
-        <div class="p-3 rounded-md bg-error-200/50 text-error-400 {$storeUserInfo.membership == 0 ? "flex": "hidden"}">
-            Please activate your membership to access your invite link, referral code, and QR code.
+        <div class="flex items-center p-3 rounded-md bg-purple-200/50 text-purple-400 {$storeUserInfo.membership == 0 ? "flex": "hidden"}">
+            <div class="text-sm">
+                Invitation will only be available after activation!
+            </div>
+            <a class="flex items-center text-sm rounded-md p-1 h-[30px] text-white btn bg-primary-500" href='/membership'>
+                Activate
+            </a>
+            
         </div>
 
         <div class="flex items-center gap-2 p-3 rounded-md bg-warning-200/50 text-warning-500">
             <div>
                 <Icon icon="akar-icons:circle-alert" width="1.5em" height="1.5em" />
             </div>
-            <p>The referral code will expire or become unusable if your membership ends.</p>
+            <p class="text-sm">The referral code will expire or become unusable if your membership ends.</p>
         </div>
        
     </div>

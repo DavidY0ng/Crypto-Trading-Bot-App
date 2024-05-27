@@ -15,6 +15,7 @@ export const referralCode = writable('')
 export const feeWalletBalance = writable(0)
 export const rewardWalletBalance = writable({})
 export const depositInfo = writable('')
+export const withdrawInfo = writable('')
 export let depositCurrentPageInfo = writable({
     amount: 0,
     sn: '',
@@ -88,6 +89,16 @@ export async function getDepositInfo () {
         return
     } else {
         depositInfo.set(res.data)
+    }
+}
+
+export async function getWithdrawInfo () {
+    const res = await apiWithToken ('GET', '/info/withdraw', {
+    })
+    if(!res) {
+        return
+    } else {
+        withdrawInfo.set(res.data)
     }
 }
 

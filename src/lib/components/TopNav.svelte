@@ -17,8 +17,7 @@
 	$: if ($noReferralCode) {
         showModal.set(true);
     }
-
-
+	
 	const connectWallet = async () => {
 		try {
 			// showModal = true;
