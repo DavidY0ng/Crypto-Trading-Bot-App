@@ -33,7 +33,6 @@
 					txid: txid.txid
 				});
                 goSuccess()
-				console.log(resp);
 			}
 		} catch (e) {
 			const error: any = e as GetBlockNumberErrorType;

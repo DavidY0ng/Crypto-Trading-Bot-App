@@ -69,7 +69,7 @@ export async function getFeeWalletBalance () {
 
 export async function getRewardWalletBalance () {
     const res = await apiWithToken ('GET', '/user/wallet/balance', {
-        wallet: 'earn',
+        wallet: 'reward',
         symbol: 'USDT'
     })
     if(!res) {

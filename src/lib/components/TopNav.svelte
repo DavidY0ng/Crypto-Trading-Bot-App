@@ -18,6 +18,8 @@
         showModal.set(true);
     }
 
+	$: showModal.set(true)
+
 	const connectWallet = async () => {
 		try {
 			// showModal = true;
@@ -110,7 +112,7 @@ onMount(() => {
 			<p class="fixed text-xs text-error-500">{errorInput}</p>
 			{/if}
 		</div>
-		<div class="flex justify-end flex-grow">
+		<div class="flex justify-end flex-grow pt-2">
 			<button on:click={onSubmitCode} class="flex flex-grow py-2 font-semibold text-white rounded-md btn bg-primary-500">
 				Connect
 			</button>
