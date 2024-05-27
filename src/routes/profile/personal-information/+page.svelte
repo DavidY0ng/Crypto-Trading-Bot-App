@@ -1,16 +1,20 @@
-<script lang='ts'>
+<script lang="ts">
 	import BackHeader from '$lib/components/BackHeader.svelte';
-	import { getUserInfo, userInfo, isLoading, showModal } from '$lib/stores/store';
+	import { getUserInfo, userInfo, isLoading, showModal, showGoogleModal } from '$lib/stores/store';
 	import Icon from '@iconify/svelte';
-    import Modal from '$lib/components/Modal.svelte';
+	import Modal from '$lib/components/Modal.svelte';
+	import GoogleModal from '$lib/components/GoogleModal.svelte';
 	import { apiWithToken } from '$lib/utils/http';
 	import { goto } from '$app/navigation';
 	import { showToast } from '$lib/components/toasts/toast';
 	import { onMount } from 'svelte';
 
 	let inputValue = '';
+	let google2FACode = ['', '', '', '', '', ''];
+	let editToken = '';
 	let errorInput = '';
-	let currentMenuItem:string | number | null = null; // Add a variable to hold the current menu item data
+	let inputs = []; 
+	let currentMenuItem: string | number | null = null; // Add a variable to hold the current menu item data
 
 	$: menus = [
 		{
@@ -27,7 +31,7 @@
 			name: 'Phone number',
 			value: $userInfo.phone_no,
 			param: 'phone_no'
-		},
+		}
 		// {
 		// 	name: 'Twitter',
 		// 	value: 'Richie'
@@ -43,24 +47,45 @@
 	];
 
 	async function submitInfo() {
-		if(inputValue == '') {
-			errorInput = "Field cannot be empty";
+		if (inputValue == '') {
+			errorInput = 'Field cannot be empty';
 			setTimeout(() => {
 				errorInput = '';
 			}, 3000);
-			return
+			return;
 		}
 		if (currentMenuItem) {
 			const res = await apiWithToken('PUT', '/user/account/info', {
-				[currentMenuItem.param]: inputValue, // Dynamically use the param from the current menu item
+				[currentMenuItem.param]: inputValue // Dynamically use the param from the current menu item
 			});
+
 			if (res.success) {
-				getUserInfo();
-				showToast('Profile updated', 'green');
-				showModal.set(false); // Close the modal on success
+				editToken = res.data.token;
+				showGoogleModal.set(true);
 			} else {
 				showToast(res.data[0], 'red');
 			}
+		}
+	}
+
+	async function submitGoogle2FACode(token: string, code:string[]) {
+		const FAcode = code.join('')
+		const res = await apiWithToken('POST', '/auth/twofa', {
+			token: token,
+			code: FAcode
+		});
+
+		if (res.success) {
+			showToast('Profile updated', 'green');
+			showGoogleModal.set(false);
+			showModal.set(false);
+			getUserInfo();
+		} else {
+			showToast(res.data[0], 'red');
+		}
+		if (!res) {
+			return;
+		} else {
 		}
 	}
 
@@ -68,6 +93,18 @@
 		currentMenuItem = menuItem; // Set the current menu item data
 		inputValue = menuItem.value; // Pre-fill the input with the current value
 		showModal.set(true);
+	}
+
+	// handle input change for 6 digit code
+	function handleInputChange(index: number, event: Event) {
+		const target = event.target as HTMLInputElement;
+		google2FACode[index] = target.value;
+		google2FACode = [...google2FACode]; // Update the array to trigger reactivity
+
+		// Automatically focus the next input if the current one is filled
+        if (target.value && index < inputs.length - 1) {
+            inputs[index + 1].focus();
+        }
 	}
 
 	onMount(() => {
@@ -104,18 +141,66 @@
 			</div>
 		</div>
 		<div class="mb-3">
-			<input type="text" class="py-2 rounded-md" bind:value={inputValue}>
+			<input type="text" class="py-2 rounded-md" bind:value={inputValue} />
 			{#if errorInput}
-			<p class="fixed text-xs text-error-500">{errorInput}</p>
+				<p class="fixed text-xs text-error-500">{errorInput}</p>
 			{/if}
 		</div>
 		<div class="flex justify-end w-full gap-2">
-			<button on:click={()=>showModal.set(false)} class="w-1/2 py-2 font-semibold text-white bg-gray-500 rounded-md btn">
+			<button
+				on:click={() => showModal.set(false)}
+				class="w-1/2 py-2 font-semibold text-white bg-gray-500 rounded-md btn"
+			>
 				Cancel
 			</button>
-			<button on:click={submitInfo} class="w-1/2 py-2 font-semibold text-white rounded-md btn bg-primary-500">
+			<button
+				on:click={submitInfo}
+				class="w-1/2 py-2 font-semibold text-white rounded-md btn bg-primary-500"
+			>
 				Confirm
 			</button>
 		</div>
 	</Modal>
+{/if}
+
+{#if $showGoogleModal}
+	<GoogleModal cross="hidden">
+		<div slot="header">
+			<div class="">Google Authenticator</div>
+		</div>
+		<div class="mb-3">
+			<div class="mb-2 text-sm text-gray-500">
+				Enter the 6 digit code from your authenticator app.
+			</div>
+			<div class="flex justify-center gap-2">
+				{#each google2FACode as digit, index}
+				<input
+					type="text"
+					class="w-10 py-2 text-center border rounded-md"
+					maxlength="1"
+					bind:this={inputs[index]}
+					on:input={(e) => handleInputChange(index, e)}
+				/>
+				{/each}
+			</div>
+			
+			{#if errorInput}
+				<p class="fixed text-xs text-error-500">{errorInput}</p>
+			{/if}
+		</div>
+		<div class="flex justify-end w-full gap-2">
+			<button
+				on:click={() => showGoogleModal.set(false)}
+				class="w-1/2 py-2 font-semibold text-white bg-gray-500 rounded-md btn"
+			>
+				Cancel
+			</button>
+			<button
+				on:click={() => submitGoogle2FACode(editToken, google2FACode)}
+				class="w-1/2 py-2 font-semibold text-white rounded-md btn bg-primary-500"
+			>
+				Confirm
+			</button>
+		</div>
+	</GoogleModal>
 {/if}

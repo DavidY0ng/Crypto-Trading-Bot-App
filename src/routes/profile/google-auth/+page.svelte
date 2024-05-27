@@ -1,7 +1,17 @@
-<script>
+<script lang='ts'>
     import { t } from "$lib/i18n";
     import BackHeader from "$lib/components/BackHeader.svelte";
     import QRCode from '@castlenine/svelte-qrcode';
+    import { onMount } from 'svelte'
+    import { getGoogle2FACode, google2FACode, submitGoogle2FACode } from '$lib/stores/store'
+
+    let qrCode:string
+    
+    onMount (async() => {
+        await getGoogle2FACode()
+        qrCode = $google2FACode 
+        
+    })
 </script>
 <BackHeader path="/profile" layout="flex items-center bg-white pb-2">
 	<div class="flex justify-start flex-grow flex-2 h3">Security</div>
@@ -35,7 +45,9 @@
                 <span class="inline-block">{$t('login.g-auth-scan-tip')}</span>
             </div>
             <div class="flex items-center justify-center mb-4 text-center qr-code">
-                <QRCode size={150} data="hello" />
+                {#if qrCode}
+                <QRCode size={150} data={qrCode} />
+                {/if}
             </div>
             <div class="mb-4 text-sm text-gray-400 tip caps-first">
                 <span class="inline-block">{$t('login.g-auth-scan-tip-2')}</span>

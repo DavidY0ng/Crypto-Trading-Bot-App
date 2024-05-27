@@ -7,6 +7,7 @@ import { goto } from "$app/navigation";
 
 export const isLoading = writable(false)
 export const showModal = writable(false)
+export const showGoogleModal = writable(false)
 export const noReferralCode = writable(false)
 export const showReferralModal = writable(false)
 export const userInfo = writable({})
@@ -23,6 +24,7 @@ export let depositCurrentPageInfo = writable({
     address: '',
     token_address: ''
 });
+export const google2FACode = writable('')
 
 export async function getUserInfo () {
     const res = await apiWithToken ('GET', '/user/account/info')
@@ -86,7 +88,18 @@ export async function getDepositInfo () {
         return
     } else {
         depositInfo.set(res.data)
-        console.log(get(depositInfo))
     }
 }
+
+export async function getGoogle2FACode () {
+    const res = await apiWithToken ('GET', '/auth/twofa', {
+    })
+    if(!res) {
+        return
+    } else {
+        google2FACode.set(res.data.code)
+    }
+}
+
+
 

@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import Icon from "@iconify/svelte";
 	import { createEventDispatcher } from 'svelte';
-	import { showModal, showGoogleModal } from "$lib/stores/store";
+	import { showGoogleModal } from "$lib/stores/store";
 
     export let modalClass = ""
 	export let cross = ''
@@ -9,23 +9,23 @@
 	let dialog:any; // HTMLDialogElement
 	const dispatch = createEventDispatcher();
 
-	$: if (dialog && showModal) {
+	$: if (dialog && showGoogleModal) {
 		dialog.showModal();
 	}
 	
 	// $: console.log(showModal, "current modal state")
 	function closeModal() {
 		if (dialog) dialog.close();
-		showModal.set(false);
+		showGoogleModal.set(false);
 		dispatch('close')
 	}
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
-{#if $showModal }
-<dialog class="{modalClass} w-[300px]"
+{#if $showGoogleModal }
+<dialog class="{modalClass} w-[320px]"
 	bind:this={dialog}
-	on:close={() => showModal.set(false)}
+	on:close={() => showGoogleModal.set(false)}
 	on:click|self={() =>closeModal()}
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->

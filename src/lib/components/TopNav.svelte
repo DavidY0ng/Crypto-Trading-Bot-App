@@ -18,7 +18,6 @@
         showModal.set(true);
     }
 
-	$: showModal.set(true)
 
 	const connectWallet = async () => {
 		try {
