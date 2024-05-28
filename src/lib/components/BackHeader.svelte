@@ -7,12 +7,14 @@
 </script>
 
 
-<div class="{layout} pt-3 px-3 shadow-md">
+<div class="{layout} pt-3 px-3">
     <div class="flex flex-1">
         <button on:click={() => goto(path)}>
             <Icon icon="gravity-ui:arrow-left" width="1.2em" height="1.2em" />
         </button>
     </div>
-  
+
     <slot />
+
+    
 </div>

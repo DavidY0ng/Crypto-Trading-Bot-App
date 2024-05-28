@@ -22,7 +22,7 @@
 
 </script>
 
-<BackHeader path='/wallet' layout='flex items-center bg-white pb-2'>
+<BackHeader path='/wallet/fee-wallet' layout='flex items-center bg-white pb-2'>
     <div class="flex justify-center flex-1 h3">
         Deposit
     </div>

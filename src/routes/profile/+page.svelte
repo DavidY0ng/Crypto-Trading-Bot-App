@@ -20,7 +20,7 @@
         {
             icon: 'fluent:document-bullet-list-clock-20-regular',
             name: "Transaction History",
-            links: ''
+            links: '/profile/transaction-history'
         },
         {
             icon: 'mdi:security-lock-outline',
