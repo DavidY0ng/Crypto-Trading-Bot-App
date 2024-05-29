@@ -17,14 +17,21 @@
 	import { storeLocal } from '$lib/stores/storeLocal';
 
 	let tabSet = 0 ;
+	let tabSetFromWithdrawalDetails = false;
 	
 	onMount(() => {
-		if ($storeLocal.prevUrl == '/profile/transaction-history/withdrawal-details') {
-			tabSet == 1
-		}
+		
 	});
 
-
+	$:if ($storeLocal.prevUrl == '/profile/transaction-history/withdrawal-details') {
+		// Set the tab to withdrawal tab only if it hasn't been set before
+		if (!tabSetFromWithdrawalDetails) {
+			tabSet = 1;
+			tabSetFromWithdrawalDetails = true; // Set the flag to true to indicate tab has been set
+		}
+		// Reset currentTab if needed
+	
+	}
 
 	
 
