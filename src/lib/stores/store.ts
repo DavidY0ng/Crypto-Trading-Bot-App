@@ -211,3 +211,4 @@ export async function fetchHistory(type:string, page:number) {
     }
     return res;
 }
+

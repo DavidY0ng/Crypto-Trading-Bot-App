@@ -47,7 +47,7 @@
         <div class="text-sm text-gray-400">
             IP Address
         </div>
-        <div class="flex justify-between p-2 border rounded-md">
+        <div class="flex items-center justify-between p-2 border rounded-md">
             <div >
                 172.232.123.123.2.123
             </div>
