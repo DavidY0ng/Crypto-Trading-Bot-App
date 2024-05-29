@@ -9,13 +9,14 @@
     import QRCode from '@castlenine/svelte-qrcode';
     
     
-    
+    let refCode:string
+    let refUrl
     let url: string =
 		currentURL === new URL(urlList.live.domainURL).hostname
 			? urlList.live.domainURL
 			: urlList.dev.domainURL;
             
-    $: refUrl = `${url}?code=${$referralCode}`;
+   
     $: invitationMenu = [
         {
             title: "My invitation link",
@@ -45,6 +46,8 @@
     onMount(async () => {
         await getUserInfo()
         await getReferralCode()
+        let refCode = $referralCode
+        refUrl = `${url}?code=${refCode}`;
     })
     
 </script>
@@ -103,9 +106,11 @@
                     
                 </div>
             {:else}
+                {#if refUrl}
                 <div class="">
                     <QRCode size={170} data={refUrl} />
                 </div>
+                {/if}
             {/if}
         </div>
 

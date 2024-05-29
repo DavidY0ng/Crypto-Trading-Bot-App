@@ -5,7 +5,9 @@ import { walletActions } from "viem";
 import { showToast } from "$lib/components/toasts/toast";
 import { goto } from "$app/navigation";
 import { authenticator } from "otplib";
+import { storeLocal } from "./storeLocal";
 
+export const previousUrl = writable(null)
 export const isLoading = writable(false)
 export const showModal = writable(false)
 export const showGoogleModal = writable(false)
@@ -15,7 +17,7 @@ export const showReferralModal = writable(false)
 export const userInfo = writable({})
 export const referralCode = writable('')
 export const feeWalletBalance = writable(0)
-export const rewardWalletBalance = writable({})
+export const rewardWalletBalance = writable(0)
 export const depositInfo = writable('')
 export const withdrawInfo = writable('')
 export let depositCurrentPageInfo = writable({

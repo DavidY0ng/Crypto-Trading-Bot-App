@@ -8,6 +8,7 @@
     import Confirmation from "$lib/components/deposit/Confirmation.svelte";
 	import Broadcast from "$lib/components/deposit/Broadcast.svelte";
 	import Complete from "$lib/components/deposit/Complete.svelte";
+    import { storeLocal } from "$lib/stores/storeLocal";
 
     let steps = ['Info','Confirmation','Broadcast','Complete']
     let currentActive = 1
@@ -22,7 +23,7 @@
 
 </script>
 
-<BackHeader path='/wallet/fee-wallet' layout='flex items-center bg-white pb-2'>
+<BackHeader path={$storeLocal.prevUrl == "/" ? '/' : '/wallet/fee-wallet'} layout='flex items-center bg-white pb-2'>
     <div class="flex justify-center flex-1 h3">
         Deposit
     </div>

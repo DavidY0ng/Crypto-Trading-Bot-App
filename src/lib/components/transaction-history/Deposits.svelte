@@ -27,6 +27,69 @@
             network: "bsc",
             txid: "1231092ubsfkshfkdsjhkew"
         },
+        {
+            id: "3",
+            currency: "USDT",
+            amount: "300",
+            date: "2024-03-07 14:14:14",
+            status: "Rejected",
+            network: "bsc",
+            txid: "1231092ubsfkshfkdsjhkew"
+        },
+        {
+            id: "3",
+            currency: "USDT",
+            amount: "300",
+            date: "2024-03-07 14:14:14",
+            status: "Rejected",
+            network: "bsc",
+            txid: "1231092ubsfkshfkdsjhkew"
+        },
+        {
+            id: "3",
+            currency: "USDT",
+            amount: "300",
+            date: "2024-03-07 14:14:14",
+            status: "Rejected",
+            network: "bsc",
+            txid: "1231092ubsfkshfkdsjhkew"
+        },
+        {
+            id: "3",
+            currency: "USDT",
+            amount: "300",
+            date: "2024-03-07 14:14:14",
+            status: "Rejected",
+            network: "bsc",
+            txid: "1231092ubsfkshfkdsjhkew"
+        },
+        {
+            id: "3",
+            currency: "USDT",
+            amount: "300",
+            date: "2024-03-07 14:14:14",
+            status: "Rejected",
+            network: "bsc",
+            txid: "1231092ubsfkshfkdsjhkew"
+        },
+        {
+            id: "3",
+            currency: "USDT",
+            amount: "300",
+            date: "2024-03-07 14:14:14",
+            status: "Rejected",
+            network: "bsc",
+            txid: "1231092ubsfkshfkdsjhkew"
+        },
+        {
+            id: "3",
+            currency: "USDT",
+            amount: "300",
+            date: "2024-03-07 14:14:14",
+            status: "Rejected",
+            network: "bsc",
+            txid: "1231092ubsfkshfkdsjhkew"
+        },
     ]
 </script>
 

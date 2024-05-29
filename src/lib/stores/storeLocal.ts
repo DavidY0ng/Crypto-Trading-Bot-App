@@ -15,8 +15,7 @@ interface IAccessToken {
 
 interface IStoreLocal {
 	theme: string;
-	path: string;
-	pathId: number;
+	prevUrl: string;
 	lang: 'zh' | 'en';
 	alwaysLogin: boolean;
 }
@@ -35,8 +34,7 @@ export const emptyAccessToken: IAccessToken = {
 
 export const emptyData: IStoreLocal = {
 	theme: 'day',
-	path: '/',
-	pathId: 3,
+	prevUrl: '/',
 	lang: 'en',
 	alwaysLogin: false,
 	

@@ -12,8 +12,38 @@
 	import { storeUserInfo } from '$lib/stores/storeUser';
     import { showToast } from '$lib/components/toasts/toast';
     import { clearUserData, connectedAddress, walletClient } from '$lib/utils/wallet';
-
+	import { page } from '$app/stores';
+	import { previousUrl } from '$lib/stores/store';
+	import { storeLocal } from '$lib/stores/storeLocal';
+	
 	initializeStores();
+	
+	let currentUrl = $page.url.pathname;
+
+	// $: {
+	// 	previousUrl.set(currentUrl);
+	// 	currentUrl = $page.url.pathname;
+	// 	storeLocal.set({
+	// 		...$storeLocal,
+	// 		prevUrl: $previousUrl
+	// 	});
+	// }
+
+	$: {
+		storeLocal.set({
+				...$storeLocal,
+				prevUrl: currentUrl
+			});
+		currentUrl = $page.url.pathname;
+	}
+
+	// $: {
+	// 	$page; // Re-run the store update whenever $page changes
+	// 	previousUrl.set(currentUrl);
+	// 	console.log($previousUrl, 1)
+	// }
+
+	
 
     const onChangeAccount = async () => {
 		if ($storeUserInfo.address != zeroAddress) {

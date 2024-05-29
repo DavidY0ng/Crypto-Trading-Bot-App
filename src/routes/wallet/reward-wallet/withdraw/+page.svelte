@@ -4,12 +4,16 @@
     import { t } from '$lib/i18n';
     import BackHeader from "$lib/components/BackHeader.svelte"
     import { storeUserInfo } from "$lib/stores/storeUser";
-    import { getWithdrawInfo, withdrawInfo, rewardWalletBalance, getRewardWalletBalance } from "$lib/stores/store";
+    import { getWithdrawInfo, withdrawInfo, rewardWalletBalance, getRewardWalletBalance, getUserInfo, isLoading } from "$lib/stores/store";
+    import Spinner from '$lib/components/Spinner.svelte'
 	import { onMount } from "svelte";
 	import { truncateString } from "$lib/utils/helper";
+	import { apiWithToken } from "$lib/utils/http";
+	import { showToast } from "$lib/components/toasts/toast";
+    import { goto } from "$app/navigation";
     
 
-    let amountValue:number | null = null
+    let amountValue:string | null = null
     let confirmCheck:boolean = false
     let withdrawAmount:number
 
@@ -21,8 +25,35 @@
     $: if(confirmCheck) {
         withdrawAmount = amountValue - (amountValue * $withdrawInfo.fee/100)
     }
+
+    async function submitWithdrawal(sn:string, amount:string) {
+        isLoading.set(true);
+
+        const res = await apiWithToken('POST', '/transaction/withdraw', {
+            sn: sn,
+            amount: amount
+        });
+
+        if (res.success) {
+           
+
+            // Set a timeout to keep the loader for 1 second before navigating
+            setTimeout(() => {
+                isLoading.set(false);
+                goto('./withdraw/success');
+            }, 2000); // 1000 milliseconds = 1 second
+
+        } else {
+            isLoading.set(false);
+            showToast(res.data[0], 'red');
+        }
+    }
     
 </script>
+
+{#if $isLoading}
+    <Spinner />
+{/if}
 
 <BackHeader path='/wallet/reward-wallet' layout='flex items-center bg-white pb-2'>
     <div class="flex justify-center flex-1 h3">
@@ -69,7 +100,7 @@
                 Amount
             </div>
             <div>
-                <input type="number" pattern="[0-9]*" class="p-2 px-3 bg-white border rounded-md shadow-sm" bind:value={amountValue} placeholder="Enter an amount" readonly={confirmCheck}>
+                <input type="number" pattern="[0-9]*" class="p-2 px-3 bg-white border rounded-md shadow-sm {confirmCheck == true ? "text-gray-400" : ''}" bind:value={amountValue} placeholder="Enter an amount" readonly={confirmCheck}>
             </div>
             <div class="flex justify-between text-xs">
                 <div class="text-gray-400">
@@ -124,7 +155,7 @@
         </div>
     
         <div class="flex flex-grow">
-            <button  class="flex justify-center flex-grow text-white rounded-md shadow-md btn bg-primary-500" disabled={!confirmCheck}>
+            <button on:click={() => submitWithdrawal($withdrawInfo.sn,amountValue)} class="flex justify-center flex-grow text-white rounded-md shadow-md btn bg-primary-500" disabled={!confirmCheck}>
                 Withdraw
             </button>
         </div>

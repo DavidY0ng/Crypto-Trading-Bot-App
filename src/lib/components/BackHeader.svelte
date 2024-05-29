@@ -1,9 +1,29 @@
 <script>
     import { goto } from "$app/navigation";
 	import Icon from "@iconify/svelte";
+    import { get } from 'svelte/store';
+    import { previousUrl } from '$lib/stores/store';
+    import { storeLocal } from "$lib/stores/storeLocal";
 
     export let path
     export let layout
+
+    // function goBack() {
+    //     const url = $storeLocal.prevUrl;
+    //     console.log(url)
+    //     if (url) {
+    //     goto(url);
+    //     } else {
+    //     // Fallback behavior if there's no previous URL
+    //     goto('/');
+    //     }
+    // }
+
+    // function goBack() {
+    //     const store = get(storeLocal);
+    //     const prevUrl = store.prevUrl || '/';
+    //     goto(prevUrl);
+    // }
 </script>
 
 

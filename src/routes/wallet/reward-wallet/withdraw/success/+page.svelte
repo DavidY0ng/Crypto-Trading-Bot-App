@@ -12,7 +12,7 @@
         </div>
       
         <div class="flex text-center h1">
-            Withdraw request submitted
+            Withdrawal request submitted
         </div>
 
         <div class="flex flex-row justify-between w-full gap-3">

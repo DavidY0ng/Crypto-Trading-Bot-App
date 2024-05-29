@@ -9,7 +9,7 @@
     const menus = [
         {
             icon: 'streamline:subscription-cashflow',
-            name: "Manage Plans",
+            name: "Membership",
             links: '/membership/plans'
         },
         {
@@ -30,7 +30,7 @@
         {
             icon: 'fluent:people-community-48-regular',
             name: "My Community",
-            links: ''
+            links: '/profile/community'
         },
     ]
 
@@ -55,7 +55,7 @@
                         UID:
                     </div>
                     <div class="font-thin text-white">
-                        {$storeUserInfo.uid}1234
+                        {$storeUserInfo.uid}
                     </div>
                 </div>
                 

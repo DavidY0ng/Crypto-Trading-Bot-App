@@ -1,0 +1,44 @@
+[
+    {
+        "id": "1",
+        "name": "richie",
+        "upline": "0",
+        "content": "hello",
+        "profit" : "1.232",
+        "children": [
+            {
+                "id": "2",
+                "name": "richie",
+                "upline": "0",
+                "content": "hello",
+                "profit" : "1.232",
+                "children": []
+            },
+            {
+                "id": "3",
+                "name": "richie",
+                "upline": "0",
+                "content": "hello",
+                "profit" : "1.232",
+                "children": [
+                    {
+                        "id": "5",
+                        "name": "richie",
+                        "upline": "0",
+                        "content": "hello",
+                        "profit" : "1.232",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "4",
+        "name": "richie",
+        "upline": "0",
+        "content": "hello",
+        "profit" : "1.232",
+        "children": []
+    }
+]
