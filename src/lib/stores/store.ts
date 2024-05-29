@@ -31,6 +31,11 @@ export let depositCurrentPageInfo = writable({
 });
 export const google2FACode = writable('')
 export const google2FAKey = writable('')
+export const depositHistory = writable([])
+export const depositHistoryDetails = writable({})
+export const withdrawHistory = writable([])
+export const withdrawHistoryDetails = writable({})
+export const currentPage = writable(1)
 
 export async function getUserInfo () {
     const res = await apiWithToken ('GET', '/user/account/info')
@@ -131,5 +136,78 @@ export async function enableGoogle2FA (code:string) {
     }
 }
 
+export async function getDepositHistory(page: number) {
+    const res = await apiWithToken('GET', '/transaction/history/deposit', {
+        size: 10,
+        page: page
+    });
 
+    if (!res) {
+        return [];
+    } else {
+        if (page === 1) {
+            depositHistory.set(res.data.data);
+        } else {
+            depositHistory.update(existingData => [...existingData, ...res.data.data]);
+        }
+        return res.data.data;
+    }
+}
 
+export async function getDepositHistoryDetails (sn:string) {
+    const res = await apiWithToken ('GET', '/transaction/history/deposit/detail', {
+        sn: sn
+    })
+    if(!res) {
+        return
+    } else {
+        depositHistoryDetails.set(res.data)
+    }
+}
+
+export async function getWithdrawHistory (page:number) {
+    const res = await apiWithToken ('GET', '/transaction/history/withdraw', {
+        size: 10,
+        page: page
+    })
+    if(!res) {
+        return
+    } else {
+        if (page === 1) {
+            withdrawHistory.set(res.data.data);
+        } else {
+            withdrawHistory.update(existingData => [...existingData, ...res.data.data]);
+        }
+        return res.data.data;
+    }
+}
+
+export async function getWithdrawHistoryDetails (sn:string) {
+    const res = await apiWithToken ('GET', '/transaction/history/withdraw/detail', {
+        sn: sn
+    })
+    if(!res) {
+        return
+    } else {
+        withdrawHistoryDetails.set(res.data)
+    }
+}
+
+//fetch different types of history
+export async function fetchHistory(type:string, page:number) {
+    let res;
+    switch (type) {
+        case 'deposit':
+            res = await getDepositHistory(page);
+            break;
+        case 'withdraw':
+            res = await getWithdrawHistory(page);
+            break;
+        // case 'transfer':
+        //     res = await getTransferHistory(page);
+        //     break;
+        default:
+            throw new Error('Invalid history type');
+    }
+    return res;
+}

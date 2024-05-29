@@ -8,6 +8,7 @@
 	import { showToast } from '$lib/components/toasts/toast';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import { onMount } from 'svelte';
+	import { storeLocal } from '$lib/stores/storeLocal';
 
 	const benefits = ['Higher ROI', 'Free Bots 24/7', 'Gurantee Profit', 'Premium Support'];
 
@@ -30,7 +31,7 @@
 
 </script>
 
-<BackHeader path="/" layout="flex items-center pb-2 bg-white">
+<BackHeader  path={$storeLocal.prevUrl == "/" ? '/' : '/profile'} layout="flex items-center pb-2 bg-white">
 	<div class="flex justify-center flex-1 h3"></div>
 
 	<div class="flex-1"></div>

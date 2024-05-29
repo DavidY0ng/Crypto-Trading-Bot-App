@@ -10,27 +10,32 @@
         {
             icon: 'streamline:subscription-cashflow',
             name: "Membership",
-            links: '/membership/plans'
+            link: '/membership/plans',
+            alternateLink: '/membership'
         },
         {
             icon: 'iconoir:wallet',
             name: "My Wallet",
-            links: '/wallet'
+            link: '/wallet',
+            alternateLink: '/wallet'
         },
         {
             icon: 'fluent:document-bullet-list-clock-20-regular',
             name: "Transaction History",
-            links: '/profile/transaction-history'
+            link: '/profile/transaction-history',
+            alternateLink: '/profile/transaction-history'
         },
         {
             icon: 'mdi:security-lock-outline',
             name: "Security",
-            links: '/profile/google-auth'
+            link: '/profile/google-auth',
+            alternateLink: '/profile/google-auth'
         },
         {
             icon: 'fluent:people-community-48-regular',
             name: "My Community",
-            links: '/profile/community'
+            link: '/profile/community',
+            alternateLink: '/profile/community'
         },
     ]
 
@@ -84,7 +89,7 @@
 <!-- menu and links -->
 <div class="flex flex-col flex-grow bg-white">
     {#each menus as menu}
-        <a class="flex items-center gap-4 p-5 border-b" href={menu.links}>
+        <a class="flex items-center gap-4 p-5 border-b" href={$storeUserInfo.membership == 0 ? menu.alternateLink : menu.link}>
             <div>
                 <Icon icon={menu.icon} width="1.2em" height="1.2em" />
             </div>

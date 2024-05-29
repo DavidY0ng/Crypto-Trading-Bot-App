@@ -1,121 +1,69 @@
-<script>
-    const deposits = [ 
-        {
-            id: "1",
-            currency: "USDT",
-            amount: "113.232",
-            date: "2024-03-07 14:14:14",
-            status: "Completed",
-            network: "bsc",
-            txid: "1231092ubsfkshfkdsjhkew"
-        },
-        {
-            id: "2",
-            currency: "USDT",
-            amount: "200",
-            date: "2024-03-07 14:14:14",
-            status: "Completed",
-            network: "bsc",
-            txid: "1231092ubsfkshfkdsjhkew"
-        },
-        {
-            id: "3",
-            currency: "USDT",
-            amount: "300",
-            date: "2024-03-07 14:14:14",
-            status: "Rejected",
-            network: "bsc",
-            txid: "1231092ubsfkshfkdsjhkew"
-        },
-        {
-            id: "3",
-            currency: "USDT",
-            amount: "300",
-            date: "2024-03-07 14:14:14",
-            status: "Rejected",
-            network: "bsc",
-            txid: "1231092ubsfkshfkdsjhkew"
-        },
-        {
-            id: "3",
-            currency: "USDT",
-            amount: "300",
-            date: "2024-03-07 14:14:14",
-            status: "Rejected",
-            network: "bsc",
-            txid: "1231092ubsfkshfkdsjhkew"
-        },
-        {
-            id: "3",
-            currency: "USDT",
-            amount: "300",
-            date: "2024-03-07 14:14:14",
-            status: "Rejected",
-            network: "bsc",
-            txid: "1231092ubsfkshfkdsjhkew"
-        },
-        {
-            id: "3",
-            currency: "USDT",
-            amount: "300",
-            date: "2024-03-07 14:14:14",
-            status: "Rejected",
-            network: "bsc",
-            txid: "1231092ubsfkshfkdsjhkew"
-        },
-        {
-            id: "3",
-            currency: "USDT",
-            amount: "300",
-            date: "2024-03-07 14:14:14",
-            status: "Rejected",
-            network: "bsc",
-            txid: "1231092ubsfkshfkdsjhkew"
-        },
-        {
-            id: "3",
-            currency: "USDT",
-            amount: "300",
-            date: "2024-03-07 14:14:14",
-            status: "Rejected",
-            network: "bsc",
-            txid: "1231092ubsfkshfkdsjhkew"
-        },
-        {
-            id: "3",
-            currency: "USDT",
-            amount: "300",
-            date: "2024-03-07 14:14:14",
-            status: "Rejected",
-            network: "bsc",
-            txid: "1231092ubsfkshfkdsjhkew"
-        },
-    ]
+<script lang='ts'>
+    import { getDepositHistory,fetchHistory, depositHistory } from "$lib/stores/store";
+    import { onMount } from "svelte";
+	import { get } from "svelte/store";
+    import { short_number_format } from "$lib/utils/helper";
+
+    let page = 1
+    let observer: IntersectionObserver;
+
+    onMount(async () => {
+        await fetchHistory('deposit', page);
+        createObserver();
+    })
+
+    async function loadMoreData() {
+        page++;
+        const res = await getDepositHistory(page);
+        if (res.length === 0) {
+            observer.disconnect();
+        }
+    }
+
+    function createObserver() {
+        const sentinel = document.querySelector('#sentinel');
+        if (sentinel) {
+            observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        loadMoreData();
+                    }
+                });
+            }, { threshold: 1.0 });
+
+            observer.observe(sentinel);
+        } else {
+            console.error('Sentinel element not found');
+        }
+    }
 </script>
 
-{#each deposits as data}
-<a class="flex flex-col gap-1 p-3 border-b border-gray-100" href='/profile/transaction-history/deposit-details?{data.id}'>
-    <div class="flex justify-between text-sm font-semibold">
-        <div>
-            {data.currency}
-        </div>
+{#if $depositHistory.length > 0}
+    {#each $depositHistory as data}
+        <a class="flex flex-col gap-1 p-3 border-b border-gray-100" href='/profile/transaction-history/deposit-details?{data.sn}'>
+            <div class="flex justify-between text-sm font-semibold">
+                <div>
+                    {data.assets}
+                </div>
+            
+                <div class="text-green-500">
+                    +{short_number_format(data.amount)}
+                </div>
+            </div>
+            
+            <div class="flex justify-between text-xs text-gray-400">
+                <div>
+                    {data.created_at}
+                </div>
+                <div class="capitalize">
+                    {data.status}
+                </div>
+            </div>
+        </a>
+    {/each}
     
-        <div class="text-green-500">
-            +{data.amount}
-        </div>
-    </div>
-    
-    
-    <div class="flex justify-between text-xs text-gray-400">
-        <div>
-            {data.date}
-        </div>
-        <div>
-            {data.status}
-        </div>
-    </div>
-</a>
-{/each}
+{/if}
+<div id="sentinel" class="flex flex-grow"></div>
 
 <div class="flex justify-center p-3">
     <div class="text-sm text-gray-400">
