@@ -14,9 +14,22 @@
     import Transfer from '$lib/components/transaction-history/Transfer.svelte';
     import Bot from '$lib/components/transaction-history/Bot.svelte';
     import Referral from '$lib/components/transaction-history/Referral.svelte';
+	import { storeLocal } from '$lib/stores/storeLocal';
 
-	let tabSet = 0;
-	onMount(() => {});
+	let tabSet = 0 ;
+	
+	onMount(() => {
+		if ($storeLocal.prevUrl == '/profile/transaction-history/withdrawal-details') {
+			tabSet == 1
+		}
+	});
+
+
+
+	
+
+	
+	
 </script>
 
 <BackHeader path="/profile" layout="flex items-center bg-white pb-2">

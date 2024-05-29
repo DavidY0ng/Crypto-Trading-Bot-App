@@ -2,18 +2,18 @@
 	import BackHeader from '$lib/components/BackHeader.svelte';
 	import Icon from '@iconify/svelte';
 	import {
-		getFeeWalletBalance,
-		getRewardWalletBalance,
-		feeWalletBalance,
-		rewardWalletBalance
+		getDepositHistoryDetails, depositHistoryDetails
 	} from '$lib/stores/store';
 	import { onMount } from 'svelte';
     import { page } from '$app/stores';
 	import { copyToClipboard } from '$lib/utils/helper';
 	import { goto } from '$app/navigation';
+    import { short_number_format } from '$lib/utils/helper'
 
-	let tabSet = 0;
-	onMount(() => {});
+	onMount(() => {
+        let sn = $page.url.searchParams.get('sn')
+        getDepositHistoryDetails(sn)
+    });
 </script>
 
 <div class="flex items-center px-3 pt-3 pb-2 bg-white">
@@ -31,15 +31,15 @@
 <div class="flex flex-col flex-grow bg-white">
     <div>
         <div class="flex flex-col items-center flex-grow gap-2 p-3">
-            <div class="font-semibold h1">
-                +113.23232 USDT
+            <div class="font-semibold text-green-500 h1">
+                +{short_number_format($depositHistoryDetails.amount)} {$depositHistoryDetails.assets}
             </div>
             <div class="flex items-center gap-2">
-                <div class="text-green-500">
+                <div class="text-green-500 {$depositHistoryDetails.status == 'success' ? 'flex' : 'hidden' }">
                     <Icon icon="mdi:tick-circle" width="1.2em" height="1.2em" />
                 </div>
-                <div class="text-green-500">
-                    Completed
+                <div class=" capitalize {$depositHistoryDetails.status == 'success' ? 'text-green-500' : '' }">
+                    {$depositHistoryDetails.status}
                 </div>
             </div>
             
@@ -54,7 +54,7 @@
                 Network
             </div>
             <div class="px-2 rounded-sm bg-secondary-500/50 text-secondary-700">
-                Bsc
+                {$depositHistoryDetails.network}
             </div>
         </div>
 
@@ -64,10 +64,10 @@
             </div>
             <div class="flex w-[60%] gap-2">
                 <div class="text-right break-all ">
-                    0x39f4c638f78110119AD9B1eeaB73832332E0D75F
+                    {$depositHistoryDetails.address}
                 </div>
                 <div class="text-primary-500">
-                    <button on:click={() => copyToClipboard(' 0x39f4c638f78110119AD9B1eeaB73832332E0D75F')}>
+                    <button on:click={() => copyToClipboard($depositHistoryDetails.address)}>
                         <Icon icon="solar:copy-line-duotone" width="1em" height="1em" />
                     </button>
                     
@@ -82,10 +82,10 @@
             </div>
             <div class="flex w-[60%] gap-2">
                 <div class="text-right break-all ">
-                    0x39f4c638f78110119AD9B1eeaB73832332E0D75F
+                    {$depositHistoryDetails.txid}
                 </div>
                 <div class="text-primary-500">
-                    <button on:click={() => copyToClipboard(' 0x39f4c638f78110119AD9B1eeaB73832332E0D75F')}>
+                    <button on:click={() => copyToClipboard($depositHistoryDetails.txid)}>
                         <Icon icon="solar:copy-line-duotone" width="1em" height="1em" />
                     </button>
                     
@@ -97,8 +97,8 @@
             <div class="text-gray-400">
                 Deposit Wallet
             </div>
-            <div>
-                Fee Wallet
+            <div class="capitalize">
+                {$depositHistoryDetails.wallet} Wallet
             </div>
         </div>
 
@@ -107,7 +107,7 @@
                 Date
             </div>
             <div>
-                2024-03-07 14:14:14
+                {$depositHistoryDetails.created_at}
             </div>
         </div>
         

@@ -40,7 +40,7 @@
 
 {#if $depositHistory.length > 0}
     {#each $depositHistory as data}
-        <a class="flex flex-col gap-1 p-3 border-b border-gray-100" href='/profile/transaction-history/deposit-details?{data.sn}'>
+        <a class="flex flex-col gap-1 p-3 border-b border-gray-100" href='/profile/transaction-history/deposit-details?sn={data.sn}'>
             <div class="flex justify-between text-sm font-semibold">
                 <div>
                     {data.assets}

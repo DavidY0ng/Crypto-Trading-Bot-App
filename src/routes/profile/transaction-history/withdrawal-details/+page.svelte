@@ -2,17 +2,19 @@
 	import BackHeader from '$lib/components/BackHeader.svelte';
 	import Icon from '@iconify/svelte';
 	import {
-		getFeeWalletBalance,
-		getRewardWalletBalance,
-		feeWalletBalance,
-		rewardWalletBalance
+		getWithdrawHistoryDetails,
+        withdrawHistoryDetails
 	} from '$lib/stores/store';
 	import { onMount } from 'svelte';
     import { page } from '$app/stores';
 	import { copyToClipboard } from '$lib/utils/helper';
+    import { short_number_format } from '$lib/utils/helper'
 
 	let tabSet = 0;
-	onMount(() => {});
+	onMount(() => {
+        let sn = $page.url.searchParams.get('sn')
+        getWithdrawHistoryDetails(sn)
+    });
 </script>
 
 <div class="flex items-center px-3 pt-3 pb-2 bg-white">
@@ -31,14 +33,14 @@
     <div>
         <div class="flex flex-col items-center flex-grow gap-2 p-3">
             <div class="font-semibold h1">
-                -113.23232 USDT
+                -{short_number_format($withdrawHistoryDetails.actual_amount)} {$withdrawHistoryDetails.assets}
             </div>
             <div class="flex items-center gap-2">
-                <div class="text-green-500">
+                <div class="text-green-500 {$withdrawHistoryDetails.status == 'success' ? 'flex' : 'hidden' }">
                     <Icon icon="mdi:tick-circle" width="1.2em" height="1.2em" />
                 </div>
-                <div class="text-green-500">
-                    Completed
+                <div class="capitalize {$withdrawHistoryDetails.status == 'success' ? 'text-green-500' : '' }">
+                    {$withdrawHistoryDetails.status}
                 </div>
             </div>
             
@@ -53,7 +55,7 @@
                 Network
             </div>
             <div class="px-2 rounded-sm bg-secondary-500/50 text-secondary-700">
-                Bsc
+                {$withdrawHistoryDetails.network}
             </div>
         </div>
 
@@ -63,10 +65,10 @@
             </div>
             <div class="flex w-[60%] gap-2">
                 <div class="text-right break-all ">
-                    0x39f4c638f78110119AD9B1eeaB73832332E0D75F
+                    {$withdrawHistoryDetails.address}
                 </div>
                 <div class="text-primary-500">
-                    <button on:click={() => copyToClipboard(' 0x39f4c638f78110119AD9B1eeaB73832332E0D75F')}>
+                    <button on:click={() => copyToClipboard($withdrawHistoryDetails.address)}>
                         <Icon icon="solar:copy-line-duotone" width="1em" height="1em" />
                     </button>
                     
@@ -81,10 +83,10 @@
             </div>
             <div class="flex w-[60%] gap-2">
                 <div class="text-right break-all ">
-                    0x39f4c638f78110119AD9B1eeaB73832332E0D75F
+                    {$withdrawHistoryDetails.txid}
                 </div>
                 <div class="text-primary-500">
-                    <button on:click={() => copyToClipboard(' 0x39f4c638f78110119AD9B1eeaB73832332E0D75F')}>
+                    <button on:click={() => copyToClipboard($withdrawHistoryDetails.txid)}>
                         <Icon icon="solar:copy-line-duotone" width="1em" height="1em" />
                     </button>
                     
@@ -97,7 +99,7 @@
                 Withdrawal Amount
             </div>
             <div>
-                114.23232 USDT
+                {$withdrawHistoryDetails.withdrawal_amount}
             </div>
         </div>
 
@@ -106,7 +108,7 @@
                 Withdrawal Fee
             </div>
             <div>
-                1 USDT
+                {$withdrawHistoryDetails.fee} {$withdrawHistoryDetails.assets}
             </div>
         </div>
 
@@ -114,8 +116,8 @@
             <div class="text-gray-400">
                 Withdrawal Wallet
             </div>
-            <div>
-                Reward Wallet
+            <div class="capitalize">
+                {$withdrawHistoryDetails.wallet} Wallet
             </div>
         </div>
 
@@ -124,7 +126,7 @@
                 Date
             </div>
             <div>
-                2024-03-07 14:14:14
+                {$withdrawHistoryDetails.created_at}
             </div>
         </div>
         
