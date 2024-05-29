@@ -59,15 +59,18 @@
             <a class="flex justify-between flex-grow w-full gap-2 p-5 card" href={wallet.link}>
                 <!-- <span class="text-primary-500"><Icon icon={wallet.icon} width="1.2em" height="1.2em" /></span> -->
                 <div class="flex flex-col gap-2">
-                    <div class="flex items-center gap-2 text-lg">
+                    <div class="flex items-center gap-2 text-base ">
                         {wallet.name}
                     </div>
-                    <div class="flex gap-2 text-sm">
+                    <div class="flex items-end gap-2">
                         <!-- <div class="text-gray-400">
                             Available Balance
                         </div> -->
-                        <div class="font-bold">
-                            {wallet.id == '1' ? $feeWalletBalance : $rewardWalletBalance} USDT
+                        <div class="text-2xl font-semibold leading-none">
+                            {wallet.id == '1' ? $feeWalletBalance : $rewardWalletBalance}
+                        </div>
+                        <div class="text-xs leading-none">
+                            USDT
                         </div>
                     </div>
                 </div>

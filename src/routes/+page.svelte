@@ -9,7 +9,7 @@
 
 	const menuPath = [
 		{
-			links: '#',
+			links: '/api-sync',
 			icon: 'icon-park-outline:api',
 			name: 'API sync'
 		},

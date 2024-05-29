@@ -10,6 +10,7 @@
 	import { showToast } from '$lib/components/toasts/toast';
 	import { onMount } from 'svelte';
 	import { storeUserInfo } from '$lib/stores/storeUser';
+	import { copyToClipboard } from "$lib/utils/helper"
 
 	let inputValue = '';
 	let google2FACode = ['', '', '', '', '', ''];
@@ -19,6 +20,11 @@
 	let currentMenuItem: string | number | null = null; // Add a variable to hold the current menu item data
 
 	$: menus = [
+		{
+			name: 'UID',
+			value: $userInfo.user_id,
+			param: 'user_id'
+		},
 		{
 			name: 'Nickname',
 			value: $userInfo.nickname,
@@ -34,6 +40,7 @@
 			value: $userInfo.phone_no,
 			param: 'phone_no'
 		}
+		
 		// {
 		// 	name: 'Twitter',
 		// 	value: 'Richie'
@@ -120,22 +127,34 @@
 </script>
 
 <BackHeader path="/profile" layout="flex items-center bg-white pb-2">
-	<div class="flex justify-start flex-grow flex-2 h3">Personal Information</div>
+	<div class="flex justify-start flex-grow font-semibold flex-2 h3">Personal Information</div>
 </BackHeader>
 <div class="flex flex-col flex-grow gap-5 p-3 bg-white">
 	{#each menus as menu, i}
 		<div class="flex">
-			<div class="flex">
+			<div class="flex font-semibold">
 				{menu.name}
 			</div>
+			{#if menu.name !== 'UID'}
 			<button on:click={() => openModal(menu)} class="flex justify-end flex-grow gap-2">
-				<div class="font-bold">
+				<div class="">
 					{menu.value}
 				</div>
 				<div class="text-gray-400">
 					<Icon icon="material-symbols:keyboard-arrow-right" width="1.5em" height="1.5em" />
 				</div>
 			</button>
+			{:else}
+			<div class="flex justify-end flex-grow gap-2 pr-1">
+				<div class="">
+					{menu.value}
+				</div>
+				<button on:click={() => copyToClipboard(menu.value)} class="text-gray-400">
+					<Icon icon="solar:copy-line-duotone" width="1.2em" height="1.2em" />
+				</button>
+			</div>
+				
+			{/if}
 		</div>
 	{/each}
 </div>

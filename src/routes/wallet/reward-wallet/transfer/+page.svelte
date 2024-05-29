@@ -57,13 +57,13 @@
 	</div>
 
 	<div class="p-3 py-5 card">
-		<div class="text-sm text-gray-400">
+		<div class="pb-1 text-sm text-gray-400">
 			Amount
 		</div>
 		<div>
 			<input class="py-2 bg-white border rounded-md" type='number' placeholder="Enter an amount">
 		</div>
-		<div class="flex justify-between text-xs">
+		<div class="flex justify-between pt-1 text-xs">
 			<div class="text-gray-400">
 				Available 
 			</div>
