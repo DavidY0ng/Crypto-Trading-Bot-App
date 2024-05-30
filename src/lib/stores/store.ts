@@ -36,6 +36,8 @@ export const depositHistoryDetails = writable({})
 export const withdrawHistory = writable([])
 export const withdrawHistoryDetails = writable({})
 export const transferHistory = writable([])
+export const currentMembershipPlan = writable([])
+export const membershipPlanHistory = writable([])
 export const currentPage = writable(1)
 
 export async function getUserInfo () {
@@ -52,7 +54,8 @@ export async function getUserInfo () {
                 uid: currentUserData.user_id,
                 membership: currentUserData.membership,
                 upline: currentUserData.upline,
-                authenticator: currentUserData.authenticator
+                authenticator: currentUserData.authenticator,
+                api_synced: 0
                 
             };
         });
@@ -208,6 +211,40 @@ export async function getTransferHistory (page:number) {
             transferHistory.update(existingData => [...existingData, ...res.data.data]);
         }
         return res.data.data;
+    }
+}
+
+export async function getCurrentMembershipPlan () {
+    const res = await apiWithToken ('GET', '/membership/detail', {
+        status: 'active'
+    })
+    if(!res) {
+        return
+    } else {
+        // if (page === 1) {
+        //     currentMembershipPlan.set(res.data.data);
+        // } else {
+        //     currentMembershipPlan.update(existingData => [...existingData, ...res.data.data]);
+        // }
+        // return res.data.data;
+        currentMembershipPlan.set(res.data)
+    }
+}
+
+export async function getMembershipPlanHistory () {
+    const res = await apiWithToken ('GET', '/membership/detail', {
+        status: 'expired'
+    })
+    if(!res) {
+        return
+    } else {
+        // if (page === 1) {
+        //     currentMembershipPlan.set(res.data.data);
+        // } else {
+        //     currentMembershipPlan.update(existingData => [...existingData, ...res.data.data]);
+        // }
+        // return res.data.data;
+        membershipPlanHistory.set(res.data)
     }
 }
 

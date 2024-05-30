@@ -46,7 +46,7 @@
 	</div>
 
 	<!-- payment card -->
-	<div class="flex flex-col px-5 py-10 mb-5 border rounded-xl">
+	<div class="flex flex-col px-3 py-10 mb-5 border rounded-xl">
 		<div class="flex h-full mb-10">
 			<span class="text-gray-500 text-[20px]">$</span>
 			<div class="font-bold text-[45px]">100</div>
@@ -54,10 +54,10 @@
 		<div class="grid grid-cols-2 gap-4">
 			{#each benefits as benefit}
 				<div class="flex items-center gap-2">
-					<div class="text-green-500">
+					<div class="text-green-500 h-">
 						<Icon icon="teenyicons:tick-circle-solid" width="1.2em" height="1.2em" />
 					</div>
-					<div class="text-[15px]">
+					<div class="text-[14px]">
 						{benefit}
 					</div>
 				</div>
