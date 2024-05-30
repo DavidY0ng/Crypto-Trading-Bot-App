@@ -35,6 +35,7 @@ export const depositHistory = writable([])
 export const depositHistoryDetails = writable({})
 export const withdrawHistory = writable([])
 export const withdrawHistoryDetails = writable({})
+export const transferHistory = writable([])
 export const currentPage = writable(1)
 
 export async function getUserInfo () {
@@ -193,6 +194,23 @@ export async function getWithdrawHistoryDetails (sn:string) {
     }
 }
 
+export async function getTransferHistory (page:number) {
+    const res = await apiWithToken ('GET', '/transaction/history/transfer', {
+        size: 10,
+        page: page
+    })
+    if(!res) {
+        return
+    } else {
+        if (page === 1) {
+            transferHistory.set(res.data.data);
+        } else {
+            transferHistory.update(existingData => [...existingData, ...res.data.data]);
+        }
+        return res.data.data;
+    }
+}
+
 //fetch different types of history
 export async function fetchHistory(type:string, page:number) {
     let res;
@@ -203,9 +221,9 @@ export async function fetchHistory(type:string, page:number) {
         case 'withdraw':
             res = await getWithdrawHistory(page);
             break;
-        // case 'transfer':
-        //     res = await getTransferHistory(page);
-        //     break;
+        case 'transfer':
+            res = await getTransferHistory(page);
+            break;
         default:
             throw new Error('Invalid history type');
     }

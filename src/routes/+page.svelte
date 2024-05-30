@@ -66,7 +66,7 @@
 			<div class="flex justify-between mb-3">
 				<div class="flex flex-col">
 					<div class="text-sm text-gray-400">Total Profit</div>
-					<div class="text-lg font-bold">0.00</div>
+					<div class="text-lg font-semibold">0.00</div>
 				</div>
 
 				<div class="flex flex-col text-end">

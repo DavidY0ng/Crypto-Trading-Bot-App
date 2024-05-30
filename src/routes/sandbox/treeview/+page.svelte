@@ -154,15 +154,15 @@
 		{#each DATA as data}
 			<div>
 				<!-- level 1 -->
-				<div class="pb-3">
-					<div class="flex items-start">
+				<div class="pb-3 w-[260px]">
+					<div class="flex items-start ">
 						{#if data.children.length > 0}
 							<button on:click={() => toggleExpand(data.id)} class="flex items-center justify-center text-[20px] font-bold rounded-full pr-1">
 								<Icon icon={expanded[data.id] ? "ic:round-expand-less" : "ic:baseline-expand-more"} width="1.2em" height="1.2em" />
 							</button>
 						{/if}
 						
-						<div class="{data.children.length == 0 ? 'pl-[27px]' : ''}">
+						<div class="{data.children.length == 0 ? 'pl-[27px]' : ''} w-full">
 							<div >
 								{truncateString(data.address, 13,13)}
 							</div>
@@ -184,14 +184,14 @@
 				{#if expanded[data.id]}
 					{#each data.children as child1}
 						<div class="ml-5">
-							<div class="pb-3">
-								<div class="flex items-center">
+							<div class="pb-3 w-[255px]">
+								<div class="flex items-center ">
 									{#if child1.children.length > 0}
 									<button on:click={() => toggleExpand(child1.id)} class="flex items-center justify-center text-[20px] font-bold rounded-full pr-1">
 										<Icon icon={expanded[child1.id] ? "ic:round-expand-less" : "ic:baseline-expand-more"} width="1.2em" height="1.2em" />
 									</button>
 									{/if}
-									<div class="{child1.children.length == 0 ? 'pl-[27px]' : ''}">
+									<div class="{child1.children.length == 0 ? 'pl-[27px]' : ''} w-full">
 										<div >
 											{truncateString(child1.address, 13,13)}
 										</div>
@@ -212,14 +212,14 @@
 							{#if expanded[child1.id]}
 								{#each child1.children as child2}
 									<div class="ml-5">
-										<div class="pb-3">
-											<div class="flex items-center">
+										<div class="pb-3 w-[255px]">
+											<div class="flex items-center ">
 												{#if child2.children.length > 0}
 												<button on:click={() => toggleExpand(child2.id)} class="flex items-center justify-center text-[20px] font-bold rounded-full pr-1">
 													<Icon icon={expanded[child2.id] ? "ic:round-expand-less" : "ic:baseline-expand-more"} width="1.2em" height="1.2em" />
 												</button>
 												{/if}
-												<div class="{child2.children.length == 0 ? 'pl-[27px]' : ''}">
+												<div class="{child2.children.length == 0 ? 'pl-[27px]' : ''} w-full">
 													<div >
 														{truncateString(child2.address, 13,13)}
 													</div>
