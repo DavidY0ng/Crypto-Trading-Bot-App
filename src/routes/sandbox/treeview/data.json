@@ -5,6 +5,9 @@
         "upline": "0",
         "content": "hello",
         "profit" : "1.232",
+        "membership": "0",
+        "address": "0xDe600b6b32aba9c01c86580F5b1Cfd90B6d91166",
+        "sn": "nlgxucsg2pg4txo8",
         "children": [
             {
                 "id": "2",
@@ -12,6 +15,9 @@
                 "upline": "0",
                 "content": "hello",
                 "profit" : "1.232",
+                "membership": "1",
+                "address": "layer20xDe600b6b32aba9c01c86580F5b1Cfd90B6d91166",
+                "sn": "nlgxucsg2pg4txo8",
                 "children": []
             },
             {
@@ -20,6 +26,9 @@
                 "upline": "0",
                 "content": "hello",
                 "profit" : "1.232",
+                "membership": "0",
+                "address": "layer2a0xDe600b6b32aba9c01c86580F5b1Cfd90B6d91166",
+                "sn": "nlgxucsg2pg4txo8",
                 "children": [
                     {
                         "id": "5",
@@ -27,6 +36,9 @@
                         "upline": "0",
                         "content": "hello",
                         "profit" : "1.232",
+                        "membership": "1",
+                        "address": "layer30xDe600b6b32aba9c01c86580F5b1Cfd90B6d91166",
+                        "sn": "nlgxucsg2pg4txo8",
                         "children": []
                     }
                 ]
@@ -39,6 +51,9 @@
         "upline": "0",
         "content": "hello",
         "profit" : "1.232",
+        "address": "0xDe600b6b32aba9c01c86580F5b1Cfd90B6d91166",
+        "membership": "1",
+        "sn": "nlgxucsg2pg4txo8",
         "children": []
     }
 ]

@@ -62,6 +62,6 @@
     </div>
 
     <div class="flex flex-col justify-end flex-grow">
-        <button class="flex text-white rounded-md btn bg-primary-500">Next</button>
+        <a href='./binance/step-2' class="flex text-white rounded-md btn bg-primary-500">Next</a>
     </div>
 </div>
