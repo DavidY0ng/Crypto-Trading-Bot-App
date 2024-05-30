@@ -2,6 +2,7 @@
     import BackHeader from '$lib/components/BackHeader.svelte';
 	import { getUserInfo, userInfo, isLoading, showModal, showGoogleModal, showAuthenticatorModal } from '$lib/stores/store';
 	import Icon from '@iconify/svelte';
+    import { storeUserInfo } from '$lib/stores/storeUser';
 
     const menus = [
         {
@@ -31,7 +32,7 @@
 
         <div>
             <a href="/api-sync/binance" class="py-1 text-white shadow-md bg-primary-500 btn">
-                Add
+                {$storeUserInfo.api_synced == 0 ? 'Add' : 'View'}
             </a>
         </div>
     </div>
