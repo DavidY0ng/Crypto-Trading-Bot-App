@@ -39,6 +39,7 @@ export const transferHistory = writable([])
 export const currentMembershipPlan = writable([])
 export const membershipPlanHistory = writable([])
 export const currentPage = writable(1)
+export const hierarchyData = writable([])
 
 export async function getUserInfo () {
     const res = await apiWithToken ('GET', '/user/account/info')
@@ -267,3 +268,13 @@ export async function fetchHistory(type:string, page:number) {
     return res;
 }
 
+export async function getHierarchy (user_id) {
+    const res = await apiWithToken ('GET', '/user/account/hierarchy', {
+        user_id: user_id
+    })
+    if(!res) {
+        return
+    } else {
+        hierarchyData.set(res.data)
+    }
+}

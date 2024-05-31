@@ -7,17 +7,23 @@
 	import DATA from './data.json';
 	import Icon from "@iconify/svelte";
 	import { truncateString } from "$lib/utils/helper";
+	import { getHierarchy, hierarchyData } from '$lib/stores/store';
+	import { storeUserInfo } from '$lib/stores/storeUser';
 
 	let expanded:any = {};
 
 	function toggleExpand(id) {
 		expanded[id] = !expanded[id];
 	}
+
+	onMount(() => {
+		getHierarchy($storeUserInfo.uid)
+	})
 </script>
 
 <div class="flex flex-col">
 	<div class="flex flex-col">
-		{#each DATA as data}
+		{#each $hierarchyData as data}
 			<div>
 				<!-- level 1 -->
 				<div class="w-full pb-3 ">
@@ -30,10 +36,10 @@
 						
 						<div class="{data.children.length == 0 ? 'pl-[27px]' : ''} w-full card flex gap-1 justify-between">
 							<div >
-								{truncateString(data.address, 10,10)}
+								{truncateString(data.web3_address, 10,10)}
 							</div>
 
-							<div class="flex items-center px-1 text-success-500 {data.membership == '0' ? "hidden" : ''} ">
+							<div class="flex items-center px-1 text-success-500 {data.active_membership == 'yes' ? "" : 'hidden'} ">
 								<Icon icon="pajamas:profile" width="1.2em" height="1.2em" />
 							</div>
 							
@@ -56,9 +62,9 @@
 									{/if}
 									<div class="{child1.children.length == 0 ? 'ml-[27px]' : ''} w-full card flex gap-1 justify-between">
 										<div >
-											{truncateString(child1.address, 10,10)}
+											{truncateString(child1.web3_address, 10,10)}
 										</div>
-										<div class="flex items-center px-1 text-success-500 {child1.membership == '0' ? "hidden" : ''}">
+										<div class="flex items-center px-1 text-success-500 {child1.active_membership == 'yes' ? "" : 'hidden'}">
 											<Icon icon="pajamas:profile" width="1.2em" height="1.2em" />
 										</div>
 										
@@ -79,9 +85,9 @@
 												{/if}
 												<div class="{child2.children.length == 0 ? 'ml-[27px]' : ''} card w-full flex gap-1 justify-between">
 													<div >
-														{truncateString(child2.address, 10,10)}
+														{truncateString(child2.web3_address, 10,10)}
 													</div>
-													<div class="flex items-center px-1 text-success-500 {child2.membership == '0' ? "hidden" : ''}">
+													<div class="flex items-center px-1 text-success-500 {child2.active_membership == 'yes' ? "" : 'hidden'}">
 														<Icon icon="pajamas:profile" width="1.2em" height="1.2em" />
 													</div>
 													

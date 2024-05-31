@@ -6,9 +6,9 @@ export default [
 		key: 'common',
 		loader: async () => (await import('./common.json')).default
 	},
-	{
-		locale: lang,
-		key: 'error',
-		loader: async () => (await import('./error.json')).default
-	}
+	// {
+	// 	locale: lang,
+	// 	key: 'error',
+	// 	loader: async () => (await import('./error.json')).default
+	// }
 ];
