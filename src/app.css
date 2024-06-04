@@ -9,7 +9,7 @@ html, body { @apply h-full overflow-hidden bg-surface-100; }
 }
 
 input {
-    @apply outline-primary-500 bg-gray-200 p-1 px-2 w-full
+    @apply outline-primary-500 bg-white border p-2 rounded-md w-full
 }
 
 @layer utilities {

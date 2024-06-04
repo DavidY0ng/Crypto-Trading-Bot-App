@@ -59,7 +59,7 @@
 </script>
 
 <div class="flex flex-col flex-grow">
-	<a href='/sandbox/camera'>camera</a>
+	<!-- <a href='/sandbox/camera'>camera</a> -->
 	<!-- dashboard -->
 	<div class="flex flex-col gap-3 p-3 pb-0 text-white bg-surface-500">
 		<TopNav />
