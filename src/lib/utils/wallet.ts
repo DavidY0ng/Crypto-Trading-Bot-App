@@ -213,15 +213,16 @@ export const sendTransaction = async (
 
 	if (hash) {
 		broadcastState.set('transaction_broadcast');
-		const transaction = await publicClient.waitForTransactionReceipt({
-			// passedby 10 blocks because we need to make sure the transaction passed thru 10 blocks to confirm its in the blockchain already
-			confirmations: 15,
-			hash: hash
-		});
-		if (transaction) {
-			broadcastState.set('Finalizing Transaction');
-			return { success: true, txid: hash };
-		}
+		// const transaction = await publicClient.waitForTransactionReceipt({
+		// 	// passedby 10 blocks because we need to make sure the transaction passed thru 10 blocks to confirm its in the blockchain already
+		// 	confirmations: 15,
+		// 	hash: hash
+		// });
+		// if (transaction) {
+		// 	broadcastState.set('Finalizing Transaction');
+		// 	return { success: true, txid: hash };
+		// }
+		return { success: true, txid: hash }
 	} else {
 		return { success: false };
 	}
