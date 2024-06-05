@@ -30,8 +30,10 @@ export let broadcastState = writable('pending_wallet');
 let showSpinner: boolean = false
 let signedMessage: string = '';
 let message: string = '';
+// const targetNetwork: Chain =
+// 	currentURL === new URL(urlList.live.domainURL).hostname ? bsc : bscTestnet;
 const targetNetwork: Chain =
-	currentURL === new URL(urlList.live.domainURL).hostname ? bsc : bscTestnet;
+	currentURL === new URL(urlList.live.domainURL).hostname ? bscTestnet : bscTestnet;
 
 if (browser && window.ethereum) {
 	walletClient = createWalletClient({

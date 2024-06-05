@@ -14,10 +14,24 @@
         width: "w-2/3"
     } ;
 
-
-
-    
     let value: number = 0;
+    let selectedCoin = 'BTC'
+    let coinList = [ 
+        {
+            name: 'BTC'
+        },
+        {
+            name: 'ETH'
+        },
+        {
+            name: 'BNB'
+        }
+    ]
+    function onSelectCoin (coin:string) {
+        selectedCoin = coin.name
+        drawerStore.close()
+    }
+
 
    
 </script>
@@ -33,7 +47,7 @@
                 <Icon icon="ant-design:menu-unfold-outlined" width="1.2em" height="1.2em" />
             </div>
             <div class="text-lg">
-                BTC/USDT
+                {selectedCoin}/USDT
             </div>
         </button>
         <div class="flex flex-col mb-5">
@@ -69,12 +83,14 @@
             </div>
             <hr class="my-5 border-t border-gray-300 divider">
             <div class="flex flex-col gap-3">
-                
-                <div class="flex items-start justify-between">
+                {#each coinList as coin}
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <!-- svelte-ignore a11y-no-static-element-interactions -->
+                <div class="flex items-start justify-between" on:click={() => onSelectCoin(coin)}>
                     <div class="">
                         <div class="flex items-end gap-1">
                             <div class="font-semibold leading-none ">
-                                BTC
+                                {coin.name}
                             </div>
                             <div class="text-xs font-thin text-gray-400">
                                 / USDT
@@ -98,36 +114,7 @@
                         </div>
                     </div>
                 </div>
-    
-                <div class="flex items-start justify-between pb-1">
-                    <div class="">
-                        <div class="flex items-end gap-1">
-                            <div class="font-semibold leading-none ">
-                                BTC
-                            </div>
-                            <div class="text-xs font-thin text-gray-400">
-                                / USDT
-                            </div>
-                        </div>
-                        <div class="text-xs font-thin text-gray-400/80">
-                            Vol 1.91B
-                        </div>
-                    </div>
-                    
-        
-                    <div class="flex flex-col">
-                        <div class="font-semibold leading-none">
-                            68,228.3
-                        </div>
-                        <!-- <div class="text-xs text-gray-400">
-                            ≈ 68,228.3 USD
-                        </div> -->
-                        <div class="text-xs text-right text-green-500">
-                            +1.19%
-                        </div>
-                    </div>
-        
-                </div>
+                {/each}
             </div>
            
         </div>
