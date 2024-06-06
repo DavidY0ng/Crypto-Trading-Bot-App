@@ -2,9 +2,9 @@
 	import Icon from '@iconify/svelte';
     import BackHeader from '$lib/components/BackHeader.svelte';
     import { TabGroup, Tab, TabAnchor } from '@skeletonlabs/skeleton';
-    import Reports from '$lib/components/bot-details/Reports.svelte'
+    import Reports from '$lib/components/bot-details/grid/Reports.svelte'
     import Placed from '$lib/components/bot-details/grid/Placed.svelte'
-    import Transaction from '$lib/components/bot-details/Transaction.svelte'
+    import Transaction from '$lib/components/bot-details/grid/Transaction.svelte'
 
     let tabSet = 0
    

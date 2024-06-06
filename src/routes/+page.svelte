@@ -24,7 +24,7 @@
 			name: 'Deposit'
 		},
 		{
-			links: '#',
+			links: '/revenue',
 			icon: 'icon-park-outline:sales-report',
 			name: 'Revenue'
 		}
@@ -34,12 +34,14 @@
 		{
 			icon: 'mdi:grid',
 			name: 'Grid',
-			description: 'Grid trading strategy is bla bla bla'
+			description: 'Grid trading strategy is bla bla bla',
+			links: "/bots/grid"
 		},
 		{
 			icon: 'ph:horse',
 			name: 'Martingale',
-			description: 'Place double to your bet when you lose.'
+			description: 'Place double to your bet when you lose.',
+			links: "/bots/martingale"
 		}
 		// {
 		//     icon: "material-symbols:balance",
@@ -138,7 +140,7 @@
             Strategy
             </div>
 			{#each strategies as strategy}
-				<div class="flex items-center gap-4 py-5 rounded-lg ">
+				<a class="flex items-center gap-4 py-5 rounded-lg " href={strategy.links}>
 					<div class="flex items-center justify-center h-12 rounded-full w-14 bg-primary-200">
 						<Icon icon={strategy.icon} width="1.4em" height="1.4em" />
 					</div>
@@ -155,7 +157,7 @@
 							{strategy.description}
 						</div>
 					</div>
-				</div>
+				</a>
 			{/each}
 		</div>
 	</div>

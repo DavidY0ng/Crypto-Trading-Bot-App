@@ -68,7 +68,7 @@
 						</div>
 
 						<div>
-							<div class="mb-1 text-xs text-gray-400">Buy fee USDT</div>
+							<div class="mb-1 text-xs text-gray-400">Sell fee USDT</div>
 							<div class="text-sm font-semibold">0</div>
 						</div>
 

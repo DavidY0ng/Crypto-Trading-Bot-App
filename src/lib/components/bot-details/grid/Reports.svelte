@@ -143,7 +143,13 @@
         <div class="font-semibold">
             Profit in USDT
         </div>
-        <div class="card !shadow-sm">
+        <div class="card !shadow-sm p-3">
+            <div class="text-xs text-gray-300">
+                USDTPnl
+            </div>
+            <div class="text-xl font-bold text-green-500">
+                +106.27%
+            </div>
             <Chart />
         </div>
     </div>

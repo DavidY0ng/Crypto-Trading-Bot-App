@@ -23,7 +23,9 @@
 				}
 			},
 			y: {
-				display: false // Disable y axis
+				grid: {
+					display: true // Disable vertical grid lines
+				}
 			}
 		}
 	};
@@ -33,18 +35,18 @@
 		datasets: [
 			{
 				fill: true,
-				lineTension: 0.3,
+				lineTension: 0,
 				backgroundColor: 'rgba(39, 197, 94, .2)',
 				borderColor: '#22c55e',
 				borderCapStyle: 'butt',
 				borderDash: [],
 				borderDashOffset: 0.0,
 				borderJoinStyle: 'miter',
-				pointBorderColor: 'rgb(205, 130,1 58)',
+				pointBorderColor: '#22c55e',
 				pointBackgroundColor: 'rgb(255, 255, 255)',
-				pointBorderWidth: 0,
+				pointBorderWidth: 5,
 				pointHoverRadius: 5,
-				pointHoverBackgroundColor: 'rgb(0, 0, 0)',
+				pointHoverBackgroundColor: 'rgb(255, 255, 255)',
 				pointHoverBorderColor: 'rgba(220, 220, 220,1)',
 				pointHoverBorderWidth: 2,
 				pointRadius: 1,
@@ -79,4 +81,30 @@
 	onMount(() => {});
 </script>
 
-<Line data={dataLine} options={chartOptions} />
+<div >
+	<div class="mb-3 text-lg font-semibold">
+        Total Profit
+    </div>
+	<div class="flex justify-between">
+		<div class="font-semibold">
+			<select>
+				<option>BTC/USDT</option>
+				<option>ETH/USDT</option>
+			</select>
+		</div>
+		<div class="flex gap-5 text-sm">
+			<button>
+				7 Days
+			</button>
+			<button>
+				30 Days
+			</button>
+			<button>
+				60 Days
+			</button>
+		</div>
+	</div>
+	
+	<Line data={dataLine} options={chartOptions} />
+</div>
+
