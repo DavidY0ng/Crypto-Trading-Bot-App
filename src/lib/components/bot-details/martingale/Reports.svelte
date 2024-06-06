@@ -1,10 +1,34 @@
 <script>
     import { copyToClipboard } from "$lib/utils/helper";
 	import Icon from "@iconify/svelte";
+    import Chart from "./chart/Chart.svelte";
+
+    const parameterData = [ 
+        {
+            name: 'Price deviation',
+            value: '0.80%'
+        },
+        {
+            name: 'Volume scale',
+            value: '1.5'
+        },
+        {
+            name: 'Safety orders',
+            value: '8'
+        },
+        {
+            name: 'Take profit ratio',
+            value: '0.80%'
+        },
+        {
+            name: 'Signal',
+            value: 'Immediately'
+        },
+    ]
 </script>
 
 <div class="flex flex-col gap-3 p-3">
-    <div class="p-3 !shadow-sm card">
+    <div class="p-3 border card">
         <div class="flex items-center gap-2 mb-3">
             <div class="w-7 h-7">
                 <img src="/img/coin-icons/eth.png">
@@ -12,7 +36,7 @@
            
             <div class="flex flex-col">
                 <div class="font-semibold">
-                    ETH/USDT Grid Trading
+                    ETH/USDT Martingale Trading
                 </div>
                 <div class="text-xs text-gray-400/80">
                     --(2024/05/28 15:28:24 Created)
@@ -56,7 +80,7 @@
         
             <div class="w-1/2 text-right">
                 <div class="text-xs text-gray-400/80">
-                    Grid Profit USDT
+                    DCA USDT
                 </div>
                 <div class="text-sm font-semibold text-green-500">
                     +0.000
@@ -67,16 +91,13 @@
             </div>
         </div>
     
-        <div class="flex w-full px-3">
+        <div class="flex w-full px-3 mb-3">
             <div class="w-1/2 text-left">
                 <div class="text-xs text-gray-400/80">
                     Price range USDT
                 </div>
                 <div class="text-sm font-semibold ">
                     3,345.31 - 4533.18
-                </div>
-                <div class="text-sm font-semibold ">
-                    (50 grids)
                 </div>
             </div>
         
@@ -94,7 +115,7 @@
             <button class="flex justify-center flex-1 py-1 text-white bg-red-500 rounded-md">
                 End Bot
             </button>
-            <a href='/bots/details' class="flex justify-center flex-1 p-1 border rounded-md">
+            <a href='/bots/martingale-details' class="flex justify-center flex-1 p-1 border rounded-md">
                 Details
             </a>
         </div> -->
@@ -107,9 +128,30 @@
             Profit in USDT
         </div>
         <div class="card !shadow-sm">
-            
+            <Chart />
         </div>
     </div>
+
+    <div>
+        <div class="font-semibold">
+            Parameter
+        </div>
+        <div class="card !shadow-sm p-3">
+            <div class="grid grid-cols-3 gap-3">
+                {#each parameterData as data}
+                    <div>
+                        <div class="mb-1 text-xs text-gray-400">
+                            {data.name}
+                        </div>
+                        <div class="text-sm font-semibold">
+                            {data.value}
+                        </div>
+                    </div>
+                {/each}
+            </div>
+        </div>
+    </div>
+    
 
     <div>
         <div class="font-semibold">
@@ -139,7 +181,7 @@
                     Tool
                 </div>
                 <div class="font-semibold">
-                    Grid Trading Bot
+                    Martingale Trading Bot
                 </div>
             </div>
 

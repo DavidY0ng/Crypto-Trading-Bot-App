@@ -63,7 +63,7 @@
 	</div>
 
 	<div>
-		<div class="relative flex flex-col items-center p-3 mb-3 text-white bg-surface-600 rounded-xl">
+		<div class="relative flex flex-col items-center p-3 mb-3 text-white bg-primary-900 rounded-xl">
 			<div>
 				<div>Quantity per grid 0.0003 ETH</div>
 				<div>Current price ETH/USDT = 3850.01</div>
@@ -90,7 +90,7 @@
 			<div>Sell price</div>
 		</div>
 
-		<div class="flex gap-5 font-semibold">
+		<div class="flex gap-5 font-semibold !shadow-sm card p-3">
 			<div class="flex flex-col flex-1 gap-2">
 				{#each buyData as data, i}
 					<div class="flex items-center justify-between flex-grow text-sm">
@@ -145,6 +145,6 @@
 		height: 0;
 		border-left: 10px solid transparent;
 		border-right: 10px solid transparent;
-		border-top: 15px solid #202028; /* Match this color to the progress bar color or adjust as needed */
+		border-top: 15px solid #1D083A; /* Match this color to the progress bar color or adjust as needed */
 	}
 </style>
