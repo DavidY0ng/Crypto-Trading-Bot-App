@@ -32,7 +32,7 @@ input {
 
 	content: '';
     position: absolute;
-    width: 10%;
+    width: 10px;
     height: 3px;
     bottom: 0;
     /* border-radius: 50%; */

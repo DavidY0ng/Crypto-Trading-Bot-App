@@ -64,7 +64,7 @@
 					<div class="flex mb-3 font-semibold">Requirements</div>
 					<div class="flex flex-col gap-1 text-sm">
 						<div class="flex justify-between">
-							<div class="">Invite 3 Users</div>
+							<div class="">3 Direct Referrals</div>
 							<div class="text-green-500"><Icon icon="subway:tick" width="1.2em" height="1.2em" /></div>
 						</div>
 						<div class="flex justify-between">

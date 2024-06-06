@@ -106,6 +106,7 @@
 		<button
 			on:click={() => submitTransfer(amount)}
 			class="flex text-white rounded-md shadow-md btn bg-primary-500"
+			disabled={amount == null || amount <= '0'}
 		>
 			Confirm
 		</button>

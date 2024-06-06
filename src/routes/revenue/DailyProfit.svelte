@@ -14,6 +14,20 @@
 	} from 'chart.js';
 
 	ChartJS.register(Filler, Tooltip, Title, LineElement, LinearScale, PointElement, CategoryScale);
+
+    let selectedPeriod = '7'
+    const periods = [
+        { label: '7 Days', value: '7' },
+        { label: '30 Days', value: '30' },
+        { label: '60 Days', value: '60' },
+    ];
+
+    function selectPeriod(period) {
+        selectedPeriod = period;
+        // updateChartData();
+    }
+
+
 	let chartOptions = {
 		responsive: true,
 		scales: {
@@ -93,15 +107,11 @@
 			</select>
 		</div>
 		<div class="flex gap-5 text-sm">
-			<button>
-				7 Days
-			</button>
-			<button>
-				30 Days
-			</button>
-			<button>
-				60 Days
-			</button>
+			{#each periods as period}
+                <button on:click={() => selectPeriod(period.value)} class="{selectedPeriod === period.value ? 'underline-active' : 'text-gray-400'}">
+                {period.label}
+                </button>
+            {/each}
 		</div>
 	</div>
 	

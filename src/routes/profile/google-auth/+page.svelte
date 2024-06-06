@@ -83,7 +83,7 @@
             <div class="mb-4 text-sm text-gray-400 tip">
                 <span class="inline-block">{$t('login.g-auth-enter-tip')}</span>
             </div>
-            <input bind:value={googleCodeInput} type='text' class="w-full px-3 py-2 text-sm transition border-2 rounded-lg outline-none text-ellipsis border-white/30 hover:border-white/40 focus:border-white/60" placeholder={t.get('login.g-auth-placeholder')}/>
+            <input bind:value={googleCodeInput} type='text' class="w-full px-3 py-2 text-sm transition border rounded-lg text-ellipsis" placeholder={t.get('login.g-auth-placeholder')}/>
         </div>
         <button on:click={() => enableGoogle2FA(googleCodeInput)} type="button" class="self-end btn bg-primary-500 w-full text-white !capitalize px-16 mt-8 rounded-lg" >{$t('login.submit')}</button>
     </div>

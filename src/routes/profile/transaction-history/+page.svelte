@@ -75,7 +75,7 @@
 				bind:group={tabSet}
 				name="tab2"
 				value={3}
-				class="flex justify-center flex-1 px-2">Bot</Tab
+				class="flex justify-center flex-1 px-2">Expenses</Tab
 			>
             <Tab
 				bind:group={tabSet}

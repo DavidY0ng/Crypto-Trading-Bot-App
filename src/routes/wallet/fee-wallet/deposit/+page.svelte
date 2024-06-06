@@ -10,7 +10,7 @@
 	import Complete from '$lib/components/deposit/Complete.svelte';
 	import { storeLocal } from '$lib/stores/storeLocal';
 
-	let steps = ['Info', 'Confirmation', 'Broadcast', 'Complete'];
+	let steps = ['Info', 'Confirmation', 'Signature', 'Complete'];
 	let currentActive = 1;
 	let progressBar: any;
 	let amountValue: number;

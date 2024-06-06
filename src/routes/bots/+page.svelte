@@ -4,6 +4,23 @@
     let value: number = 0;
     import Bots from './Bots.svelte';
     import Running from './Running.svelte'
+	import { onMount } from 'svelte';
+	import { storeLocal } from '$lib/stores/storeLocal';
+
+	let fromDetailsPage = false;
+	
+	onMount(() => {
+		
+	});
+
+	$:if ($storeLocal.prevUrl == '/bots/grid-details' || $storeLocal.prevUrl == '/bots/martingale-details') {
+		// Set the tab to withdrawal tab only if it hasn't been set before
+		if (!fromDetailsPage) {
+			value = 1;
+			fromDetailsPage = true; // Set the flag to true to indicate tab has been set
+		}
+		// Reset currentTab if needed
+	}
 
    
 </script>
