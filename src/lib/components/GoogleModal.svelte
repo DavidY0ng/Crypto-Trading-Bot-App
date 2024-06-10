@@ -2,6 +2,7 @@
 	import Icon from "@iconify/svelte";
 	import { createEventDispatcher } from 'svelte';
 	import { showGoogleModal } from "$lib/stores/store";
+	import Toast from "./toasts/toast.svelte";
 
     export let modalClass = ""
 	export let cross = ''
@@ -29,7 +30,7 @@
 	on:click|self={() =>closeModal()}
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div class="">
+	<div class="z-40">
         <div class="flex justify-end text-gray-500 {cross}">
             <button on:click={closeModal} class="outline-none">
                 <Icon icon="maki:cross" width="1.2em" height="1.2em" />
@@ -45,6 +46,7 @@
 		<!-- svelte-ignore a11y-autofocus -->
 	</div>
 </dialog>
+
 {/if}
 
 <style>
@@ -55,8 +57,8 @@
 		padding: 0;
 	}
 	dialog::backdrop {
-		background: rgba(0, 0, 0, 0.3);
-		z-index: 5;
+		background: rgba(0, 0, 0, 0.0);
+		z-index: 30;
 	}
 	dialog > div {
 		padding: 1em;

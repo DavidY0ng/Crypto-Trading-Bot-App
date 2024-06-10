@@ -55,8 +55,8 @@
 		padding: 0;
 	}
 	dialog::backdrop {
-		background: rgba(0, 0, 0, 0.3);
-		z-index: 5;
+		background: rgba(0, 0, 0, 0.1);
+		
 	}
 	dialog > div {
 		padding: 1em;

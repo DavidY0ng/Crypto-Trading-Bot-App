@@ -36,6 +36,7 @@ export const depositHistoryDetails = writable({})
 export const withdrawHistory = writable([])
 export const withdrawHistoryDetails = writable({})
 export const transferHistory = writable([])
+export const referralHistory = writable([])
 export const currentMembershipPlan = writable([])
 export const membershipPlanHistory = writable([])
 export const currentPage = writable(1)
@@ -215,6 +216,23 @@ export async function getTransferHistory (page:number) {
     }
 }
 
+export async function getReferralHistory (page:number) {
+    const res = await apiWithToken ('GET', '/transaction/history/reward', {
+        size: 10,
+        page: page
+    })
+    if(!res) {
+        return
+    } else {
+        if (page === 1) {
+            referralHistory.set(res.data.data);
+        } else {
+            referralHistory.update(existingData => [...existingData, ...res.data.data]);
+        }
+        return res.data.data;
+    }
+}
+
 export async function getCurrentMembershipPlan () {
     const res = await apiWithToken ('GET', '/membership/detail', {
         status: 'active'
@@ -249,6 +267,8 @@ export async function getMembershipPlanHistory () {
     }
 }
 
+
+
 //fetch different types of history
 export async function fetchHistory(type:string, page:number) {
     let res;
@@ -261,6 +281,9 @@ export async function fetchHistory(type:string, page:number) {
             break;
         case 'transfer':
             res = await getTransferHistory(page);
+            break;
+        case 'referral':
+            res = await getReferralHistory(page);
             break;
         default:
             throw new Error('Invalid history type');
@@ -278,3 +301,4 @@ export async function getHierarchy (user_id) {
         hierarchyData.set(res.data)
     }
 }
+

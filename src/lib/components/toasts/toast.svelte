@@ -23,7 +23,7 @@
 </script>
 
 <Toast
-	zIndex="z-[99999999999]"
+	zIndex="z-[888]"
 	position="tr"
 	padding="p-2"
 	buttonDismiss="bg-white btn-sm btn w-[30px] h-[30px] text-black"

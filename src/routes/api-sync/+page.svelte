@@ -1,6 +1,5 @@
 <script>
     import BackHeader from '$lib/components/BackHeader.svelte';
-	import { getUserInfo, userInfo, isLoading, showModal, showGoogleModal, showAuthenticatorModal } from '$lib/stores/store';
 	import Icon from '@iconify/svelte';
     import { storeUserInfo } from '$lib/stores/storeUser';
 
