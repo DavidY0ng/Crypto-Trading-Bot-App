@@ -7,6 +7,8 @@
 	import { getReferralCode, getUserInfo, referralCode } from '$lib/stores/store';
     import { storeUserInfo} from "$lib/stores/storeUser"
     import QRCode from '@castlenine/svelte-qrcode';
+	import NoConnectWallet from '$lib/components/NoConnectWallet.svelte';
+	import { storeAccessToken } from '$lib/stores/storeLocal';
     
     
     let refCode:string
@@ -51,6 +53,9 @@
     })
     
 </script>
+{#if !$storeAccessToken.access_token}
+<NoConnectWallet />
+{:else}
 
 <BackHeader path='/' layout='flex items-center bg-white pb-2'>
     <div class="flex justify-center flex-1 h3">
@@ -157,3 +162,5 @@
     
     
 </div>
+
+{/if}

@@ -5,7 +5,8 @@
     import Bots from './Bots.svelte';
     import Running from './Running.svelte'
 	import { onMount } from 'svelte';
-	import { storeLocal } from '$lib/stores/storeLocal';
+	import { storeAccessToken, storeLocal } from '$lib/stores/storeLocal';
+	import NoConnectWallet from '$lib/components/NoConnectWallet.svelte';
 
 	let fromDetailsPage = false;
 	
@@ -25,6 +26,9 @@
    
 </script>
 
+{#if !$storeAccessToken.access_token}
+<NoConnectWallet />
+{:else}
 <div class="flex flex-col flex-grow p-3 bg-white">
     <div class="flex flex-col flex-grow p-3">
         <div class="flex justify-center mb-5">
@@ -44,3 +48,4 @@
     </div>
     
 </div>
+{/if}

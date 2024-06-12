@@ -2,8 +2,13 @@
     import BackHeader from "$lib/components/BackHeader.svelte";
     import TotalProfit from './TotalProfit.svelte'
     import DailyProfit from "./DailyProfit.svelte";
+	import NoConnectWallet from "$lib/components/NoConnectWallet.svelte";
+	import { storeAccessToken } from "$lib/stores/storeLocal";
 </script>
 
+{#if !$storeAccessToken.access_token}
+<NoConnectWallet />
+{:else}
 <BackHeader path="/" layout="flex items-center bg-white pb-2">
 	<div class="flex justify-start flex-grow font-semibold flex-2 h4">Revenue</div>
 </BackHeader>
@@ -45,3 +50,4 @@
     <TotalProfit />
     <DailyProfit />
 </div>
+{/if}

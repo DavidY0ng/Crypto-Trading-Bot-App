@@ -5,6 +5,8 @@
     import { truncateString } from '$lib/utils/helper'
     import Icon from "@iconify/svelte";
     import QRCode from '@castlenine/svelte-qrcode';
+	import NoConnectWallet from '$lib/components/NoConnectWallet.svelte';
+	import { storeAccessToken } from '$lib/stores/storeLocal';
 
     const menus = [
         {
@@ -13,12 +15,12 @@
             link: '/membership/plans',
             alternateLink: '/membership'
         },
-        {
-            icon: 'iconoir:wallet',
-            name: "My Wallet",
-            link: '/wallet',
-            alternateLink: '/wallet'
-        },
+        // {
+        //     icon: 'iconoir:wallet',
+        //     name: "My Wallet",
+        //     link: '/wallet',
+        //     alternateLink: '/wallet'
+        // },
         {
             icon: 'fluent:document-bullet-list-clock-20-regular',
             name: "Transaction History",
@@ -43,7 +45,9 @@
         getUserInfo()
     })
 </script>
-
+{#if !$storeAccessToken.access_token}
+<NoConnectWallet />
+{:else}
 <div class="flex flex-col flex-grow max-h-[250px]">
 
     <div class="flex flex-col flex-grow p-5 bg-surface-500">
@@ -102,3 +106,4 @@
         </a> 
     {/each}
 </div>
+{/if}

@@ -8,7 +8,8 @@
 	import Confirmation from '$lib/components/deposit/Confirmation.svelte';
 	import Broadcast from '$lib/components/deposit/Broadcast.svelte';
 	import Complete from '$lib/components/deposit/Complete.svelte';
-	import { storeLocal } from '$lib/stores/storeLocal';
+	import { storeAccessToken, storeLocal } from '$lib/stores/storeLocal';
+	import NoConnectWallet from '$lib/components/NoConnectWallet.svelte';
 
 	let steps = ['Info', 'Confirmation', 'Signature', 'Complete'];
 	let currentActive = 1;
@@ -21,7 +22,9 @@
 		progressBar.handleProgress(stepIncrement);
 	};
 </script>
-
+{#if !$storeAccessToken.access_token}
+<NoConnectWallet />
+{:else}
 <BackHeader
 	path={$storeLocal.prevUrl == '/'
 		? '/'
@@ -49,3 +52,4 @@
 		<Complete />
 	{/if}
 </div>
+{/if}

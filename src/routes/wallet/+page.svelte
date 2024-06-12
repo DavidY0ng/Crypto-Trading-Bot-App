@@ -3,6 +3,8 @@
     import Icon from "@iconify/svelte";
     import { getFeeWalletBalance, getRewardWalletBalance, feeWalletBalance, rewardWalletBalance } from "$lib/stores/store";
 	import { onMount } from "svelte";
+    import NoConnectWallet from "$lib/components/NoConnectWallet.svelte";
+    import { storeAccessToken } from "$lib/stores/storeLocal";
 
     let totalBalance
     const wallets = [
@@ -36,6 +38,9 @@
         
     </div>
 </BackHeader>  -->
+{#if !$storeAccessToken.access_token}
+<NoConnectWallet />
+{:else}
 <div class="relative flex flex-col flex-grow bg-white">
     <div class="relative flex flex-col items-center overflow-hidden">
         <div class="bg-primary-900 rounded-b-full h-[300px] w-[900px] overflow-hidden flex items-center pt-20 text-white flex-col gap-5">
@@ -83,7 +88,7 @@
         {/each}
     </div>
 </div>
-
+{/if}
 
 <!-- <div class="flex flex-col gap-5 p-3">
     <div class="flex flex-col shadow-md  rounded-xl bg-[url('/img/wallet/3.png')] bg-cover h-[200px]">

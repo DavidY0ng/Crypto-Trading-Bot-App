@@ -1,5 +1,5 @@
 <script>
-    
+    import Modal from "$lib/components/Modal.svelte";
 </script>
 
 <div class="flex flex-col gap-3">

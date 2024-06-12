@@ -79,7 +79,7 @@
 
     <div>
         <div class="mb-2 font-semibold">
-            2. Trading Bot Fee
+            3. Trading Bot Fee
         </div>
         <div class="flex items-center mb-1 bg-white rounded-md">
             <input class="p-2 rounded-md" type="number" placeholder="Fee (USDT)" bind:value={feeInput}>

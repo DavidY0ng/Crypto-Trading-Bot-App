@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <div class="flex justify-end">
+    <!-- <div class="flex justify-end">
         <div class="flex items-center gap-2 p-2 border rounded-md">
             <div>
                 Scan from Photos
@@ -79,7 +79,7 @@
             </button>
         </div>
         
-    </div>
+    </div> -->
     
 
     <div class="flex flex-col justify-end flex-grow">

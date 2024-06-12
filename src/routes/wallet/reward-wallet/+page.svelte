@@ -15,7 +15,7 @@
     })
 </script>
 
-<BackHeader path="/profile" layout="flex items-center bg-white pb-2">
+<BackHeader path="/wallet" layout="flex items-center bg-white pb-2">
 	<div class="flex justify-start flex-grow font-semibold flex-2 h3">Reward Wallet</div>
 </BackHeader>
 

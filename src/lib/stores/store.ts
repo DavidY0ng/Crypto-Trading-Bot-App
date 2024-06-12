@@ -41,6 +41,7 @@ export const currentMembershipPlan = writable([])
 export const membershipPlanHistory = writable([])
 export const currentPage = writable(1)
 export const hierarchyData = writable([])
+export const rankData = writable([])
 
 export async function getUserInfo () {
     const res = await apiWithToken ('GET', '/user/account/info')
@@ -299,6 +300,17 @@ export async function getHierarchy (user_id) {
         return
     } else {
         hierarchyData.set(res.data)
+    }
+}
+
+export async function getRank () {
+    const res = await apiWithToken ('GET', '/user/account/rank', {
+        
+    })
+    if(!res) {
+        return
+    } else {
+        rankData.set(res.data)
     }
 }
 
