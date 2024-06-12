@@ -13,7 +13,7 @@
 	<div class="flex justify-start flex-grow font-semibold flex-2 h4">Revenue</div>
 </BackHeader>
 
-<div class="">
+<div class="p-3 bg-white">
     <div class="rounded-md bg-primary-900">
         <div class="p-3 text-white rounded-xl">
 			<div class="flex justify-between mb-3">

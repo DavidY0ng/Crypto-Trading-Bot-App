@@ -26,7 +26,7 @@
 </BackHeader>
 
 <div class="p-3 pb-5 bg-white">
-    <div class="flex flex-col shadow-md  rounded-md bg-gradient-to-r from-[#821dd4] to-[#b452ea] bg-cover h-[200px]">
+    <div class="flex flex-col shadow-md  rounded-md bg-gradient-to-r from-[#821dd4] to-[#b452ea] bg-cover ">
         <div class="flex justify-between flex-grow p-5 text-white h-2/3">
             <div class="flex flex-col gap-2">
                 <div class="text-base">
@@ -37,18 +37,16 @@
                     {$feeWalletBalance} <span class="h5">USDT</span>
                 </div>
             </div>
-            <div class="h2">
+            <!-- <div class="h2">
                 <Icon icon="bxs:wallet" width="1.2em" height="1.2em" />
-            </div>
-        </div>
-        
-        <div class="flex flex-grow overflow-hidden rounded-b-xl h-1/3">
-            <div class="flex items-center justify-end flex-grow pr-5">
-                <a class="font-bold border bg-[#821dd4] bg-gradient-to-r from-[#821dd4] to-[#b452ea] rounded-lg btn text-white" href='/wallet/fee-wallet/deposit'>
+            </div> -->
+            <div class="flex items-center">
+                <a class="border bg-[#821dd4] bg-gradient-to-r from-[#821dd4] to-[#b452ea] rounded-lg btn text-white" href='/wallet/fee-wallet/deposit'>
                     Deposit
                 </a>
             </div>
-        </div>
+           
+        </div>        
     </div>
 
 </div>

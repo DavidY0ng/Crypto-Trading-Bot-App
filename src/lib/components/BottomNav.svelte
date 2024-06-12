@@ -32,7 +32,7 @@
         {#each menuList as menu}
             <a href={menu.path} class="flex flex-col items-center text-sm {$page.url.pathname == menu.path ? 'text-primary-500' : 'text-gray-400'}">
                 <div>
-                    <Icon icon={menu.icon} width="1.7em" height="1.7em" />
+                    <Icon icon={menu.icon} width="1.3em" height="1.3em" />
                 </div>
                 <div>
                     {menu.name}

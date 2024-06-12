@@ -24,7 +24,11 @@
 			<div class="flex flex-col p-3 bg-gray-100 rounded-md">
 				<div class="flex items-center gap-5">
 					<div class="w-8 h-8">
-						<img class="w-8 h-8" src="/img/profile/ranking/V{$rankData.current_rank}.png" alt="rankImg" />
+						{#if $rankData}
+						<img class="w-8 h-8" src="/img/profile/ranking/V{$rankData.current_rank}.png" alt="rankImg" loading="lazy"/>
+						{:else}
+							<div class="w-8 bg-gray-300 placeholder-circle" />
+						{/if}
 					</div>
 					<div class="text-lg font-bold">VIP {$rankData.current_rank}</div>
 				</div>

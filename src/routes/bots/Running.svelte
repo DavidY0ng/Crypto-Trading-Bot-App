@@ -1,5 +1,6 @@
 <script>
     import Modal from "$lib/components/Modal.svelte";
+	import { showModal } from "$lib/stores/store";
 </script>
 
 <div class="flex flex-col gap-3">
@@ -90,7 +91,7 @@
         </div>
        
         <div class="flex gap-2 text-sm">
-            <button class="flex justify-center flex-1 py-1 text-white bg-red-500 rounded-md">
+            <button on:click={() => showModal.set(true)}  class="flex justify-center flex-1 py-1 text-white bg-red-500 rounded-md">
                 End Bot
             </button>
             <a href='/bots/grid-details' class="flex justify-center flex-1 p-1 border rounded-md">
@@ -103,7 +104,7 @@
     <div class="p-3 border card">
         <div class="flex items-center gap-2 mb-3">
             <div class="w-7 h-7">
-                <img src="/img/coin-icons/eth.png">
+                <img src="/img/coin-icons/eth.png" alt='img'>
             </div>
            
             <div class="flex flex-col">
@@ -184,7 +185,7 @@
         </div>
        
         <div class="flex gap-2 text-sm">
-            <button class="flex justify-center flex-1 py-1 text-white bg-red-500 rounded-md">
+            <button on:click={() => showModal.set(true)} class="flex justify-center flex-1 py-1 text-white bg-red-500 rounded-md">
                 End Bot
             </button>
             <a href='/bots/martingale-details' class="flex justify-center flex-1 p-1 border rounded-md">
@@ -195,6 +196,30 @@
     </div>
 </div>
 
+{#if $showModal}
+	<Modal cross="hidden">
+		<div slot="header">
+			<div class="">
+				Do you want to terminate this bot?
+			</div>
+		</div>
+
+		<div class="flex justify-end w-full gap-2 pt-5">
+			<button
+				on:click={() => showModal.set(false)}
+				class="w-1/2 py-2 font-semibold text-white bg-gray-500 rounded-md btn"
+			>
+				Cancel
+			</button>
+			<button
+				
+				class="w-1/2 py-2 font-semibold text-white rounded-md btn bg-primary-500"
+			>
+				Confirm
+			</button>
+		</div>
+	</Modal>
+{/if}
 
 <style>.trapezium-bg {
     background-color: #22c55e; /* green-500 color */

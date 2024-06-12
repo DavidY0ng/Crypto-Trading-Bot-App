@@ -55,7 +55,6 @@
                 USDT
             </div>
             </div>
-           
         </div>
         
     </div>

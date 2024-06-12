@@ -82,7 +82,7 @@
 			</div>
 
 			<div>
-				<div class="font-semibold text-green-500">Guaranteed Experts</div>
+				<div class="font-semibold text-green-600">Guaranteed Experts</div>
 				<p>Bot created by experts engineer.</p>
 			</div>
 		</div>

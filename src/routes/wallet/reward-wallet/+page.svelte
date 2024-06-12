@@ -20,7 +20,7 @@
 </BackHeader>
 
 <div class="p-3 pb-5 bg-white">
-    <div class="flex flex-col shadow-md rounded-md bg-gradient-to-r from-[#7e4de0] to-[#8d84f6] h-[200px]">
+    <div class="flex flex-col shadow-md rounded-md bg-gradient-to-r from-[#7e4de0] to-[#8d84f6]">
         <div class="flex justify-between flex-grow p-5 text-white h-2/3">
             <div class="flex flex-col gap-2">
                 <div class="text-base">
@@ -31,22 +31,19 @@
                     {$rewardWalletBalance} <span class="h5">USDT</span>
                 </div>
             </div>
-            <div class="h2">
-                <Icon icon="solar:money-bag-bold" width="1.2em" height="1.2em" />
-            </div>
-        </div>
-        
-        <div class="flex flex-grow overflow-hidden bg-transparent rounded-b-xl h-1/3">
-            <div class="flex items-center justify-end flex-grow gap-3 pr-5 font-bold text-black">
+             <!-- <div class="h2">
+                <Icon icon="bxs:wallet" width="1.2em" height="1.2em" />
+            </div> -->
+            <div class="flex flex-col items-center gap-2">
                 <a class="text-white border rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 btn" href='/wallet/reward-wallet/transfer'>
                     Transfer
                 </a>
                 <a class="text-white bg-gradient-to-r from-[#7e4de0] to-[#8d84f6] rounded-lg border btn w-[95px]" href='/wallet/reward-wallet/withdraw'>
                     Withdraw
                 </a>
-                
             </div>
         </div>
+
     </div>
 
 </div>

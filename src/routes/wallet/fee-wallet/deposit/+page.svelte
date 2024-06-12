@@ -26,11 +26,10 @@
 <NoConnectWallet />
 {:else}
 <BackHeader
-	path={$storeLocal.prevUrl == '/'
-		? '/'
-		: $storeLocal.prevUrl == '/bots/grid'
-			? '/bots/grid'
-			: '/wallet/fee-wallet'}
+	path={$storeLocal.prevUrl == '/' ? '/'
+		: $storeLocal.prevUrl == '/bots/grid' ? '/bots/grid'
+			: $storeLocal.prevUrl == '/bots/martingale' ? '/bots/martingale'
+				: '/wallet/fee-wallet'}
 	layout="flex items-center bg-white pb-2"
 >
 	<div class="flex justify-center flex-1 h3">Deposit</div>
